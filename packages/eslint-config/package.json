@@ -20,5 +20,12 @@
     "globals": "^16.5.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.49.0"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.36.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0",
+    "tw-animate-css": "^1.4.0"
   }
 }

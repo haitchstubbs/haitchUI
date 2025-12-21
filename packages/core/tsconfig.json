@@ -1,0 +1,25 @@
+{
+	"extends": "@repo/typescript-config/base.json",
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"verbatimModuleSyntax": true,
+
+		"jsx": "react-jsx",
+
+		"declaration": true,
+		"declarationMap": true,
+		"emitDeclarationOnly": false,
+
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"noEmit": false,
+
+		"strict": true,
+		"skipLibCheck": true
+	},
+	"include": ["src"]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "haitchUI",
+  "name": "@haitch/ui",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -22,3 +22,4 @@
     "packages/*"
   ]
 }
+
