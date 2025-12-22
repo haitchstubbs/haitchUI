@@ -1,36 +1,30 @@
 {
-	"name": "@repo/ui",
-	"version": "0.0.0",
-	"private": true,
-	"exports": {
-		".": "./src/index.ts",
-		"./tailwind/preset": "./src/tailwind/preset.ts",
-		"./styles/tokens.css": "./src/styles/tokens.css",
-		"./*": "./src/*.tsx"
-	},
-	"scripts": {
-		"lint": "eslint . --max-warnings 0",
-		"generate:component": "turbo gen react-component",
-		"check-types": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@repo/eslint-config": "*",
-		"@repo/typescript-config": "*",
-		"@types/node": "^22.15.3",
-		"@types/react": "19.2.2",
-		"@types/react-dom": "19.2.2",
-		"eslint": "^9.39.1",
-		"typescript": "5.9.2"
-	},
-	"dependencies": {
-		"@floating-ui/react": "^0.26.0",
-		"@haitchui/core": "0.0.0",
-		"@tabler/icons-react": "^3.36.0",
-		"class-variance-authority": "^0.7.1",
-		"clsx": "^2.1.1",
-		"react": "^19.2.0",
-		"react-dom": "^19.2.0",
-		"tailwind-merge": "^3.4.0",
-		"tw-animate-css": "^1.4.0"
-	}
+  "name": "@repo/ui",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@floating-ui/react": "^0.26.0",
+    "@haitchui/core": "0.0.0",
+    "@tabler/icons-react": "^3.36.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwind-merge": "^3.4.0",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^22.15.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "eslint": "^9.39.1",
+    "typescript": "5.9.2"
+  }
 }

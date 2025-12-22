@@ -1,3 +1,3 @@
 "use client";
 
-export type { ThemeName } from "./theme/types";
+export type { ThemeName } from "./theme/types.js";

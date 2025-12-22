@@ -1,0 +1,24 @@
+{
+  "name": "@haitch/tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@haitchui/core": "0.0.0",
+    "@repo/ui": "*",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@vitejs/plugin-react": "^5.1.2",
+    "jsdom": "^27.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vitest": "^4.0.16"
+  }
+}

@@ -5,7 +5,7 @@ import { ButtonGroup } from "@repo/ui/components/button-group"
 
 export default function DemoButtonGroup() {
   return (
-    <div className="flex flex-col items-start gap-8">
+    <div className="flex flex-col items-center gap-2">
       <ButtonGroup>
         <Button variant="outline" size="sm">
           Small
