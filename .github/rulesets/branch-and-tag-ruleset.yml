@@ -1,0 +1,55 @@
+version: 1
+rulesets:
+  # Protect the main branch by requiring pull requests, reviews and passing status checks
+  - name: "main branch protection"
+    enforcement: true
+    conditions:
+      ref_name:
+        include:
+          - "main"
+    rules:
+      # Require pull requests with at least one approving review
+      - type: "required_pull_request_reviews"
+        configuration:
+          required_approving_review_count: 1
+          dismiss_stale_reviews: true
+          require_code_owner_review: false
+      # Require status checks to pass before merging. Leave the checks list empty to require all checks
+      - type: "required_status_checks"
+        configuration:
+          strict: true
+          checks: []
+      # Disallow force pushes to the protected branch
+      - type: "restrict_force_pushes"
+        configuration:
+          actors: []
+      # Disallow branch deletion
+      - type: "restrict_deletions"
+        configuration:
+          actors: []
+      # Restrict who can push directly (only users with write access)
+      - type: "restrict_pushes"
+        configuration:
+          actors:
+            - type: "REPOSITORY_ROLE"
+              value: "write"
+  # Protect release tags (v*) so only maintainers can create/delete tags
+  - name: "release tag protection"
+    enforcement: true
+    conditions:
+      ref_name:
+        include:
+          - "v*"
+    rules:
+      # Restrict who can create tags matching the pattern
+      - type: "restrict_pushes"
+        configuration:
+          actors:
+            - type: "REPOSITORY_ROLE"
+              value: "write"
+      # Restrict deletion of tags
+      - type: "restrict_deletions"
+        configuration:
+          actors:
+            - type: "REPOSITORY_ROLE"
+              value: "write"
