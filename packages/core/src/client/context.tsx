@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { UI } from "./manager";
-import type { OverlayDOM, OverlayDOMContextValue, ResolvedOverlayDOM } from "./types";
+import { UI } from "../lib/manager";
+import type { OverlayDOM, OverlayDOMContextValue, ResolvedOverlayDOM } from "../types/types";
 
 const OverlayDOMContext = React.createContext<OverlayDOMContextValue | null>(null);
 

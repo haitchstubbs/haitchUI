@@ -22,7 +22,14 @@
 		"@haitch/ui": "workspace:*",
 		"@haitch/typescript-config": "workspace:*",
 		"@haitch/core": "workspace:*",
-    "@haitch/tests": "workspace:*"
+		"@haitch/tests": "workspace:*",
+		"@haitch/react-popover": "workspace:*",
+		"@haitch/react-slot": "workspace:*",
+		"@haitch/react-rect": "workspace:*",
+		"@haitch/react-virtual-element": "workspace:*",
+		"@haitch/react-overlay": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*"
+		
 	},
 	"overrides": {
 		"next": "16.0.10",
@@ -37,6 +44,8 @@
 	},
 	"workspaces": [
 		"apps/*",
-		"packages/*"
+		"packages/*",
+		"packages/primitives/*",
+		".devtools/**"
 	]
 }

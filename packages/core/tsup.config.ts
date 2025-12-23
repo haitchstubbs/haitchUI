@@ -5,8 +5,8 @@ export default defineConfig([
   {
     entry: {
       index: "src/index.ts",
-      client: "src/client.ts",
-      server: "src/server.ts",
+      client: "src/client/index.ts",
+      server: "src/server/index.ts",
     },
     format: ["esm"],
     dts: true,
@@ -19,7 +19,7 @@ export default defineConfig([
 
   // client entry — bundled with banner, but NO DTS here
   {
-    entry: ["src/client.ts"],
+    entry: ["src/client/index.ts"],
     format: ["esm"],
     dts: false, // ✅ critical
     sourcemap: true,

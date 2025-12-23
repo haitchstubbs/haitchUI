@@ -255,8 +255,12 @@ export function ContextMenu(props: ContextMenuProps) {
 	const { getReferenceProps, getFloatingProps } = useInteractions([dismiss, role]);
 
 	// Init synchronously to reduce act() warnings / timing flakiness
-	const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(() => dom.getPortalContainer());
+	const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(() => {
+		if (typeof document === "undefined") return null;
+		return dom.getPortalContainer();
+	});
 	React.useEffect(() => {
+		if (typeof document === "undefined") return;
 		const next = dom.getPortalContainer();
 		setPortalRoot(next);
 	}, [dom]);

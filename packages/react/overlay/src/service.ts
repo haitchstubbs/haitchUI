@@ -1,4 +1,16 @@
-import type { OverlayDOM, RectLike, ResolvedOverlayDOM, VirtualElement } from "../types/types";
+import type { OverlayDOM, ResolvedDOM } from "./types.js";
+
+type VirtualElement = {
+	getBoundingClientRect: () => DOMRect;
+	contextElement?: Element | null;
+};
+
+type Rect = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+};
 
 /**
  * OverlayDOMManager
@@ -9,21 +21,21 @@ import type { OverlayDOM, RectLike, ResolvedOverlayDOM, VirtualElement } from ".
  *
  * No React imports. Safe to use anywhere.
  */
-export class UI {
-	public readonly dom: ResolvedOverlayDOM;
+export class DOM {
+	public readonly dom: ResolvedDOM;
 
-	private constructor(dom: ResolvedOverlayDOM) {
+	private constructor(dom: ResolvedDOM) {
 		this.dom = dom;
 	}
 
-	static default(): UI {
-		return new UI(UI.resolve(undefined));
+	static default(): DOM {
+		return new DOM(DOM.resolve(undefined));
 	}
 
 	/**
 	 * Create a new manager with child overrides applied on top of this manager.
 	 */
-	fork(child?: OverlayDOM): UI {
+	fork(child?: OverlayDOM): DOM {
 		if (!child) return this;
 
 		const parent = this.dom;
@@ -38,7 +50,7 @@ export class UI {
 			getOwnerDocument: child.getOwnerDocument ?? parent.getOwnerDocument,
 		};
 
-		return new UI(UI.resolve(merged));
+		return new DOM(DOM.resolve(merged));
 	}
 
 	/**
@@ -48,7 +60,7 @@ export class UI {
 		return this.dom.isEventOutside(event, inside);
 	}
 
-	createVirtualElement(rect: RectLike, options?: { contextElement?: Element | null }): VirtualElement {
+	createVirtualElement(rect: Rect, options?: { contextElement?: Element | null }): VirtualElement {
 		return this.dom.createVirtualElement(rect, options);
 	}
 
@@ -56,13 +68,13 @@ export class UI {
 	// Resolution + Defaults
 	// -------------------------
 
-	private static resolve(input?: OverlayDOM): ResolvedOverlayDOM {
-		const getDocument = input?.getDocument ?? UI.defaultGetDocument;
-		const getOwnerDocument = input?.getOwnerDocument ?? ((node) => UI.defaultGetOwnerDocument(node, getDocument));
+	private static resolve(input?: OverlayDOM): ResolvedDOM {
+		const getDocument = input?.getDocument ?? DOM.defaultGetDocument;
+		const getOwnerDocument = input?.getOwnerDocument ?? ((node) => DOM.defaultGetOwnerDocument(node, getDocument));
 		const getRootNode = input?.getRootNode ?? (() => getDocument());
-		const getPortalContainer = input?.getPortalContainer ?? (() => UI.defaultGetPortalContainer(getDocument));
-		const isEventOutside = input?.isEventOutside ?? UI.defaultIsEventOutside;
-		const createVirtualElement = input?.createVirtualElement ?? UI.defaultCreateVirtualElement;
+		const getPortalContainer = input?.getPortalContainer ?? (() => DOM.defaultGetPortalContainer(getDocument));
+		const isEventOutside = input?.isEventOutside ?? DOM.defaultIsEventOutside;
+		const createVirtualElement = input?.createVirtualElement ?? DOM.defaultCreateVirtualElement;
 		const getActiveElement = input?.getActiveElement ?? (() => getDocument().activeElement);
 
 		return {
@@ -127,7 +139,7 @@ export class UI {
 		return true;
 	}
 
-	private static defaultCreateVirtualElement(rect: RectLike, options?: { contextElement?: Element | null }): VirtualElement {
+	private static defaultCreateVirtualElement(rect: Rect, options?: { contextElement?: Element | null }): VirtualElement {
 		return {
 			getBoundingClientRect: () => new DOMRect(rect.x, rect.y, rect.width, rect.height),
 			contextElement: options?.contextElement ?? null,

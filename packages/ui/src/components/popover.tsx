@@ -1,26 +1,17 @@
 "use client";
 
 import * as React from "react";
+import { FloatingFocusManager, FloatingPortal, type Strategy, type Middleware } from "@floating-ui/react";
+import { Popover as PopoverService } from "@haitch/core/client";
+import type { RectLike } from "@haitch/core";
 import {
-	FloatingFocusManager,
-	FloatingPortal,
-	autoUpdate,
-	flip,
-	offset,
-	shift,
-	useClick,
-	useDismiss,
-	useFloating,
-	useInteractions,
-	useRole,
-	useTransitionStyles,
-	type Placement,
-	type Strategy,
-	type Middleware,
-} from "@floating-ui/react";
-
-import type { RectLike, VirtualElement } from "@haitch/core";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
+	PopoverContext,
+	useControllableOpen,
+	useOverlayDOMManager,
+	usePopoverContext,
+	usePopoverFloating,
+	type OverlayDOM,
+} from "@haitch/core/client";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
 import { cn } from "../lib/cn";
@@ -28,68 +19,13 @@ import { cn } from "../lib/cn";
 type Side = "top" | "right" | "bottom" | "left";
 type Align = "start" | "center" | "end";
 
-function placementFromSideAlign(side: Side, align: Align): Placement {
-	if (align === "center") return side;
-	return `${side}-${align}` as Placement;
-}
-
-function sideFromPlacement(p: Placement): Side {
-	return p.split("-")[0] as Side;
-}
-
-function alignFromPlacement(p: Placement): Align {
-	const parts = p.split("-");
-	return (parts[1] as Align) ?? "center";
-}
-
-type PopoverContextValue = {
-	open: boolean;
-	setOpen: (open: boolean) => void;
-
-	// positioning
-	placement: Placement;
-	refs: ReturnType<typeof useFloating>["refs"];
-	floatingStyles: React.CSSProperties;
-	getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
-	getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
-
-	portalRoot: HTMLElement | null;
-
-	modal: boolean;
-	closeOnOutsidePress: boolean;
-	closeOnEscape: boolean;
-
-	// shadow-dom-safe outside press
-	isOutside: (event: Event) => boolean;
-
-	// transition (Radix-like presence)
-	isMounted: boolean;
-	transitionStyles: React.CSSProperties;
-
-	// per-content overrides
-	setContentOverrides: (overrides: {
-		side?: Side;
-		align?: Align;
-		sideOffset?: number;
-	}) => void;
-};
-
-const PopoverContext = React.createContext<PopoverContextValue | null>(null);
-
-function usePopoverContext() {
-	const ctx = React.useContext(PopoverContext);
-	if (!ctx) throw new Error("Popover components must be used within <Popover>.");
-	return ctx;
-}
-
-type PopoverProps = {
+type PopoverProps = React.PropsWithChildren<{
 	dom?: OverlayDOM;
 
 	open?: boolean;
 	defaultOpen?: boolean;
 	onOpenChange?: (open: boolean) => void;
 
-	// shadcn-like API
 	side?: Side;
 	align?: Align;
 	sideOffset?: number;
@@ -101,161 +37,57 @@ type PopoverProps = {
 	closeOnOutsidePress?: boolean;
 	modal?: boolean;
 
-	// Virtual reference support (canvas/webgl)
 	virtualRect?: RectLike;
 	virtualContextElement?: Element | null;
-};
+}>;
 
-function useControllableOpen(opts: Pick<PopoverProps, "open" | "defaultOpen" | "onOpenChange">) {
-	const [uncontrolled, setUncontrolled] = React.useState<boolean>(opts.defaultOpen ?? false);
-	const controlled = typeof opts.open === "boolean";
-	const open = controlled ? (opts.open as boolean) : uncontrolled;
-
-	const setOpen = React.useCallback(
-		(next: boolean) => {
-			if (!controlled) setUncontrolled(next);
-			opts.onOpenChange?.(next);
-		},
-		[controlled, opts]
-	);
-
-	return { open, setOpen };
-}
-
-export function Popover(props: React.PropsWithChildren<PopoverProps>) {
-	const parentManager = useOverlayDOMManager();
-	const manager = React.useMemo(() => parentManager.fork(props.dom), [parentManager, props.dom]);
-	const dom = manager.dom;
+export function Popover(props: PopoverProps) {
+	const parent = useOverlayDOMManager();
+	const manager = React.useMemo(() => parent.fork(props.dom), [parent, props.dom]);
 
 	const { open, setOpen } = useControllableOpen(props);
 
-	const [contentOverrides, setContentOverrides] = React.useState<{
-		side?: Side;
-		align?: Align;
-		sideOffset?: number;
-	}>({});
-
-	const placement = React.useMemo<Placement>(() => {
-		const side = contentOverrides.side ?? props.side ?? "bottom";
-		const align = contentOverrides.align ?? props.align ?? "center";
-		return placementFromSideAlign(side, align);
-	}, [contentOverrides.side, contentOverrides.align, props.side, props.align]);
-
-	const middleware = React.useMemo(() => {
-		const m: Middleware[] = [];
-		const resolvedOffset = contentOverrides.sideOffset ?? props.sideOffset ?? 4;
-		m.push(offset(resolvedOffset)); // shadcn default-ish
-		m.push(flip());
-		m.push(shift({ padding: 8 }));
-		if (props.middleware?.length) m.push(...props.middleware);
-		return m;
-	}, [contentOverrides.sideOffset, props.sideOffset, props.middleware]);
-
-	const floating = useFloating({
+	const floating = usePopoverFloating({
 		open,
-		onOpenChange: setOpen,
-		placement,
-		strategy: props.strategy ?? "absolute",
-		middleware,
-		whileElementsMounted: autoUpdate,
+		setOpen,
+		dom: manager.dom,
+		side: props.side,
+		align: props.align,
+		sideOffset: props.sideOffset,
+		strategy: props.strategy,
+		middleware: props.middleware,
+		virtualRect: props.virtualRect,
+		virtualContextElement: props.virtualContextElement,
+		closeOnEscape: props.closeOnEscape ?? true,
+		closeOnOutsidePress: props.closeOnOutsidePress ?? true,
 	});
-
-	// Virtual reference support (canvas/webgl)
-	React.useEffect(() => {
-		if (!props.virtualRect) return;
-		const ve: VirtualElement = dom.createVirtualElement(props.virtualRect, {
-			contextElement: props.virtualContextElement,
-		});
-		floating.refs.setReference(ve as any);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.virtualRect, props.virtualContextElement, dom]);
-
-	const closeOnEscape = props.closeOnEscape ?? true;
-	const closeOnOutsidePress = props.closeOnOutsidePress ?? true;
-	const modal = props.modal ?? false;
-
-	const isOutside = React.useCallback(
-		(event: Event) => dom.isEventOutside(event, [floating.refs.reference.current as any, floating.refs.floating.current as any]),
-		[dom, floating.refs]
-	);
-
-	const click = useClick(floating.context, { enabled: true });
-	const dismiss = useDismiss(floating.context, {
-		enabled: true,
-		escapeKey: closeOnEscape,
-		outsidePressEvent: "pointerdown",
-		outsidePress: (event) => {
-			if (!closeOnOutsidePress) return false;
-
-			const refEl = floating.refs.reference.current as HTMLElement | null;
-			const floatEl = floating.refs.floating.current as HTMLElement | null;
-
-			const target = event.target as Node | null;
-
-			// Plain containment guard first (works for normal DOM)
-			if (target && refEl?.contains(target)) return false;
-			if (target && floatEl?.contains(target)) return false;
-
-			// Shadow/portal safe fallback
-			return dom.isEventOutside(event, [refEl as any, floatEl as any]);
-		},
-	});
-
-	const role = useRole(floating.context, { role: "dialog" });
-
-	const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
 	const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
 
 	React.useEffect(() => {
-		if (typeof document === "undefined") return;
-		setPortalRoot(dom.getPortalContainer());
-	}, [dom]);
+		setPortalRoot(manager.dom.getPortalContainer());
+	}, [manager.dom]);
 
-	// Radix-like presence so "closed" can animate out.
-	// (You can also rely purely on Tailwind data-[state=...] classes; this ensures it stays mounted briefly.)
-	const { isMounted, styles: transitionStyles } = useTransitionStyles(floating.context, {
-		duration: { open: 120, close: 100 },
-		initial: { opacity: 0, transform: "scale(0.95)" },
-		open: { opacity: 1, transform: "scale(1)" },
-		close: { opacity: 0, transform: "scale(0.95)" },
-	});
-
-	const value = React.useMemo<PopoverContextValue>(
+	const value = React.useMemo(
 		() => ({
 			open,
 			setOpen,
-			placement,
-			refs: floating.refs,
-			floatingStyles: floating.floatingStyles,
-			getReferenceProps,
-			getFloatingProps,
+			placement: floating.placement,
+			refs: floating.floating.refs,
+			floatingStyles: floating.floating.floatingStyles,
+			getReferenceProps: floating.interactions.getReferenceProps,
+			getFloatingProps: floating.interactions.getFloatingProps,
 			portalRoot,
-			modal,
-			closeOnOutsidePress,
-			closeOnEscape,
-			isOutside,
-			isMounted,
-			transitionStyles,
-			setContentOverrides,
+			modal: props.modal ?? false,
+			closeOnOutsidePress: props.closeOnOutsidePress ?? true,
+			closeOnEscape: props.closeOnEscape ?? true,
+			isOutside: floating.isOutside,
+			isMounted: floating.isMounted,
+			transitionStyles: floating.transitionStyles,
+			setContentOverrides: floating.setContentOverrides,
+			floatingContext: floating.floatingContext,
 		}),
-		[
-			open,
-			setOpen,
-			placement,
-			floating.refs,
-			floating.floatingStyles,
-			getReferenceProps,
-			getFloatingProps,
-			portalRoot,
-			modal,
-			closeOnOutsidePress,
-			closeOnEscape,
-			isOutside,
-			isMounted,
-			transitionStyles,
-			setContentOverrides,
-		]
+		[open, portalRoot, floating, props]
 	);
 
 	return <PopoverContext.Provider value={value}>{props.children}</PopoverContext.Provider>;
@@ -279,9 +111,9 @@ export const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>
 		"data-state": ctx.open ? "open" : "closed",
 	});
 
-  React.useEffect(() => {
-  console.log("reference node:", ctx.refs.reference.current);
-}, [ctx.refs.reference]);
+	React.useEffect(() => {
+		console.log("reference node:", ctx.refs.reference.current);
+	}, [ctx.refs.reference]);
 
 	if (asChild) return <Slot {...(triggerProps as any)}>{children}</Slot>;
 	return <span {...(triggerProps as any)}>{children}</span>;
@@ -332,8 +164,8 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
 
 	if (!ctx.isMounted) return null;
 
-	const placementSide = sideFromPlacement(ctx.placement);
-	const resolvedAlign = align ?? alignFromPlacement(ctx.placement);
+	const placementSide = PopoverService.sideFromPlacement(ctx.placement);
+	const resolvedAlign = align ?? PopoverService.alignFromPlacement(ctx.placement);
 
 	const floatingProps = ctx.getFloatingProps({
 		...props,
@@ -346,13 +178,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
 			...ctx.floatingStyles,
 			...ctx.transitionStyles,
 			...style,
-			transform: [
-				ctx.floatingStyles.transform,
-				ctx.transitionStyles.transform,
-				style?.transform,
-			]
-				.filter(Boolean)
-				.join(" "),
+			transform: [ctx.floatingStyles.transform, ctx.transitionStyles.transform, style?.transform].filter(Boolean).join(" "),
 		},
 		className: cn(
 			"bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 rounded-ui-radius border border-border p-4 shadow-md outline-hidden",
@@ -363,7 +189,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
 	const node = asChild ? <Slot {...(floatingProps as any)}>{children}</Slot> : <div {...floatingProps}>{children}</div>;
 
 	const maybeFocusManaged = ctx.modal ? (
-		<FloatingFocusManager context={ctx.refs.floating as any} modal={true}>
+		<FloatingFocusManager context={ctx.floatingContext} modal>
 			{node}
 		</FloatingFocusManager>
 	) : (
