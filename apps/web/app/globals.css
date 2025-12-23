@@ -1,6 +1,6 @@
 @source "../**/*.{ts,tsx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
-@import "@repo/ui/styles/tokens.css";
+@import "@haitch/ui/styles/tokens.css";
 @import "tailwindcss";
 
 @layer base {

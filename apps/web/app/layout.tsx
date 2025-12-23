@@ -1,19 +1,12 @@
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+
 import "./globals.css";
 import { Providers } from "./providers";
-import { ThemeRoot } from "@repo/ui/theme/ThemeRoot";
+import { ThemeRoot } from "@haitch/ui";
 import { cn } from "../../../packages/ui/src/lib/cn";
 
-const geistSans = localFont({
-	src: "./fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-	src: "./fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-});
+import { geistMono, geistSans } from "../components/fonts/fonts";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -25,7 +18,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html>
 			<body>
 				<main>
-					<ThemeRoot theme="dracula" className={cn("min-h-screen bg-background font-sans antialiased", geistSans.className)}>
+					<ThemeRoot 
+						//theme="synthwave84" 
+						//theme="dracula"
+						//theme="dark"
+						//theme="light"
+						//theme="stone-light"
+						theme="stone-dark"
+						className={cn("min-h-screen bg-background font-sans antialiased", geistMono.variable, geistSans.variable, '')}>
 						<Providers>{children}</Providers>
 					</ThemeRoot>
 				</main>
