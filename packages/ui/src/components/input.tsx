@@ -1,61 +1,21 @@
+import * as React from "react"
 
-"use client";
+import { cn } from "../lib/cn"
 
-import * as React from "react";
-import { Slot } from "../lib/slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../lib/cn";
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+  return (
+    <input
+      type={type}
+      data-slot="input"
+      className={cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      )}
+      {...props}
+    />
+  )
+}
 
-
-const inputVariants = cva(
-    "flex w-full rounded-ui-radius border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-    {
-        variants: {
-            variant: {
-                default: "",
-                error: "border-destructive text-destructive placeholder:text-destructive/60 focus-visible:ring-destructive",
-            },
-            size: {
-                default: "",
-                sm: "px-2 py-1 text-xs",
-                lg: "px-4 py-3 text-base",
-            },
-        },
-        defaultVariants: {
-            variant: "default",
-            size: "default",
-        },
-    }
-);
-
-type InputProps = React.ComponentPropsWithoutRef<"input"> &
-    VariantProps<typeof inputVariants> & {
-        asChild?: boolean;
-    };
-
-const allowedSizes = ["default", "sm", "lg"] as const;
-type AllowedSize = typeof allowedSizes[number];
-
-const Input = React.forwardRef<HTMLElement, InputProps>(function Input(
-    { className, variant = "default", size = "default", asChild = false, ...props },
-    ref
-) {
-    const Comp = asChild ? Slot : "input";
-
-    // Ensure size is one of the allowed values
-    const normalizedSize: AllowedSize =
-        allowedSizes.includes(size as AllowedSize) ? (size as AllowedSize) : "default";
-
-    return (
-        <Comp
-            ref={ref as any}
-            data-slot="input"
-            data-variant={variant}
-            data-size={normalizedSize}
-            className={cn(inputVariants({ variant, size: normalizedSize }), className)}
-            {...props}
-        />
-    );
-});
-
-export { Input, inputVariants };
+export { Input }

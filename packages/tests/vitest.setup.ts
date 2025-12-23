@@ -5,6 +5,26 @@ import { expect } from "vitest";
 
 expect.extend(matchers);
 
+/**
+ * JSDOM doesn't implement ResizeObserver; some component libs (e.g. cmdk) expect it.
+ */
+if (typeof (globalThis as any).ResizeObserver === "undefined") {
+  class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+
+  (globalThis as any).ResizeObserver = ResizeObserver;
+}
+
+/**
+ * JSDOM doesn't implement scrollIntoView; cmdk calls it when navigating results.
+ */
+if (typeof HTMLElement !== "undefined" && !HTMLElement.prototype.scrollIntoView) {
+  HTMLElement.prototype.scrollIntoView = function scrollIntoView() {};
+}
+
 
 
 /**

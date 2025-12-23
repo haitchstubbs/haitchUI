@@ -1,40 +1,40 @@
 "use client";
 
-
-import { createContext, useContext, useMemo } from "react";
+import * as React from "react";
 import { UI } from "./manager";
 import type { OverlayDOM, OverlayDOMContextValue, ResolvedOverlayDOM } from "./types";
-import type { ReactNode } from "react";
 
-const DEFAULT_MANAGER = UI.default();
-const DEFAULT_VALUE: OverlayDOMContextValue = {
-  manager: DEFAULT_MANAGER,
-  dom: DEFAULT_MANAGER.dom,
-};
+const OverlayDOMContext = React.createContext<OverlayDOMContextValue | null>(null);
 
-const OverlayDOMContext = createContext<OverlayDOMContextValue>(DEFAULT_VALUE);
+function getDefaultManager(): UI {
+	// IMPORTANT:
+	// Don't touch `document` here. Next will execute client components during its
+	// Client Component SSR pass. Creating the manager is safe; `document` is only
+	// needed when DOM methods are actually invoked.
+	return UI.default();
+}
 
-export function OverlayDOMProvider(props: { dom?: OverlayDOM; children: ReactNode }) {
-  const parent = useContext(OverlayDOMContext);
+export function OverlayDOMProvider(props: { dom?: OverlayDOM; children: React.ReactNode }) {
+	const parent = React.useContext(OverlayDOMContext);
 
-  const manager = useMemo(() => {
-    // child overrides parent; parent chain is represented by parent.manager
-    return parent.manager.fork(props.dom);
-  }, [parent.manager, props.dom]);
+	const baseManager = React.useMemo(() => {
+		return parent?.manager ?? getDefaultManager();
+	}, [parent?.manager]);
 
-  const value = useMemo<OverlayDOMContextValue>(() => ({ manager, dom: manager.dom }), [manager]);
+	const manager = React.useMemo(() => baseManager.fork(props.dom), [baseManager, props.dom]);
+	const value = React.useMemo<OverlayDOMContextValue>(() => ({ manager, dom: manager.dom }), [manager]);
 
-  return <OverlayDOMContext.Provider value={value}>{props.children}</OverlayDOMContext.Provider>;
+	return <OverlayDOMContext.Provider value={value}>{props.children}</OverlayDOMContext.Provider>;
 }
 
 export function useOverlayDOM(): ResolvedOverlayDOM {
-  return useContext(OverlayDOMContext).dom;
+	const ctx = React.useContext(OverlayDOMContext);
+	if (!ctx) throw new Error("[haitch/core] useOverlayDOM must be used within <OverlayDOMProvider>.");
+	return ctx.dom;
 }
 
-/**
- * Optional: expose the manager if you want to use helper methods
- * without passing dom around.
- */
 export function useOverlayDOMManager(): UI {
-  return useContext(OverlayDOMContext).manager;
+	const ctx = React.useContext(OverlayDOMContext);
+	if (!ctx) throw new Error("[haitch/core] useOverlayDOMManager must be used within <OverlayDOMProvider>.");
+	return ctx.manager;
 }
