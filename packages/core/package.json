@@ -1,5 +1,5 @@
 {
-	"name": "@haitchui/core",
+	"name": "@haitch/core",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
@@ -25,7 +25,8 @@
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch",
-		"check-types": "tsc -p tsconfig.json --noEmit"
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"dev:watch": "tsup --watch"
 	},
 	"dependencies": {
 		"@floating-ui/react": "^0.26.0",
@@ -40,7 +41,7 @@
 		"react-dom": "^19.2.0"
 	},
 	"devDependencies": {
-		"@repo/typescript-config": "*",
+		"@haitch/typescript-config": "workspace:*",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.1",
 		"@testing-library/user-event": "^14.6.1",
@@ -49,6 +50,7 @@
 		"@vitejs/plugin-react": "^5.1.2",
 		"@vitest/ui": "^4.0.16",
 		"jsdom": "^27.3.0",
+		"prettier": "^3.7.4",
 		"tsup": "^8.5.1",
 		"typescript": "5.9.2",
 		"vitest": "^4.0.16"

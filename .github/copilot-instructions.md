@@ -8,14 +8,14 @@
   - Docs site: Next.js documentation site.
   - Test suites for components and core logic.
 - Shared packages: 
-  - `@repo/ui` (React UI components)
+  - `@haitch/ui` (React UI components)
   - `@haitch/core` (overlay logic)
-  - `@repo/eslint-config` (ESLint config)
-  - `@repo/typescript-config` (TypeScript config).
+  - `@haitch/eslint-config` (ESLint config)
+  - `@haitch/typescript-config` (TypeScript config).
 
 ### @haitch/ui
 - React component library with pre-built UI components.
-- Components are built using TypeScript and React 18+.
+- Components are built using TypeScript and React 19.
 - Uses `@haitch/core` for overlay/floating UI logic.
 - Intended for use in React applications
 - Is a CLI package, allowing users to generate new components via scripts.
@@ -35,7 +35,7 @@
 
 ## Key Workflows
 - **Build all:** `turbo build` (or `npx turbo build`)
-- **Build specific app/package:** `turbo build --filter=web` (or `docs`, `@repo/ui`, etc.)
+- **Build specific app/package:** `turbo build --filter=web` (or `docs`, `@haitch/ui`, etc.)
 - **Dev server (app):** `npm run dev` (from app dir)
 - **Lint:** `turbo lint` or `npm run lint` in package/app
 - **Type check:** `turbo check-types` or `npm run check-types`
@@ -44,7 +44,7 @@
 - **Apps:**
   - `apps/web` and `apps/docs` are Next.js apps using the `/app` directory (not `/pages`).
   - Each app has its own `package.json`, `tsconfig.json`, and can be run/linted/typed independently.
-- **UI Library (`@repo/ui`):**
+- **UI Library (`@haitch/ui`):**
   - Exports React components from `src/`.
   - Use `generate:component` script for new components: `npm run generate:component`.
 - **Core Overlay Logic (`@haitch/core`):**
@@ -58,7 +58,7 @@
 
 ## Conventions & Integration
 - **TypeScript everywhere.**
-- **React 18+ required.**
+- **React 19 required.**
 - **All overlays/components are expected to be client components (`"use client"`).**
 - **Prefer context-based customization for overlays (see `OverlayDOMProvider`).**
 - **Use `@floating-ui/react` for all floating/overlay logic.**
