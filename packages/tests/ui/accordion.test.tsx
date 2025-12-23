@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@repo/ui/components/accordion";
+} from "@haitch/ui";
 
 // IMPORTANT: mock the Slot used by the accordion.
 // This mock path must match the *import string inside the accordion file*.
