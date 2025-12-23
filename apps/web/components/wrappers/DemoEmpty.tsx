@@ -1,8 +1,8 @@
 import { IconFolderCode, IconArrowForwardUp } from "@tabler/icons-react";
 
-import { Button } from "@repo/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@repo/ui/components/empty";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Button } from "@haitch/ui";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@haitch/ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 
 export function DemoEmpty() {
 	return (

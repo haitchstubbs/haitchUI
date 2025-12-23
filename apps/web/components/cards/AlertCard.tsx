@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
-import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/alert";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
+import { Alert, AlertDescription, AlertTitle } from "@haitch/ui";
 import { IconSquareRoundedCheckFilled, IconAlertSquareRoundedFilled, IconGhost2Filled } from "@tabler/icons-react";
 export function AlertCard() {
 	return (

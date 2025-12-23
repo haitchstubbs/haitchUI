@@ -19,8 +19,8 @@ import {
 	type Middleware,
 } from "@floating-ui/react";
 
-import type { RectLike, VirtualElement } from "@haitchui/core";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitchui/core/client";
+import type { RectLike, VirtualElement } from "@haitch/core";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
 import { cn } from "../lib/cn";
@@ -355,7 +355,7 @@ export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentPro
 				.join(" "),
 		},
 		className: cn(
-			"bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 rounded-md border border-border p-4 shadow-md outline-hidden",
+			"bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 rounded-ui-radius border border-border p-4 shadow-md outline-hidden",
 			className
 		),
 	} as React.HTMLAttributes<HTMLDivElement>);

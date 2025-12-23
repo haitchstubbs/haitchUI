@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/avatar";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@haitch/ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 
 export function AvatarCard() {
     return  (

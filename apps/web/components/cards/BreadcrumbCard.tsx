@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
-import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui/components/breadcrumb";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
+import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@haitch/ui";
 
 export function BreadcumbCard() {
     return (

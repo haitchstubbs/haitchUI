@@ -18,8 +18,8 @@ import {
   type Middleware,
 } from "@floating-ui/react";
 
-import type { RectLike, VirtualElement } from "@haitchui/core";
-import { useOverlayDOMManager, OverlayDOM } from "@haitchui/core/client";
+import type { RectLike, VirtualElement } from "@haitch/core";
+import { useOverlayDOMManager, OverlayDOM } from "@haitch/core/client";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
 

@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@haitch/ui";
 
 export default function DemoButton() {
 	return (
