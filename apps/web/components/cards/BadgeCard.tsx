@@ -1,5 +1,5 @@
-import { Badge, BadgeCheckIcon } from "@repo/ui/components/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Badge, BadgeCheckIcon } from "@haitch/ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 
 export function BadgeCard() {
 	return (

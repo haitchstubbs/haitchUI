@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@repo/ui/components/button";
-import { Popover, PopoverTrigger, PopoverContent } from "@repo/ui/components/popover";
-import { Label } from "@repo/ui/components/label";
-import { Input } from "@repo/ui/components/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Button } from "@haitch/ui";
+import { Popover, PopoverTrigger, PopoverContent } from "@haitch/ui";
+import { Label } from "@haitch/ui";
+import { Input } from "@haitch/ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 export default function DemoPopover() {
 	return (
 		<Card className="h-fit">

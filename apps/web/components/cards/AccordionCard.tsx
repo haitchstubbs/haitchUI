@@ -1,5 +1,5 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@repo/ui/components/accordion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@haitch/ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 
 export function AccordionCard() {
 	return (

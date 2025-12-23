@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@haitch/ui";
 import DemoButton from "../wrappers/DemoButton";
 import DemoButtonGroup from "../wrappers/DemoButtonGroup";
 

@@ -1,7 +1,7 @@
 import { IconPlus } from "@tabler/icons-react"
 
-import { Button } from "@repo/ui/components/button"
-import { ButtonGroup } from "@repo/ui/components/button-group"
+import { Button } from "@haitch/ui"
+import { ButtonGroup } from "@haitch/ui"
 
 export default function DemoButtonGroup() {
   return (
