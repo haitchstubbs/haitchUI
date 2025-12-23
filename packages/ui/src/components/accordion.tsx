@@ -2,7 +2,8 @@
 import * as React from "react";
 import { Slot } from "../lib/slot";
 
-
+import { IconChevronDown } from "@tabler/icons-react";
+import { cn } from "../lib/cn";
 
 
 type AccordionSingleValue = string | null;
@@ -117,6 +118,7 @@ const AccordionItemContext = React.createContext<{
 type AccordionTriggerProps = {
     asChild?: boolean;
     className?: string;
+    hasIcon?: boolean;
     children: React.ReactNode;
 };
 
@@ -164,7 +166,14 @@ export const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTri
         }
 
         return (
-            <button {...btnProps}>{children}</button>
+            <button {...btnProps} className={cn("flex items-center justify-between", btnProps.className)}>
+                {children}
+                {props.hasIcon !== false && (
+                    <IconChevronDown
+                        className={cn("ml-2 transition-transform duration-200 size-3", isOpen && "rotate-180")}
+                    />
+                )}
+            </button>
         );
     }
 );

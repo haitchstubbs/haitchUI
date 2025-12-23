@@ -47,6 +47,10 @@ const Label = React.forwardRef<HTMLElement, LabelProps>(function Label(
             data-variant={variant}
             data-size={size}
             className={cn(labelVariants({ variant, size, className }))}
+            onClick={(e) => {
+                e.preventDefault;
+                props.onClick;
+            }}
             {...props}
         />
     );
