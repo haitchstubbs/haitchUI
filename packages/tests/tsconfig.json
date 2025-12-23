@@ -11,5 +11,5 @@
       "@ui/*": ["../packages/ui/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"]
 }

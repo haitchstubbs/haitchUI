@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@ui": path.resolve(__dirname, "../packages/ui"),
+      "@haitch/ui": path.resolve(__dirname, "../ui/src/index.ts"),
     },
   },
   test: {

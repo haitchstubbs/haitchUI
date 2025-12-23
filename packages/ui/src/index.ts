@@ -13,12 +13,22 @@ export * from "./components/card.js";
 export * from "./components/code.js";
 export * from "./components/empty.js";
 export * from "./components/input.js";
+export * from "./components/textarea.js";
+export * from "./components/input-group.js";
+export * from "./components/item.js";
 export * from "./components/label.js";
 export * from "./components/popover.js";
 export * from "./components/separator.js";
 export * from "./components/tooltip.js";
 export * from "./components/carousel.js";
 export * from "./components/checkbox.js";
+export * from "./components/collapsible.js";
+export * from "./components/command.js";
+export * from "./components/context-menu.js";
+export * from "./components/dialog.js";
+export * from "./components/kbd.js"
+export * from "./components/field.js";
+export * from "./components/native-select.js";
 
 // DOM exports
 export * from "./doms/ShadowDomRoot.js";

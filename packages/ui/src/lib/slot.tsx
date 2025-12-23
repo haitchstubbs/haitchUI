@@ -14,7 +14,7 @@ export const Slot = React.forwardRef<HTMLElement, { children: React.ReactNode } 
     const child = children as React.ReactElement<any>;
 
     // IMPORTANT: ref is on the element, not in props
-    const childRef = (child as any).ref;
+    const childRef = (child.props as any).ref ?? (child as any).ref;
 
     const childProps = child.props ?? {};
     const mergedProps: any = { ...childProps, ...slotProps };
