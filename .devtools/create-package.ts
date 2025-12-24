@@ -39,7 +39,7 @@ function parseArgs(argv: string[]): Options {
 	const __dirname = path.dirname(__filename);
 	return {
 		primitive,
-		scope: get("--scope") ?? "@haitch-ui",
+		scope: get("--scope") ?? "@haitch",
 		workspaceRoot: get("--root") ?? path.resolve(__dirname, ".."),
 		packagesDir: get("--packagesDir") ?? "packages/react",
 		client: !has("--server"),
@@ -180,7 +180,7 @@ export default defineConfig({
 	// NOTE: This assumes you have a root tsconfig.base.json.
 	// If yours is elsewhere, pass --root and/or change this template.
 	const tsconfig = {
-		extends: "../../../tsconfig.base.json",
+		extends: "@haitch/tsconfig.base.json",
 		compilerOptions: {
 			rootDir: "src",
 			outDir: "dist",
