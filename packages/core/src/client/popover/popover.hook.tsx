@@ -79,7 +79,9 @@ export function usePopoverFloating(
 		m.push(offset(overrides.sideOffset ?? props.sideOffset ?? 4));
 		m.push(flip());
 		m.push(shift({ padding: 8 }));
-		props.middleware?.length && m.push(...props.middleware);
+		if (props.middleware?.length) {
+			m.push(...props.middleware);
+		}
 		return m;
 	}, [overrides, props.sideOffset, props.middleware]);
 

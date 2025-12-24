@@ -192,10 +192,9 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
   { asChild, children, style, ...props },
   forwardedRef
 ) {
-  const ctx = useTooltipContext();
-
-  if (!ctx.open) return null;
   if (typeof document === "undefined") return null;
+
+  const ctx = useTooltipContext();
   const root = ctx.portalRoot ?? document.body;
 
   const floatingProps = ctx.getFloatingProps({
