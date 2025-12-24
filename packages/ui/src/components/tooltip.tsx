@@ -19,7 +19,7 @@ import {
 } from "@floating-ui/react";
 
 import type { RectLike, VirtualElement } from "@haitch/core";
-import { useOverlayDOMManager, OverlayDOM } from "@haitch/core/client";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
 
@@ -34,7 +34,7 @@ type TooltipContextValue = {
   getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
 
   // dom/env
-  portalRoot: HTMLElement;
+  portalRoot: HTMLElement | null;
 };
 
 const TooltipContext = React.createContext<TooltipContextValue | null>(null);
@@ -89,7 +89,7 @@ function useControllableOpen(opts: Pick<TooltipProps, "open" | "defaultOpen" | "
   return { open, setOpen };
 }
 
-export function Tooltip(props: React.PropsWithChildren<TooltipProps>) {
+export function Tooltip(props: React.PropsWithChildren<TooltipProps>): React.ReactElement {
   const parentManager = useOverlayDOMManager();
   const manager = React.useMemo(() => parentManager.fork(props.dom), [parentManager, props.dom]);
   const dom = manager.dom;
@@ -135,7 +135,14 @@ export function Tooltip(props: React.PropsWithChildren<TooltipProps>) {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, dismiss, role]);
 
-  const portalRoot = React.useMemo(() => dom.getPortalContainer(), [dom]);
+  const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(() => {
+    if (typeof document === "undefined") return null;
+    return dom.getPortalContainer();
+  });
+  React.useEffect(() => {
+    if (typeof document === "undefined") return;
+    setPortalRoot(dom.getPortalContainer());
+  }, [dom]);
 
   const value = React.useMemo<TooltipContextValue>(
     () => ({
@@ -185,9 +192,10 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
   { asChild, children, style, ...props },
   forwardedRef
 ) {
-  const ctx = useTooltipContext();
+  if (typeof document === "undefined") return null;
 
-  if (!ctx.open) return null;
+  const ctx = useTooltipContext();
+  const root = ctx.portalRoot ?? document.body;
 
   const floatingProps = ctx.getFloatingProps({
     ...props,
@@ -197,5 +205,5 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
 
   const node = asChild ? <Slot {...(floatingProps as any)}>{children}</Slot> : <div {...floatingProps}>{children}</div>;
 
-  return <FloatingPortal root={ctx.portalRoot}>{node}</FloatingPortal>;
+  return <FloatingPortal root={root}>{node}</FloatingPortal>;
 });

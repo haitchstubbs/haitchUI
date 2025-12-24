@@ -20,11 +20,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<main>
 					<ThemeRoot 
 						//theme="synthwave84" 
-						theme="dracula"
+						//theme="dracula"
 						//theme="dark"
 						//theme="light"
 						//theme="stone-light"
-						//theme="stone-dark"
+						theme="stone-dark"
 						className={cn("min-h-screen bg-background font-sans antialiased", geistMono.variable, geistSans.variable, '')}>
 						<Providers>{children}</Providers>
 					</ThemeRoot>

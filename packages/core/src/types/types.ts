@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { UI } from "./manager";
+import { UI } from "../lib/manager";
 
 export type VirtualElement = {
   getBoundingClientRect: () => DOMRect;

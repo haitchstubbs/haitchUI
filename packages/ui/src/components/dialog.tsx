@@ -365,6 +365,13 @@ const DialogTrigger = React.forwardRef<HTMLElement, DialogTriggerProps>(function
 	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
 		onClick?.(e);
 		if (e.defaultPrevented) return;
+
+		// If the trigger is a <button> inside a <form>, the default type is "submit"
+		// which would cause a navigation/reload when opening the dialog.
+		// Prevent that (users can still opt into submit with their own handlers).
+		if (e.currentTarget instanceof HTMLButtonElement && e.currentTarget.type === "submit") {
+			e.preventDefault();
+		}
 		setOpen(true);
 	};
 
