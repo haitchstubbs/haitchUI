@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { OverlayDOMProvider } from "@haitch/core/client";
-import type { OverlayDOM } from "@haitch/core/client";
+import { OverlayDOMProvider } from "@haitch/react-overlay";
+import type { OverlayDOM } from "@haitch/react-overlay";
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	const portalRef = React.useRef<HTMLDivElement | null>(null);

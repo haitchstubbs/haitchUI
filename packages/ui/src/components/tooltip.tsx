@@ -18,8 +18,9 @@ import {
   type Middleware,
 } from "@floating-ui/react";
 
-import type { RectLike, VirtualElement } from "@haitch/core";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
+import type { Rect } from "@haitch/react-rect";
+import type { VirtualElement } from "@haitch/core";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch/react-overlay";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
 
@@ -69,7 +70,7 @@ type TooltipProps = {
    * For canvas/webgl triggers: provide a rect (screen coords) and optional contextElement.
    * If set, this overrides the reference element.
    */
-  virtualRect?: RectLike;
+  virtualRect?: Rect;
   virtualContextElement?: Element | null;
 };
 

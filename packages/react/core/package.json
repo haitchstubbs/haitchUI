@@ -1,0 +1,32 @@
+{
+	"name": "@haitch/react-core",
+	"version": "0.0.0",
+	"private": false,
+	"type": "module",
+	"sideEffects": false,
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"peerDependencies": {
+		"react": ">=18",
+		"@types/react": ">=18"
+	},
+	"dependencies": {
+		"@floating-ui/react": "^0.26.0"
+	}
+}

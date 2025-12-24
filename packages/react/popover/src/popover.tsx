@@ -1,348 +1,231 @@
 "use client";
 
-import * as React from "react";
+/** React Imports */
+import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
+
+/** @haitch/react-core Imports */
 import {
-  FloatingFocusManager,
-  FloatingPortal,
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useClick,
-  useDismiss,
-  useFloating,
-  useInteractions,
-  useRole,
-  useTransitionStyles,
-  type Middleware,
-  type Placement,
-  type Strategy,
-} from "@floating-ui/react";
+	// Types
+	type Align,
+	type Side,
+	type FloatingMiddleware,
+	type FloatingReference,
+	type ReferenceType,
+	// Hooks
+	autoUpdate,
+	useDismiss,
+	useFloating,
+	useInteractions,
+	useRole,
+	useClick,
+	useTransitionStyles,
+	// Components
+	FloatingPortal,
+	FloatingFocusManager,
+} from "@haitch/react-core";
 
-import type { Rect } from "@haitch/react-rect";
+/** Primitive Imports */
+import { useOverlayDOMManager } from "@haitch/react-overlay";
+import { Slot } from "@haitch/react-slot";
+import { composeRefs } from "@haitch/react-compose-refs";
 import type { VirtualElement } from "@haitch/react-virtual-element";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch/react-overlay"; // adjust path
-import { Slot } from "@haitch/react-slot"; // adjust path to your Slot (or keep in core)
-import { composeRefs } from "@haitch/react-compose-refs"; // adjust
 
-export type Side = "top" | "right" | "bottom" | "left";
-export type Align = "start" | "center" | "end";
+/** Local Imports for Popover */
+import { useControllableState } from "./hooks.js"; // adjust path
+import { PopoverUtils } from "./util.js";
+import { PopoverContext, usePopoverContext } from "./context.js";
+import type { PopoverContextValue, RootProps, TriggerProps, AnchorProps, PortalProps, ContentProps } from "./types.js"; // adjust path
 
-function placementFromSideAlign(side: Side, align: Align): Placement {
-  if (align === "center") return side;
-  return `${side}-${align}` as Placement;
-}
-function sideFromPlacement(p: Placement): Side {
-  return p.split("-")[0] as Side;
-}
-function alignFromPlacement(p: Placement): Align {
-  return (p.split("-")[1] as Align) ?? "center";
-}
+function Root(props: RootProps) {
+	const parent = useOverlayDOMManager();
+	const manager = useMemo(() => parent.fork(props.dom), [parent, props.dom]);
+	const dom = manager.dom;
 
-function useControllableState(opts: {
-  value?: boolean;
-  defaultValue?: boolean;
-  onChange?: (next: boolean) => void;
-}) {
-  const [uncontrolled, setUncontrolled] = React.useState(opts.defaultValue ?? false);
-  const isControlled = typeof opts.value === "boolean";
-  const value = isControlled ? (opts.value as boolean) : uncontrolled;
+	const [open, setOpen] = useControllableState({
+		value: props.open,
+		defaultValue: props.defaultOpen,
+		onChange: props.onOpenChange,
+	});
 
-  const setValue = React.useCallback(
-    (next: boolean) => {
-      if (!isControlled) setUncontrolled(next);
-      opts.onChange?.(next);
-    },
-    [isControlled, opts.onChange]
-  );
+	const [contentOverrides, setContentOverrides] = useState<{
+		side?: Side;
+		align?: Align;
+		sideOffset?: number;
+	}>({});
 
-  return [value, setValue] as const;
-}
+	const placement = useMemo(() => {
+		const side = contentOverrides.side ?? props.side ?? "bottom";
+		const align = contentOverrides.align ?? props.align ?? "center";
+		return PopoverUtils.placementFromSideAlign(side, align);
+	}, [contentOverrides.side, contentOverrides.align, props.side, props.align]);
 
-type PopoverContextValue = {
-  open: boolean;
-  setOpen: (open: boolean) => void;
+	const middleware = useMemo(() => {
+		const m: FloatingMiddleware[] = PopoverUtils.resolveMiddleware(contentOverrides.sideOffset, props.sideOffset, props.middleware);
+		return m;
+	}, [contentOverrides.sideOffset, props.sideOffset, props.middleware]);
 
-  placement: Placement;
-  refs: ReturnType<typeof useFloating>["refs"];
-  floatingStyles: React.CSSProperties;
+	const floating = useFloating({
+		open,
+		onOpenChange: setOpen,
+		placement,
+		strategy: props.strategy ?? "absolute",
+		middleware,
+		whileElementsMounted: autoUpdate,
+	});
 
-  getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
-  getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
+	// Virtual reference support
+	useEffect(() => {
+		if (!props.virtualRect) return;
+		const ve: VirtualElement = dom.createVirtualElement(props.virtualRect, {
+			contextElement: props.virtualContextElement,
+		});
+		floating.refs.setReference(ve as ReferenceType);
+	}, [props.virtualRect, props.virtualContextElement, dom, floating.refs]);
 
-  portalRoot: HTMLElement | null;
+	const closeOnEscape = props.closeOnEscape ?? true;
+	const closeOnOutsidePress = props.closeOnOutsidePress ?? true;
 
-  modal: boolean;
-  isMounted: boolean;
-  transitionStyles: React.CSSProperties;
+	const isOutside = useCallback(
+		(event: Event) =>
+			dom.isEventOutside(event, [
+				floating.refs.reference.current,
+				floating.refs.floating.current,
+			].filter((el): el is Element => el instanceof Element)
+			),
+		[dom, floating.refs]
+	);
 
-  setContentOverrides: (o: { side?: Side; align?: Align; sideOffset?: number }) => void;
+	const click = useClick(floating.context);
+	const dismiss = useDismiss(floating.context, {
+		escapeKey: closeOnEscape,
+		outsidePressEvent: "pointerdown",
+		outsidePress: closeOnOutsidePress ? (event) => isOutside(event) : false,
+	});
+	const role = useRole(floating.context, { role: "dialog" });
 
-  // for focus manager
-  floatingContext: ReturnType<typeof useFloating>["context"];
+	const interactions = useInteractions([click, dismiss, role]);
 
-  // shadow-dom safe outside press helper
-  isOutside: (event: Event) => boolean;
-};
+	const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+	useEffect(() => {
+		setPortalRoot(dom.getPortalContainer());
+	}, [dom]);
 
-const PopoverContext = React.createContext<PopoverContextValue | null>(null);
+	const { isMounted, styles: transitionStyles } = useTransitionStyles(floating.context, {
+		duration: { open: 120, close: 100 },
+		initial: { opacity: 0, transform: "scale(0.95)" },
+		open: { opacity: 1, transform: "scale(1)" },
+		close: { opacity: 0, transform: "scale(0.95)" },
+	});
 
-function usePopoverContext() {
-  const ctx = React.useContext(PopoverContext);
-  if (!ctx) throw new Error("Popover components must be used within <Popover.Root>.");
-  return ctx;
-}
+	const value = useMemo<PopoverContextValue>(
+		() => ({
+			open,
+			setOpen,
+			placement,
+			refs: floating.refs,
+			floatingStyles: floating.floatingStyles,
+			getReferenceProps: interactions.getReferenceProps,
+			getFloatingProps: interactions.getFloatingProps,
+			portalRoot,
+			modal: props.modal ?? false,
+			isMounted,
+			transitionStyles,
+			setContentOverrides,
+			floatingContext: floating.context,
+			isOutside,
+		}),
+		[
+			open,
+			setOpen,
+			placement,
+			floating.refs,
+			floating.floatingStyles,
+			interactions.getReferenceProps,
+			interactions.getFloatingProps,
+			portalRoot,
+			props.modal,
+			isMounted,
+			transitionStyles,
+			isOutside,
+		]
+	);
 
-/** ---------------- Root ---------------- */
-
-export type RootProps = React.PropsWithChildren<{
-  dom?: OverlayDOM;
-
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
-
-  side?: Side;
-  align?: Align;
-  sideOffset?: number;
-
-  strategy?: Strategy;
-  middleware?: Middleware[];
-
-  closeOnEscape?: boolean;
-  closeOnOutsidePress?: boolean;
-  modal?: boolean;
-
-  virtualRect?: Rect;
-  virtualContextElement?: Element | null;
-}>;
-
-export function Root(props: RootProps) {
-  const parent = useOverlayDOMManager();
-  const manager = React.useMemo(() => parent.fork(props.dom), [parent, props.dom]);
-  const dom = manager.dom;
-
-  const [open, setOpen] = useControllableState({
-    value: props.open,
-    defaultValue: props.defaultOpen,
-    onChange: props.onOpenChange,
-  });
-
-  const [contentOverrides, setContentOverrides] = React.useState<{
-    side?: Side;
-    align?: Align;
-    sideOffset?: number;
-  }>({});
-
-  const placement = React.useMemo(() => {
-    const side = contentOverrides.side ?? props.side ?? "bottom";
-    const align = contentOverrides.align ?? props.align ?? "center";
-    return placementFromSideAlign(side, align);
-  }, [contentOverrides.side, contentOverrides.align, props.side, props.align]);
-
-  const middleware = React.useMemo(() => {
-    const m: Middleware[] = [];
-    const resolvedOffset = contentOverrides.sideOffset ?? props.sideOffset ?? 4;
-    m.push(offset(resolvedOffset));
-    m.push(flip());
-    m.push(shift({ padding: 8 }));
-    if (props.middleware?.length) m.push(...props.middleware);
-    return m;
-  }, [contentOverrides.sideOffset, props.sideOffset, props.middleware]);
-
-  const floating = useFloating({
-    open,
-    onOpenChange: setOpen,
-    placement,
-    strategy: props.strategy ?? "absolute",
-    middleware,
-    whileElementsMounted: autoUpdate,
-  });
-
-  // Virtual reference support
-  React.useEffect(() => {
-    if (!props.virtualRect) return;
-    const ve: VirtualElement = dom.createVirtualElement(props.virtualRect, {
-      contextElement: props.virtualContextElement,
-    });
-    floating.refs.setReference(ve as any);
-  }, [props.virtualRect, props.virtualContextElement, dom, floating.refs]);
-
-  const closeOnEscape = props.closeOnEscape ?? true;
-  const closeOnOutsidePress = props.closeOnOutsidePress ?? true;
-
-  const isOutside = React.useCallback(
-    (event: Event) =>
-      dom.isEventOutside(event, [
-        floating.refs.reference.current as any,
-        floating.refs.floating.current as any,
-      ]),
-    [dom, floating.refs]
-  );
-
-  const click = useClick(floating.context);
-  const dismiss = useDismiss(floating.context, {
-    escapeKey: closeOnEscape,
-    outsidePressEvent: "pointerdown",
-    outsidePress: closeOnOutsidePress ? (event) => isOutside(event) : false,
-  });
-  const role = useRole(floating.context, { role: "dialog" });
-
-  const interactions = useInteractions([click, dismiss, role]);
-
-  const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
-  React.useEffect(() => {
-    setPortalRoot(dom.getPortalContainer());
-  }, [dom]);
-
-  const { isMounted, styles: transitionStyles } = useTransitionStyles(floating.context, {
-    duration: { open: 120, close: 100 },
-    initial: { opacity: 0, transform: "scale(0.95)" },
-    open: { opacity: 1, transform: "scale(1)" },
-    close: { opacity: 0, transform: "scale(0.95)" },
-  });
-
-  const value = React.useMemo<PopoverContextValue>(
-    () => ({
-      open,
-      setOpen,
-      placement,
-      refs: floating.refs,
-      floatingStyles: floating.floatingStyles,
-      getReferenceProps: interactions.getReferenceProps,
-      getFloatingProps: interactions.getFloatingProps,
-      portalRoot,
-      modal: props.modal ?? false,
-      isMounted,
-      transitionStyles,
-      setContentOverrides,
-      floatingContext: floating.context,
-      isOutside,
-    }),
-    [
-      open,
-      setOpen,
-      placement,
-      floating.refs,
-      floating.floatingStyles,
-      interactions.getReferenceProps,
-      interactions.getFloatingProps,
-      portalRoot,
-      props.modal,
-      isMounted,
-      transitionStyles,
-      isOutside,
-    ]
-  );
-
-  return <PopoverContext.Provider value={value}>{props.children}</PopoverContext.Provider>;
+	return <PopoverContext.Provider value={value}>{props.children}</PopoverContext.Provider>;
 }
 
 /** ---------------- Trigger ---------------- */
+const Trigger = forwardRef<HTMLElement, TriggerProps>(function Trigger({ asChild, children, ...props }, forwardedRef) {
+	const ctx = usePopoverContext();
+	const mergedRef = composeRefs(forwardedRef, ctx.refs.setReference as any);
 
-export type TriggerProps = React.HTMLAttributes<HTMLElement> & { asChild?: boolean };
+	const triggerProps = ctx.getReferenceProps({
+		...(props as any),
+		ref: mergedRef,
+		"data-state": ctx.open ? "open" : "closed",
+	});
 
-export const Trigger = React.forwardRef<HTMLElement, TriggerProps>(function Trigger(
-  { asChild, children, ...props },
-  forwardedRef
-) {
-  const ctx = usePopoverContext();
-  const mergedRef = composeRefs(forwardedRef, ctx.refs.setReference as any);
-
-  const triggerProps = ctx.getReferenceProps({
-    ...(props as any),
-    ref: mergedRef,
-    "data-state": ctx.open ? "open" : "closed",
-  });
-
-  return asChild ? <Slot {...(triggerProps as any)}>{children}</Slot> : <span {...(triggerProps as any)}>{children}</span>;
+	return asChild ? <Slot {...(triggerProps as any)}>{children}</Slot> : <span {...(triggerProps as any)}>{children}</span>;
 });
 
 /** ---------------- Anchor ---------------- */
+const Anchor = forwardRef<HTMLElement, AnchorProps>(function Anchor({ asChild, children, ...props }, forwardedRef) {
+	const ctx = usePopoverContext();
+	const mergedRef = composeRefs(forwardedRef, ctx.refs.setReference as any);
 
-export type AnchorProps = React.HTMLAttributes<HTMLElement> & { asChild?: boolean };
+	const anchorProps = {
+		...props,
+		ref: mergedRef,
+	};
 
-export const Anchor = React.forwardRef<HTMLElement, AnchorProps>(function Anchor(
-  { asChild, children, ...props },
-  forwardedRef
-) {
-  const ctx = usePopoverContext();
-  const mergedRef = composeRefs(forwardedRef, ctx.refs.setReference as any);
-
-  const anchorProps = {
-    ...props,
-    ref: mergedRef,
-  };
-
-  return asChild ? <Slot {...(anchorProps as any)}>{children}</Slot> : <span {...(anchorProps as any)}>{children}</span>;
+	return asChild ? <Slot {...(anchorProps as any)}>{children}</Slot> : <span {...(anchorProps as any)}>{children}</span>;
 });
 
 /** ---------------- Portal ---------------- */
-
-export type PortalProps = React.PropsWithChildren<{
-  /** optional override for portal root */
-  container?: HTMLElement | null;
-}>;
-
-export function Portal({ container, children }: PortalProps) {
-  const ctx = usePopoverContext();
-  return <FloatingPortal root={container ?? ctx.portalRoot}>{children}</FloatingPortal>;
+function Portal({ container, children }: PortalProps) {
+	const ctx = usePopoverContext();
+	return <FloatingPortal root={container ?? ctx.portalRoot}>{children}</FloatingPortal>;
 }
 
 /** ---------------- Content ---------------- */
-
-export type ContentProps = React.HTMLAttributes<HTMLDivElement> & {
-  asChild?: boolean;
-  side?: Side;
-  align?: Align;
-  sideOffset?: number;
-};
-
-export const Content = React.forwardRef<HTMLDivElement, ContentProps>(function Content(
-  { asChild, children, style, side, align, sideOffset, ...props },
-  forwardedRef
+const Content = forwardRef<HTMLDivElement, ContentProps>(function Content(
+	{ asChild, children, style, side, align, sideOffset, ...props },
+	forwardedRef
 ) {
-  const ctx = usePopoverContext();
+	const ctx = usePopoverContext();
 
-  React.useEffect(() => {
-    ctx.setContentOverrides({ side, align, sideOffset });
-    return () => ctx.setContentOverrides({});
-  }, [side, align, sideOffset, ctx]);
+	useEffect(() => {
+		ctx.setContentOverrides({ side, align, sideOffset });
+		return () => ctx.setContentOverrides({});
+	}, [side, align, sideOffset, ctx]);
 
-  if (!ctx.isMounted) return null;
+	if (!ctx.isMounted) return null;
 
-  const placementSide = sideFromPlacement(ctx.placement);
-  const resolvedAlign = align ?? alignFromPlacement(ctx.placement);
+	const placementSide = PopoverUtils.sideFromPlacement(ctx.placement);
+	const resolvedAlign = align ?? PopoverUtils.alignFromPlacement(ctx.placement);
 
-  const floatingProps = ctx.getFloatingProps({
-    ...props,
-    ref: composeRefs(forwardedRef, ctx.refs.setFloating as any),
-    "data-state": ctx.open ? "open" : "closed",
-    "data-side": placementSide,
-    "data-align": resolvedAlign,
-    style: {
-      ...ctx.floatingStyles,
-      ...ctx.transitionStyles,
-      ...style,
-      transform: [
-        ctx.floatingStyles.transform,
-        ctx.transitionStyles.transform,
-        style?.transform,
-      ]
-        .filter(Boolean)
-        .join(" "),
-    },
-  } as React.HTMLAttributes<HTMLDivElement>);
+	const floatingProps = ctx.getFloatingProps({
+		...props,
+		ref: composeRefs(forwardedRef, ctx.refs.setFloating as any),
+		"data-state": ctx.open ? "open" : "closed",
+		"data-side": placementSide,
+		"data-align": resolvedAlign,
+		style: {
+			...ctx.floatingStyles,
+			...ctx.transitionStyles,
+			...style,
+			transform: [ctx.floatingStyles.transform, ctx.transitionStyles.transform, style?.transform].filter(Boolean).join(" "),
+		},
+	} as React.HTMLAttributes<HTMLDivElement>);
 
-  const node = asChild
-    ? <Slot {...(floatingProps as any)}>{children}</Slot>
-    : <div {...floatingProps}>{children}</div>;
+	const node = asChild ? <Slot {...(floatingProps as any)}>{children}</Slot> : <div {...floatingProps}>{children}</div>;
 
-  return ctx.modal ? (
-    <FloatingFocusManager context={ctx.floatingContext} modal>
-      {node}
-    </FloatingFocusManager>
-  ) : (
-    node
-  );
+	return ctx.modal ? (
+		<FloatingFocusManager context={ctx.floatingContext} modal>
+			{node}
+		</FloatingFocusManager>
+	) : (
+		node
+	);
 });
+
+export { Root, Trigger, Anchor, Portal, Content };

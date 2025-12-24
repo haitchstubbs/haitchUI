@@ -8,7 +8,7 @@ import { IconX } from "@tabler/icons-react";
 import { cn } from "../lib/cn";
 import { Slot } from "../lib/slot";
 import { composeRefs } from "../lib/compose-refs";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch/react-overlay";
 
 type DialogContextValue = {
 	open: boolean;
