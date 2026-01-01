@@ -1,36 +1,45 @@
 {
-  "name": "@haitch/react-popover",
-  "version": "0.0.0",
-  "private": false,
-  "type": "module",
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
-  },
-  "dependencies": {
-    "@floating-ui/react": "^0.26.0",
-    "@haitch/react-rect": "workspace:*",
-    "@haitch/react-virtual-element": "workspace:*",
-    "@haitch/react-slot": "workspace:*",
-    "@haitch/react-compose-refs": "workspace:*"
-  },
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "check-types": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint .",
-    "test": "vitest run"
-  }
+	"name": "@haitch/react-popover",
+	"version": "0.0.0",
+	"private": false,
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"peerDependencies": {
+		"react": ">=18",
+		"react-dom": ">=18",
+		"@floating-ui/react": "^0.26.0",
+		"@haitch/react-overlay": "workspace:*",
+		"@haitch/react-rect": "workspace:*",
+		"@haitch/react-virtual-element": "workspace:*",
+		"@haitch/react-slot": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch/react-core": "workspace:*"
+	},
+	"dependencies": {
+		"@floating-ui/react": "^0.26.0",
+		"@haitch/react-overlay": "workspace:*",
+		"@haitch/react-rect": "workspace:*",
+		"@haitch/react-virtual-element": "workspace:*",
+		"@haitch/react-slot": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch/react-core": "workspace:*"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run"
+	}
 }

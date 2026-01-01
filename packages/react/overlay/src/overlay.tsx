@@ -30,12 +30,12 @@ export function OverlayDOMProvider(props: { dom?: OverlayDOM; children: React.Re
 
 export function useOverlayDOM(): ResolvedDOM {
 	const ctx = React.useContext(OverlayDOMContext);
-	if (!ctx) throw new Error("[haitch/core] useOverlayDOM must be used within <OverlayDOMProvider>.");
+	if (!ctx) throw new Error("[haitch/react-overlay] useOverlayDOM must be used within <OverlayDOMProvider>.");
 	return ctx.dom;
 }
 
 export function useOverlayDOMManager(): DOM {
 	const ctx = React.useContext(OverlayDOMContext);
-	if (!ctx) throw new Error("[haitch/core] useOverlayDOMManager must be used within <OverlayDOMProvider>.");
+	if (!ctx) throw new Error("[haitch/react-overlay] useOverlayDOMManager must be used within <OverlayDOMProvider>.");
 	return ctx.manager;
 }

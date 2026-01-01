@@ -17,6 +17,9 @@ importers:
       '@haitch/react-compose-refs':
         specifier: workspace:*
         version: link:packages/react/compose-refs
+      '@haitch/react-context-menu':
+        specifier: workspace:*
+        version: link:packages/react/context-menu
       '@haitch/react-overlay':
         specifier: workspace:*
         version: link:packages/react/overlay
@@ -29,6 +32,9 @@ importers:
       '@haitch/react-slot':
         specifier: workspace:*
         version: link:packages/react/slot
+      '@haitch/react-tooltip':
+        specifier: workspace:*
+        version: link:packages/react/tooltip
       '@haitch/react-virtual-element':
         specifier: workspace:*
         version: link:packages/react/virtual-element
@@ -65,6 +71,9 @@ importers:
       '@haitch/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../../packages/react/overlay
       '@haitch/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -82,7 +91,7 @@ importers:
         version: 8.6.0(react@19.2.3)
       next:
         specifier: 16.0.10
-        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.0
         version: 19.2.3
@@ -159,12 +168,24 @@ importers:
       '@haitch/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@haitch/react-dropdown-menu':
+        specifier: workspace:*
+        version: link:../../packages/react/dropdown-menu
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../../packages/react/overlay
+      '@haitch/react-tooltip':
+        specifier: workspace:*
+        version: link:../../packages/react/tooltip
       '@haitch/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tabler/icons-react':
         specifier: ^3.36.0
         version: 3.36.0(react@19.2.3)
+      '@tanstack/react-table':
+        specifier: ^8.21.3
+        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -176,7 +197,7 @@ importers:
         version: 8.6.0(react@19.2.3)
       next:
         specifier: 16.0.10
-        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.0
         version: 19.2.3
@@ -378,6 +399,69 @@ importers:
         specifier: '>=18'
         version: 19.2.3
 
+  packages/react/context-menu:
+    dependencies:
+      '@floating-ui/react':
+        specifier: ^0.26.0
+        version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@haitch/react-compose-refs':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../core
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../overlay
+      '@haitch/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
+  packages/react/core:
+    dependencies:
+      '@floating-ui/react':
+        specifier: ^0.26.0
+        version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@types/react':
+        specifier: '>=18'
+        version: 19.2.2
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
+  packages/react/dialog:
+    dependencies:
+      '@haitch/react-compose-refs':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../core
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../overlay
+      '@haitch/react-rect':
+        specifier: workspace:*
+        version: link:../rect
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
+  packages/react/dropdown-menu:
+    dependencies:
+      '@floating-ui/react':
+        specifier: ^0.26.0
+        version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@haitch/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
   packages/react/overlay:
     dependencies:
       react:
@@ -392,6 +476,12 @@ importers:
       '@haitch/react-compose-refs':
         specifier: workspace:*
         version: link:../compose-refs
+      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../core
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../overlay
       '@haitch/react-rect':
         specifier: workspace:*
         version: link:../rect
@@ -408,11 +498,38 @@ importers:
         specifier: '>=18'
         version: 19.2.3(react@19.2.3)
 
+  packages/react/portal:
+    dependencies:
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
   packages/react/rect:
     dependencies:
       '@haitch/react-overlay':
         specifier: workspace:*
         version: link:../overlay
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+
+  packages/react/select:
+    dependencies:
+      '@haitch/react-compose-refs':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../core
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../overlay
+      '@haitch/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      '@haitch/react-virtual-element':
+        specifier: workspace:*
+        version: link:../virtual-element
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -443,6 +560,61 @@ importers:
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@types/node@22.19.3)(@vitest/ui@4.0.16)(jiti@2.6.1)(jsdom@27.3.0)(lightningcss@1.30.2)(tsx@4.21.0)
+
+  packages/react/tooltip:
+    dependencies:
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+      react-dom:
+        specifier: '>=18'
+        version: 19.2.3(react@19.2.3)
+
+  packages/react/tree:
+    dependencies:
+      '@haitch/react-compose-refs':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      react:
+        specifier: '>=18'
+        version: 19.2.3
+    devDependencies:
+      '@testing-library/jest-dom':
+        specifier: ^6.9.1
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: ^16.3.1
+        version: 16.3.1(@testing-library/dom@10.4.1)(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@testing-library/user-event':
+        specifier: ^14.6.1
+        version: 14.6.1(@testing-library/dom@10.4.1)
+      '@types/react':
+        specifier: 19.2.2
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: 19.2.2
+        version: 19.2.2(@types/react@19.2.2)
+      '@vitejs/plugin-react':
+        specifier: ^5.1.2
+        version: 5.1.2(vite@7.3.0(@types/node@22.19.3)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0))
+      axe-core:
+        specifier: ^4.11.0
+        version: 4.11.0
+      jsdom:
+        specifier: ^27.3.0
+        version: 27.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.3(react@19.2.3)
+      vitest:
+        specifier: ^4.0.16
+        version: 4.0.16(@types/node@22.19.3)(@vitest/ui@4.0.16)(jiti@2.6.1)(jsdom@27.3.0)(lightningcss@1.30.2)(tsx@4.21.0)
+      vitest-axe:
+        specifier: ^0.1.0
+        version: 0.1.0(vitest@4.0.16)
 
   packages/react/virtual-element:
     dependencies:
@@ -518,6 +690,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.36.0
         version: 3.36.0(react@19.2.3)
+      '@tanstack/react-table':
+        specifier: ^8.21.3
+        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -527,9 +702,15 @@ importers:
       cmdk:
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.2.3)
+      react-day-picker:
+        specifier: ^9.13.0
+        version: 9.13.0(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -540,6 +721,39 @@ importers:
       '@haitch/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@haitch/react-context-menu':
+        specifier: workspace:*
+        version: link:../react/context-menu
+      '@haitch/react-dialog':
+        specifier: workspace:*
+        version: link:../react/dialog
+      '@haitch/react-dropdown-menu':
+        specifier: workspace:*
+        version: link:../react/dropdown-menu
+      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../react/overlay
+      '@haitch/react-popover':
+        specifier: workspace:*
+        version: link:../react/popover
+      '@haitch/react-rect':
+        specifier: workspace:*
+        version: link:../react/rect
+      '@haitch/react-select':
+        specifier: workspace:*
+        version: link:../react/select
+      '@haitch/react-slot':
+        specifier: workspace:*
+        version: link:../react/slot
+      '@haitch/react-tooltip':
+        specifier: workspace:*
+        version: link:../react/tooltip
+      '@haitch/react-tree':
+        specifier: workspace:*
+        version: link:../react/tree
+      '@haitch/react-virtual-element':
+        specifier: workspace:*
+        version: link:../react/virtual-element
       '@haitch/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -710,6 +924,9 @@ packages:
   '@csstools/css-tokenizer@3.0.4':
     resolution: {integrity: sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==}
     engines: {node: '>=18'}
+
+  '@date-fns/tz@1.4.1':
+    resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
 
   '@emnapi/runtime@1.7.1':
     resolution: {integrity: sha512-PVtJr5CmLwYAU9PZDMITZoR5iAOShYREoR45EyyLrbntV50mdePTgUn4AmOw90Ifcj+x2kRjdzr1HP3RrNiHGA==}
@@ -1575,6 +1792,17 @@ packages:
   '@tailwindcss/postcss@4.1.18':
     resolution: {integrity: sha512-Ce0GFnzAOuPyfV5SxjXGn0CubwGcuDB0zcdaPuCSzAa/2vII24JTkH+I6jcbXLb1ctjZMZZI6OjDaLPJQL1S0g==}
 
+  '@tanstack/react-table@8.21.3':
+    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  '@tanstack/table-core@8.21.3':
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
+
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
     engines: {node: '>=18'}
@@ -1974,6 +2202,12 @@ packages:
   data-view-byte-offset@1.0.1:
     resolution: {integrity: sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ==}
     engines: {node: '>= 0.4'}
+
+  date-fns-jalali@4.1.0-0:
+    resolution: {integrity: sha512-hTIP/z+t+qKwBDcmmsnmjWTduxCg+5KfdqWQvb2X/8C9+knYY6epN/pfxdDuyVlSVeFz0sM5eEfwIUQ70U4ckg==}
+
+  date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -2852,6 +3086,12 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  react-day-picker@9.13.0:
+    resolution: {integrity: sha512-euzj5Hlq+lOHqI53NiuNhCP8HWgsPf/bBAVijR50hNaY1XwjKjShAnIe8jm8RD2W9IJUvihDIZ+KrmqfFzNhFQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: '>=16.8.0'
+
   react-dom@19.2.3:
     resolution: {integrity: sha512-yELu4WmLPw5Mr/lmeEpox5rw3RETacE++JgHqQzd2dg+YbJuat3jH4ingc+WPZhxaoFzdv9y33G+F7Nl5O0GBg==}
     peerDependencies:
@@ -3626,6 +3866,8 @@ snapshots:
 
   '@csstools/css-tokenizer@3.0.4': {}
 
+  '@date-fns/tz@1.4.1': {}
+
   '@emnapi/runtime@1.7.1':
     dependencies:
       tslib: 2.8.1
@@ -4260,6 +4502,14 @@ snapshots:
       postcss: 8.5.6
       tailwindcss: 4.1.18
 
+  '@tanstack/react-table@8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+
+  '@tanstack/table-core@8.21.3': {}
+
   '@testing-library/dom@10.4.1':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -4746,6 +4996,10 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       is-data-view: 1.0.2
+
+  date-fns-jalali@4.1.0-0: {}
+
+  date-fns@4.1.0: {}
 
   debug@4.4.3:
     dependencies:
@@ -5553,7 +5807,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next@16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  next@16.0.10(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       '@next/env': 16.0.10
       '@swc/helpers': 0.5.15
@@ -5561,7 +5815,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
-      styled-jsx: 5.1.6(react@19.2.3)
+      styled-jsx: 5.1.6(@babel/core@7.28.5)(react@19.2.3)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.0.10
       '@next/swc-darwin-x64': 16.0.10
@@ -5710,6 +5964,13 @@ snapshots:
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
+
+  react-day-picker@9.13.0(react@19.2.3):
+    dependencies:
+      '@date-fns/tz': 1.4.1
+      date-fns: 4.1.0
+      date-fns-jalali: 4.1.0-0
+      react: 19.2.3
 
   react-dom@19.2.3(react@19.2.3):
     dependencies:
@@ -6016,10 +6277,12 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-jsx@5.1.6(react@19.2.3):
+  styled-jsx@5.1.6(@babel/core@7.28.5)(react@19.2.3):
     dependencies:
       client-only: 0.0.1
       react: 19.2.3
+    optionalDependencies:
+      '@babel/core': 7.28.5
 
   sucrase@3.35.1:
     dependencies:

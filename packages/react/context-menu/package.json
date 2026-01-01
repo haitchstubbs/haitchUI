@@ -1,0 +1,40 @@
+{
+	"name": "@haitch/react-context-menu",
+	"version": "0.0.0",
+	"private": false,
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"peerDependencies": {
+		"@haitch/react-core": "workspace:*",
+		"react": ">=18",
+		"@haitch/react-overlay": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch/react-slot": "workspace:*",
+		"@floating-ui/react": "^0.26.0"
+	},
+	"dependencies": {
+		"@haitch/react-core": "workspace:*",
+		"@haitch/react-overlay": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch/react-slot": "workspace:*",
+		"@floating-ui/react": "^0.26.0"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run"
+	}
+}

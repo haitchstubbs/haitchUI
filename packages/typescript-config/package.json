@@ -11,5 +11,10 @@
   },
   "devDependencies": {
     "prettier": "^3.7.4"
-  }
+  },
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-libary.json"
+  ]
 }

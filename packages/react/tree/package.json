@@ -1,0 +1,43 @@
+{
+	"name": "@haitch/react-tree",
+	"version": "0.0.0",
+	"private": false,
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"peerDependencies": {
+		"react": ">=18",
+		"@haitch/react-slot": "workspace:*",
+		"@haitch/react-compose-refs": "workspace:*"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.1",
+		"@testing-library/user-event": "^14.6.1",
+		"@types/react": "19.2.2",
+		"@types/react-dom": "19.2.2",
+		"@vitejs/plugin-react": "^5.1.2",
+		"axe-core": "^4.11.0",
+		"jsdom": "^27.3.0",
+		"react-dom": "^19.2.0",
+		"vitest": "^4.0.16",
+		"vitest-axe": "^0.1.0"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run"
+	}
+}

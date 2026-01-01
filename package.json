@@ -28,15 +28,17 @@
 		"@haitch/react-rect": "workspace:*",
 		"@haitch/react-virtual-element": "workspace:*",
 		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*"
-		
+		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch/react-context-menu": "workspace:*",
+		"@haitch/react-tooltip": "workspace:*"
 	},
 	"overrides": {
 		"next": "16.0.10",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"@types/react": "19.2.2",
-		"@types/react-dom": "19.2.2"
+		"@types/react-dom": "19.2.2",
+		"@floating-ui/react": "^0.26.0"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"engines": {

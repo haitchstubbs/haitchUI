@@ -1,0 +1,33 @@
+{
+  "name": "@haitch/react-select",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "peerDependencies": {
+    "react": ">=18",
+    "@haitch/react-core": "workspace:*",
+    "@haitch/react-virtual-element": "workspace:*",
+    "@haitch/react-slot": "workspace:*",
+    "@haitch/react-compose-refs": "workspace:*",
+    "@haitch/react-overlay": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  }
+}
