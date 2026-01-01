@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { JSX } from "react";
+import { type JSX } from "react";
 import { createPortal } from "react-dom";
 
 export type ShadowRootHostProps = {

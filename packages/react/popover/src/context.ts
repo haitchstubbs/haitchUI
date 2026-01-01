@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { PopoverContextValue } from "./types.js";
+import { type PopoverContextValue } from "./types";
 
 const PopoverContext = createContext<PopoverContextValue | null>(null);
 

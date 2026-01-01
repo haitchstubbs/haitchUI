@@ -29,8 +29,8 @@
 		"@haitch/react-virtual-element": "workspace:*",
 		"@haitch/react-overlay": "workspace:*",
 		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-context-menu": "workspace:*"
-		
+		"@haitch/react-context-menu": "workspace:*",
+		"@haitch/react-tooltip": "workspace:*"
 	},
 	"overrides": {
 		"next": "16.0.10",

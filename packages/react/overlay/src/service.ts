@@ -105,10 +105,8 @@ export class DOM {
 
 	private static defaultGetPortalContainer(getDocument: () => Document): HTMLElement {
 		const doc = getDocument();
-		if (!doc.body) {
-			throw new Error("OverlayDOM: document.body is not available. Provide getPortalContainer().");
-		}
-		return doc.body;
+		const overlayRoot = doc.querySelector<HTMLElement>("[data-overlay-root]");
+		return overlayRoot ?? doc.body;
 	}
 
 	/**

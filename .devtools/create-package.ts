@@ -180,7 +180,7 @@ export default defineConfig({
 	// NOTE: This assumes you have a root tsconfig.base.json.
 	// If yours is elsewhere, pass --root and/or change this template.
 	const tsconfig = {
-		extends: "@haitch/tsconfig.base.json",
+		extends: "@haitch/typescript-config/base.json",
 		compilerOptions: {
 			rootDir: "src",
 			outDir: "dist",
@@ -190,7 +190,7 @@ export default defineConfig({
 	};
 
 	const useClient = opts.client ? `"use client";\n\n` : "";
-	const indexTs = `${useClient}export * from "./${primitive}";
+	const indexTs = `${useClient}export * from "./${primitive}.js";
 `;
 
 	const primitiveTs = `${useClient}export type ${toPascal(primitive)}Props = {

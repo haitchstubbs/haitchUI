@@ -1,3 +1,3 @@
-import { safePolygon, flip, offset, shift } from "@floating-ui/react";
+import { safePolygon, flip, offset, shift, size } from "@floating-ui/react";
 
-export { safePolygon, flip, offset, shift };
+export { safePolygon, flip, offset, shift, size };

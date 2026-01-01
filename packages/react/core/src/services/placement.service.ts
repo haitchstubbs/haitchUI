@@ -1,4 +1,4 @@
-import { Align, FloatingPlacement, FloatingReference, Side } from "../types/portal.types.js";
+import { type Align, type FloatingPlacement, type FloatingReference, type Side } from "../types/portal.types.js";
 
 export class Placement {
 	static fromSideAlign(side: Side, align: Align): FloatingPlacement {
