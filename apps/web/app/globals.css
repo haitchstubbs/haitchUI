@@ -2,6 +2,7 @@
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 @import "@haitch/ui/styles/tokens.css";
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @layer base {
   html,

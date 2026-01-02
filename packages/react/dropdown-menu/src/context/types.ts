@@ -30,4 +30,5 @@ export type Ctx = {
     // Content-driven positioning (Radix-style props live on Content/SubContent)
     positioning: Positioning;
     setPositioning: (next: Partial<Positioning>) => void;
+    isPositioned: boolean;
 };

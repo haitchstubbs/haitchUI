@@ -59,7 +59,7 @@ export function useMenuInstance({
 
 	const placement = toPlacement(positioning.side, positioning.align);
 
-	const { floatingStyles, refs, context } = useFloating<HTMLElement>({
+	const { floatingStyles, refs, context, isPositioned } = useFloating<HTMLElement>({
 		nodeId,
 		open: isOpen,
 		onOpenChange: setIsOpen,
@@ -73,6 +73,7 @@ export function useMenuInstance({
 			shift({ padding: positioning.collisionPadding }),
 		],
 		whileElementsMounted: autoUpdate,
+		transform: false
 	});
 
 	const hover = useHover(context, {
@@ -135,6 +136,7 @@ export function useMenuInstance({
 	}, [tree, isOpen, nodeId, parentId]);
 
 	const ctx: Ctx = {
+		isPositioned,
 		isOpen,
 		setIsOpen,
 		activeIndex,

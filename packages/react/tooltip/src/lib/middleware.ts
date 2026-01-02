@@ -19,7 +19,6 @@ export function buildTooltipMiddleware(params: {
       padding: opts.collisionPadding,
     }),
     shift({ padding: opts.collisionPadding }),
-    arrow({ element: arrowRef }),
   ];
 
   return list.filter(Boolean) as Middleware[];

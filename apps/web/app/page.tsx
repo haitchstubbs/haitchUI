@@ -15,11 +15,30 @@ import {
 	DropdownMenuPortal,
 	DropdownMenuShortcut,
 } from "../components/ui/dropdown-menu";
+import {
+	ContextMenu,
+	ContextMenuCheckboxItem,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuSeparator,
+	ContextMenuShortcut,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger,
+} from "../components/ui/context-menu";
 import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { Button } from "../components/ui/button";
-import { IconBadge, IconChevronRight, IconInfoCircleFilled, IconRosetteDiscountCheck } from "@tabler/icons-react";
+import { IconBadge, IconChevronDown, IconChevronRight, IconDots, IconInfoCircleFilled, IconRosetteDiscountCheck } from "@tabler/icons-react";
+import { ContextMenuExample } from "../components/examples/context-menu.example";
+import { useState } from "react";
+import { cn } from "../lib/util";
 
 export default function Home() {
+	const [dropdownOpen, setDropdownOpen] = useState(false);
 	return (
 		<main className="bg-background flex w-full items-center justify-center p-8 gap-6 min-h-screen overflow-y-auto flex-col">
 			<section className="bg-background flex w-full items-center justify-center p-8 gap-6 min-h-[200vh] overflow-y-auto flex-col">
@@ -37,8 +56,8 @@ export default function Home() {
 								</Button>
 							</TooltipTrigger>
 							<TooltipContent>
-								<p className="font-extrabold">This is a basic tooltip example. It works with any element!</p>
-								<p className="font-normal">
+								<p className="text-popover font-extrabold">This is a basic tooltip example. It works with any element!</p>
+								<p className="text-popover font-normal">
 									You can put <strong>bold</strong>, <em>italic</em>, and other <u>styles</u> here.
 								</p>
 								<TooltipArrow />
@@ -53,9 +72,19 @@ export default function Home() {
 						<ItemDescription>A simple tooltip that can be attached to anything</ItemDescription>
 					</ItemContent>
 					<ItemActions>
-						<DropdownMenu>
+						<DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
 							<DropdownMenuTrigger asChild>
-								<Button variant="outline">Open</Button>
+								<Button variant="outline" className={cn(
+									dropdownOpen ? "bg-accent text-accent-foreground" : "",
+									"transition-colors duration-75 ease-in-out"
+								)}>
+									<span>Click to Open</span>
+									<IconChevronDown className={cn(
+										"size-4 ml-2",
+										dropdownOpen ? "rotate-180" : "rotate-0",
+										"transition-transform duration-200 ease-in-out"
+									)} />
+								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent className="w-56">
 								<DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -110,6 +139,8 @@ export default function Home() {
 					</ItemActions>
 				</Item>
 
+				<ContextMenuExample />
+
 				<Item variant="outline" size="sm" asChild>
 					<a href="#">
 						<ItemMedia>
@@ -119,7 +150,7 @@ export default function Home() {
 							<ItemTitle>Your profile has been verified.</ItemTitle>
 						</ItemContent>
 						<ItemActions>
-							<IconChevronRight className="size-4" />
+							<IconDots className="size-4" />
 						</ItemActions>
 					</a>
 				</Item>

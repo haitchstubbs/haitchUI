@@ -1,71 +1,46 @@
 "use client";
 
 import * as React from "react";
-// Replace it with your primitives export, e.g.:
-import {
-	TooltipProvider as TooltipProviderPrimitive,
-	Tooltip as TooltipRootPrimitive,
-	TooltipTrigger as TooltipTriggerPrimitive,
-	TooltipContent as TooltipContentPrimitive,
-	TooltipArrow as TooltipArrowPrimitive,
-	type TooltipProviderProps as TooltipProviderPrimitiveProps,
-	type TooltipProps as TooltipRootPrimitiveProps,
-	type TooltipTriggerProps as TooltipTriggerPrimitiveProps,
-	type TooltipContentProps as TooltipContentPrimitiveProps,
-} from "@haitch/react-tooltip"; // <-- adjust path
+import * as TooltipPrimitive from "@haitch/react-tooltip";
 
 import { cn } from "../../lib/util";
 
-function composeRefs<T>(...refs: Array<React.Ref<T> | undefined>) {
-	return (node: T) => {
-		for (const ref of refs) {
-			if (!ref) continue;
-			if (typeof ref === "function") ref(node);
-			else (ref as any).current = node;
-		}
-	};
+function TooltipProvider({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+	return <TooltipPrimitive.Provider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
 }
 
-function TooltipProvider({ delayDuration = 0, ...props }: TooltipProviderPrimitiveProps) {
-	return <TooltipProviderPrimitive data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
-}
-
-function Tooltip({ ...props }: TooltipRootPrimitiveProps) {
+function Tooltip({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
 	return (
 		<TooltipProvider>
-			<TooltipRootPrimitive data-slot="tooltip" {...props} />
+			<TooltipPrimitive.Root data-slot="tooltip" {...props} />
 		</TooltipProvider>
 	);
 }
 
-function TooltipTrigger({ ...props }: TooltipTriggerPrimitiveProps) {
-	return <TooltipTriggerPrimitive data-slot="tooltip-trigger" {...props} />;
+function TooltipTrigger({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
+	return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipContent({ className, sideOffset = 6, collisionPadding = 8, children, portalled = true, ...props }: TooltipContentPrimitiveProps) {
+function TooltipContent({ className, sideOffset = 10, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
 	return (
-		<TooltipContentPrimitive
-			sideOffset={sideOffset}
-			collisionPadding={collisionPadding}
-			portalled={portalled}
-			className={cn(
-				"relative",
-				"z-50 w-fit px-3 py-1.5 text-xs",
-				"bg-foreground text-background shadow-sm",
-				"rounded-radius-md",
-				className
-			)}
-			{...props}
-		>
-			{children}
-		</TooltipContentPrimitive>
+		<TooltipPrimitive.Portal>
+			<TooltipPrimitive.Content
+				data-slot="tooltip-content"
+				sideOffset={sideOffset}
+				className={cn(
+					"bg-popover-foreground text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balanced",
+					className
+				)}
+				{...props}
+			>
+				{children}
+			</TooltipPrimitive.Content>
+		</TooltipPrimitive.Portal>
 	);
 }
 
 function TooltipArrow() {
-	return (
-		<TooltipArrowPrimitive className={"fill-popover-foreground"} />
-	);
+	return <TooltipPrimitive.Arrow data-slot="tooltip-arrow" className="fill-foreground" />;
 }
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipArrow };

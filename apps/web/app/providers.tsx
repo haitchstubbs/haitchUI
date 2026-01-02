@@ -38,9 +38,26 @@ export function Providers({
 
 	return (
 		<ThemeRoot
-			//theme={"tokyo-night-storm"}
-			theme="motherduck-brutalist-dark"
-			className={cn(" ui-root min-h-screen min-w-screen bg-background antialiased", fontClassNames)}
+			theme={
+				//
+				//"dark"
+				//"stone-light"
+				//"stone-dark"
+				//"neutral-light"
+				//"neutral-dark"
+				//"synthwave74"
+				//"dracula"
+				//"nord"
+				//"one-dark-pro"
+				//"gruvbox-material-dark"
+				//"tokyo-night-storm"
+				//"brutalist-black"
+				//"duckdb-brutalist-dark"
+				//"motherduck-brutalist-dark"
+				//"cyberpunk-light"
+				"cyberpunk-dark"
+			}
+			className={cn(" ui-root min-h-screen min-w-screen text-foreground bg-background antialiased", fontClassNames)}
 		>
 			<OverlayDOMProvider dom={dom}>
 				<div ref={portalRef} />
