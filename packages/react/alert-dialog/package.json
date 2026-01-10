@@ -16,11 +16,12 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch/react-slot": "workspace:*",
-    "@haitch/react-compose-refs": "workspace:*",
+    "@haitch-ui/react-slot": "^0.1.0",
+    "@haitch-ui/react-compose-refs": "^0.1.0",
     "@haitch/react-overlay": "workspace:*"
   },
   "scripts": {

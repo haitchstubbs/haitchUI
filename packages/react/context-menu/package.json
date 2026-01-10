@@ -19,15 +19,14 @@
 		"@haitch/react-core": "workspace:*",
 		"react": ">=18",
 		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
+		"@haitch-ui/react-slot": "^0.1.0",
 		"@floating-ui/react": "^0.26.0"
 	},
 	"dependencies": {
 		"@haitch/react-core": "workspace:*",
 		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
+		"@haitch-ui/react-compose-refs": "^0.1.0",
+		"@haitch-ui/react-slot": "^0.1.0",
 		"@floating-ui/react": "^0.26.0"
 	},
 	"scripts": {

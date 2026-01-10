@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { cn } from "../../lib/util";
 
 import * as Primitive from "@haitch/react-code-block"; // <-- adjust path

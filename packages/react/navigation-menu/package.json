@@ -17,10 +17,10 @@
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
 		"react": ">=18",
-		"@haitch/react-slot": "workspace:*"
+		"react-dom": ">=18"
 	},
 	"dependencies": {
-		"@haitch/react-slot": "workspace:*"
+		"@haitch-ui/react-slot": "^0.1.0"
 	},
 	"scripts": {
 		"build": "tsup",

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { useControllableState } from "../hooks";
 import { CollapsibleContext } from "../context";
 import type { RootProps } from "../types";

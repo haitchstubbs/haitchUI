@@ -3,7 +3,7 @@
 
 import * as React from "react";
 import { FloatingFocusManager } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { useComboboxContext } from "./context";
 import type { PopupProps } from "./types";
 

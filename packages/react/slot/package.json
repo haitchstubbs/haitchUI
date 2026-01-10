@@ -1,12 +1,21 @@
 {
-  "name": "@haitch/react-slot",
-  "version": "0.0.0",
-  "private": false,
+  "name": "@haitch-ui/react-slot",
+  "version": "0.1.0",
+  "description": "A strict, compositional Slot component for React that safely forwards props, events, and refs to exactly one valid child element.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hicklebirry/haitchUI.git",
+    "directory": "packages/react/slot"
+  },
+  "bugs": {
+    "url": "https://github.com/hicklebirry/haitchUI/issues"
+  },
+  "homepage": "https://github.com/hicklebirry/haitchUI#readme",
+  "keywords": ["react", "slot", "headless-ui", "design-system", "compound-components", "ref"],
   "type": "module",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
+  "files": ["dist", "README.md"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -15,18 +24,32 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@haitch-ui/react-compose-refs": "^0.1.0"
   },
   "devDependencies": {
-    "@haitch/react-compose-refs": "workspace:*",
-    "@types/react": "^19.2.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^5.1.2",
+    "axe-core": "^4.11.0",
     "eslint": "^9.39.1",
+    "jsdom": "^27.3.0",
     "prettier": "^3.7.4",
-    "react": "^19.2.0",
     "tsup": "^8.5.1",
     "typescript": "5.9.2",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.16",
+    "vitest-axe": "^0.1.0"
   },
   "scripts": {
     "build": "tsup",

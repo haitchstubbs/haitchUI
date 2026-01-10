@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useLayoutEffect, RefObject } from "react";
+import { useRef, useState, useLayoutEffect, type RefObject } from "react";
 
 import { DOM } from "@haitch/react-overlay";
 

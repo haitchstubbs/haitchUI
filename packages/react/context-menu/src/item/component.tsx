@@ -7,7 +7,7 @@ function makeSelectEvent() {
 }
 import { forwardRef } from "react";
 import type { ItemProps } from "../types";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 export const Item = forwardRef<HTMLElement, ItemProps>(function Item(
 	{ asChild = false, onSelect, textValue, disabled, closeOnSelect = true, children, ...props },
 	ref

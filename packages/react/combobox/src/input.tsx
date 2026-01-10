@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { composeRefs } from "@haitch/react-compose-refs";
-import { Slot } from "@haitch/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
+import { Slot } from "@haitch-ui/react-slot";
 import { composeEventHandlers } from "./events";
 import { useComboboxContext } from "./context";
 import type { InputProps } from "./types";

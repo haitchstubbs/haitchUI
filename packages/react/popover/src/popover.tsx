@@ -26,8 +26,8 @@ import {
 
 /** Primitive Imports */
 import { useOverlayDOMManager } from "@haitch/react-overlay";
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
 import type { VirtualElement } from "@haitch/react-virtual-element";
 
 /** Local Imports for Popover */

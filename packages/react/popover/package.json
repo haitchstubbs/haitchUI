@@ -17,22 +17,15 @@
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
 		"react": ">=18",
-		"react-dom": ">=18",
-		"@floating-ui/react": "^0.26.0",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-rect": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-core": "workspace:*"
+		"react-dom": ">=18"
 	},
 	"dependencies": {
 		"@floating-ui/react": "^0.26.0",
 		"@haitch/react-overlay": "workspace:*",
 		"@haitch/react-rect": "workspace:*",
 		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-slot": "^0.1.0",
+		"@haitch-ui/react-compose-refs": "^0.1.0",
 		"@haitch/react-core": "workspace:*"
 	},
 	"scripts": {

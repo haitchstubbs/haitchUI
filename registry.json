@@ -82,7 +82,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -106,7 +106,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -135,7 +135,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -164,7 +164,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -611,7 +611,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -961,7 +961,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1129,7 +1129,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slot",
+					"name": "@haitch-ui/react-slot",
 					"version": "workspace:*",
 					"type": "lib"
 				},

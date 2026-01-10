@@ -1,5 +1,5 @@
 import * as React from "react";
-import { composeRefs } from "@haitch/react-compose-refs";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
 
 type AnyProps = Record<string, unknown>;
 

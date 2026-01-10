@@ -21,8 +21,8 @@ import {
 	type Side,
 	type SelectedState
 } from "@haitch/react-core";
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
 import { useOverlayDOMManager } from "@haitch/react-overlay";
 
 /* -------------------------------------------------------------------------------------------------

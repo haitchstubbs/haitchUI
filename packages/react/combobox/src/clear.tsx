@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { composeEventHandlers } from "./events";
 import { useComboboxContext } from "./context";
 import type { ClearProps } from "./types";
