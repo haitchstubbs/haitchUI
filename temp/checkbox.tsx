@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { IconCheck } from "@tabler/icons-react";
-import { cn } from "../lib/cn";
+import {cn} from "../../lib/util";
 
 type CheckboxProps = Omit<
   React.ComponentPropsWithoutRef<"button">,

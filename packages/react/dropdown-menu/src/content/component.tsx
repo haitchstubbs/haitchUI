@@ -2,6 +2,7 @@ import { FloatingFocusManager, FloatingPortal, useMergeRefs } from "@floating-ui
 import { forwardRef, useLayoutEffect } from "react";
 import type { ContentProps } from "../types";
 import { useCtx } from "../context/useRootContext";
+import { getUiRootFromReference } from "../lib/getUIFromRoot";
 
 export const Content = forwardRef<HTMLDivElement, ContentProps>(function Content(
 	{ portal = true, modal, forceMount = false, side, align, sideOffset, alignOffset, collisionPadding, children, ...props },
@@ -24,9 +25,19 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(function Content
 	const shouldRender = forceMount || menu.isOpen;
 	if (!shouldRender) return null;
 
+	const computedSide = menu.context.placement.split("-")[0]; // "top" | "right" | "bottom" | "left"
+	const open = menu.isOpen && menu.isPositioned;
+
 	const node = (
 		<FloatingFocusManager context={menu.context} modal={modal ?? menu.modal} initialFocus={menu.isNested ? -1 : 0} returnFocus={!menu.isNested}>
-			<div ref={mergedRefs as React.Ref<HTMLDivElement>} style={menu.floatingStyles} {...menu.getFloatingProps(props as any)}>
+			<div
+				data-state={open ? "open" : "closed"}
+				data-side={computedSide}
+				data-slot="context-menu-content"
+				ref={mergedRefs as React.Ref<HTMLDivElement>}
+				style={menu.floatingStyles}
+				{...menu.getFloatingProps(props as any)}
+			>
 				{children}
 			</div>
 		</FloatingFocusManager>
@@ -34,9 +45,7 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(function Content
 
 	if (!portal) return node;
 
-	const uiRootFromDocument = typeof document !== "undefined" ? document.querySelector(".ui-root") : null;
-	const foundRoot = (menu.refs.reference.current as HTMLElement | null)?.closest(".ui-root") ?? uiRootFromDocument ?? undefined;
-	const root = foundRoot instanceof HTMLElement ? foundRoot : undefined;
+	const root = getUiRootFromReference(menu.refs.reference.current);
 
 	return <FloatingPortal root={root}>{node}</FloatingPortal>;
 });

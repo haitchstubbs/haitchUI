@@ -30,7 +30,7 @@ export type TooltipProviderProps = {
 	delayDuration?: number;
 };
 
-export function TooltipProvider({ children, delayDuration = 150 }: TooltipProviderProps) {
+export function Provider({ children, delayDuration = 150 }: TooltipProviderProps) {
 	return <TooltipProviderContext.Provider value={{ delayDuration }}>{children}</TooltipProviderContext.Provider>;
 }
 
@@ -78,7 +78,7 @@ export type TooltipProps = {
 	portalled?: boolean;
 };
 
-export function Tooltip({ children, defaultOpen, open, onOpenChange, side = "top", align = "center", portalRoot, portalled = true }: TooltipProps) {
+export function Root({ children, defaultOpen, open, onOpenChange, side = "top", align = "center", portalRoot, portalled = true }: TooltipProps) {
 	const provider = useTooltipProvider();
 
 	const inferredPortalRoot = React.useMemo(() => {
@@ -106,7 +106,7 @@ export function Tooltip({ children, defaultOpen, open, onOpenChange, side = "top
 
 export type TooltipTriggerProps = React.HTMLProps<HTMLElement> & { asChild?: boolean };
 
-export const TooltipTrigger = React.forwardRef<HTMLElement, TooltipTriggerProps>(function TooltipTrigger({ asChild = false, ...props }, ref) {
+export const Trigger = React.forwardRef<HTMLElement, TooltipTriggerProps>(function TooltipTrigger({ asChild = false, ...props }, ref) {
 	const tooltip = useTooltipContext();
 	const Comp = asChild ? Slot : "span";
 
@@ -127,58 +127,71 @@ export const TooltipTrigger = React.forwardRef<HTMLElement, TooltipTriggerProps>
 });
 
 export type TooltipContentProps = React.HTMLProps<HTMLDivElement> & {
-	/** Override whether this instance is portalled */
-	portalled?: boolean;
-
-	/** shadcn-ish knobs */
-	sideOffset?: number;
-	collisionPadding?: number;
+  portalled?: boolean;
+  sideOffset?: number;
+  collisionPadding?: number;
+  className?: string;
+  children?: React.ReactNode;
 };
 
-export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(function TooltipContent(
-	{ portalled, sideOffset = 6, collisionPadding = 8, ...props },
-	ref
-) {
-	const tooltip = useTooltipContext();
+export const Content = React.forwardRef<HTMLDivElement, TooltipContentProps>(
+  function TooltipContent(
+    { portalled, className, sideOffset = 6, collisionPadding = 8, children, ...props },
+    ref
+  ) {
+    const tooltip = useTooltipContext();
 
-	// ✅ push options after render, not during render
-	useIsomorphicLayoutEffect(() => {
-		tooltip.setOptions?.({ sideOffset, collisionPadding });
-	}, [tooltip, sideOffset, collisionPadding]);
+    useIsomorphicLayoutEffect(() => {
+      tooltip.setOptions?.({ sideOffset, collisionPadding });
+    }, [tooltip, sideOffset, collisionPadding]);
 
-	if (!tooltip.open) return null;
+    if (!tooltip.open) return null;
 
-	const floatingProps = tooltip.getFloatingProps(props as any);
+    const floatingProps = tooltip.getFloatingProps({
+      ...props,
+    } as any);
 
-	const node = (
-		<div
-			{...floatingProps}
-			ref={(node) => {
-				tooltip.refs.setFloating(node);
-				if (typeof ref === "function") ref(node);
-				else if (ref) (ref as any).current = node;
-			}}
-			data-slot="tooltip-content"
-			data-state={tooltip.open ? "open" : "closed"}
-			data-side={(tooltip.placement?.split("-")[0] ?? "top") as any}
-			style={{
-				...(tooltip.floatingStyles as React.CSSProperties),
-				...(floatingProps.style as React.CSSProperties),
-				...(props.style as React.CSSProperties),
-			}}
-		/>
-	);
+    const computedSide = (tooltip.placement?.split("-")[0] ?? "top") as any;
+    const open = tooltip.open && tooltip.isPositioned;
+	const mergedClassNames = [floatingProps.className, className].filter(Boolean).join(' ');
+    const node = (
+      <div
+        {...floatingProps}
+        ref={(node) => {
+          tooltip.refs.setFloating(node);
+          if (typeof ref === "function") ref(node);
+          else if (ref) (ref as any).current = node;
+        }}
+        data-slot="tooltip-content"
+        data-state={open ? "open" : "closed"}
+        data-side={computedSide}
+        className={mergedClassNames}
+        style={{
+          ...(tooltip.floatingStyles as React.CSSProperties),
+          ...(floatingProps.style as React.CSSProperties),
+          ...(props.style as React.CSSProperties),
+          opacity: tooltip.open && !tooltip.isPositioned ? 0 : (props.style as any)?.opacity,
+        }}
+      >
+        {children}
+      </div>
+    );
 
-	const shouldPortal = portalled ?? Boolean(tooltip.__portalRoot);
-	return shouldPortal && tooltip.__portalRoot ? <FloatingPortal root={tooltip.__portalRoot}>{node}</FloatingPortal> : node;
-});
+    const shouldPortal = portalled ?? Boolean(tooltip.__portalRoot);
+    return shouldPortal && tooltip.__portalRoot ? (
+      <FloatingPortal root={tooltip.__portalRoot}>{node}</FloatingPortal>
+    ) : (
+      node
+    );
+  }
+);
 
 export type TooltipArrowProps = Omit<Partial<FloatingArrowProps>, "ref"> & {
 	style?: React.CSSProperties;
 	className?: string;
 };
 
-export const TooltipArrow = React.forwardRef<SVGSVGElement, TooltipArrowProps>(function TooltipArrow(props, forwardedRef) {
+export const Arrow = React.forwardRef<SVGSVGElement, TooltipArrowProps>(function TooltipArrow(props, forwardedRef) {
 	const { style, className, height, ...restProps } = props;
 	const tooltip = useTooltipContext();
 	return (

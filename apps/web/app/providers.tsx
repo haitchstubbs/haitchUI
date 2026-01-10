@@ -4,19 +4,21 @@ import * as React from "react";
 import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import { cn, ThemeRoot } from "@haitch/ui";
 import { OverlayDOMProvider, type OverlayDOM } from "@haitch/react-overlay";
+import { SidebarProvider } from "../components/ui/sidebar";
+import { fontVariables } from "../components/fonts";
+
+import { Toaster } from "../components/ui/toaster";
 
 export function Providers({
-	fonts,
 	children,
 	initialExpandedValues,
 	expandedCookieName,
 }: {
-	fonts: NextFontWithVariable[];
 	children: React.ReactNode;
-	initialExpandedValues: string[];
-	expandedCookieName: string;
+	initialExpandedValues?: string[];
+	expandedCookieName?: string;
 }) {
-	const fontClassNames = fonts.map((font) => font.variable).join(" ");
+
 
 	const portalRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -38,14 +40,35 @@ export function Providers({
 
 	return (
 		<ThemeRoot
-			//theme={"tokyo-night-storm"}
-			theme="motherduck-brutalist-dark"
-			className={cn(" ui-root min-h-screen min-w-screen bg-background antialiased", fontClassNames)}
+			theme={
+				//"dark"
+				//"dark"
+				//"stone-light"
+				"stone-dark"
+				//"neutral-light"
+				//"neutral-dark"
+				//"synthwave74"
+				//"dracula"
+				//"nord"
+				//"one-dark-pro"
+				//"gruvbox-material-dark"
+				//"tokyo-night-storm"
+				//"brutalist-black"
+				//"duckdb-brutalist-dark"
+				//"motherduck-brutalist-dark"
+				//"cyberpunk-light"
+				//"cyberpunk-dark"
+			}
+			className={cn(" ui-root root h-screen w-screen text-foreground bg-background antialiased", fontVariables)}
 		>
 			<OverlayDOMProvider dom={dom}>
-				<div ref={portalRef} />
-				{/* Provide expandedValues via context or props (see next section) */}
-				{children}
+			
+				<SidebarProvider>
+					<div ref={portalRef} />
+					{/* Provide expandedValues via context or props (see next section) */}
+					{children}
+				</SidebarProvider>
+				<Toaster position="bottom-right" />
 			</OverlayDOMProvider>
 		</ThemeRoot>
 	);

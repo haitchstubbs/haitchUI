@@ -1,20 +1,13 @@
 {
-  "extends": "@haitch/typescript-config/nextjs.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    "next.config.js",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"extends": "@haitch/typescript-config/nextjs.json",
+	"compilerOptions": {
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"typeRoots": ["./types", "./node_modules/@types"]
+	},
+	"include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.mjss", ".next/types/**/*.ts"],
+	"exclude": ["node_modules"]
 }

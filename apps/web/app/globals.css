@@ -1,7 +1,12 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@haitch/ui/styles/tokens.css";
 @source "../**/*.{ts,tsx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
-@import "@haitch/ui/styles/tokens.css";
-@import "tailwindcss";
+@source "../packages/ui/**/*.{ts,tsx}";
+@source "../../../packages/react/**/*.{ts,tsx,js,jsx}";
+
 
 @layer base {
   html,
@@ -37,4 +42,13 @@
       display: unset;
     }
   }
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+:root[data-theme="dark"],
+html[data-theme="dark"] {
+  color-scheme: dark;
 }

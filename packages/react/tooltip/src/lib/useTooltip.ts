@@ -1,9 +1,4 @@
-// lib/useTooltip.ts
-import {
-  autoUpdate,
-  useFloating,
-  type Placement,
-} from "@floating-ui/react";
+import { autoUpdate, useFloating, type Placement } from "@floating-ui/react";
 import { useMemo, useRef } from "react";
 
 import type { TooltipOptions } from "./types";
@@ -47,6 +42,9 @@ export function useTooltip(options?: TooltipOptions) {
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware,
+
+    // ✅ recommended: avoid transform positioning being clobbered by transform animations
+    transform: false,
   });
 
   const interactions = useTooltipInteractions({
@@ -62,7 +60,7 @@ export function useTooltip(options?: TooltipOptions) {
       arrowRef,
       setOptions,
       ...interactions,
-      ...data,
+      ...data, // includes isPositioned
     }),
     [open, setOpen, interactions, data, setOptions]
   );
