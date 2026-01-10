@@ -6,10 +6,10 @@ import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 /** @haitch/react-core Imports */
 import {
 	// Types
-	type Align,
+	type Alignment as Align,
 	type Side,
-	type FloatingMiddleware,
-	type FloatingReference,
+	type Middleware as FloatingMiddleware,
+	type ReferenceElement as FloatingReference,
 	type ReferenceType,
 	// Hooks
 	autoUpdate,
@@ -22,7 +22,7 @@ import {
 	// Components
 	FloatingPortal,
 	FloatingFocusManager,
-} from "@haitch/react-core";
+} from "@floating-ui/react";
 
 /** Primitive Imports */
 import { useOverlayDOMManager } from "@haitch/react-overlay";
@@ -49,7 +49,7 @@ function Root(props: RootProps) {
 
 	const [contentOverrides, setContentOverrides] = useState<{
 		side?: Side;
-		align?: Align;
+		align?: Align | "center";
 		sideOffset?: number;
 	}>({});
 
@@ -71,6 +71,7 @@ function Root(props: RootProps) {
 		strategy: props.strategy ?? "absolute",
 		middleware,
 		whileElementsMounted: autoUpdate,
+		transform: false
 	});
 
 	// Virtual reference support

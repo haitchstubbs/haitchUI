@@ -1,4 +1,3 @@
-/* "use client";
+"use client";
 
-export * from "./select.js";
- */
+export * from "./select";

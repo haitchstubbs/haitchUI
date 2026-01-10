@@ -1,0 +1,41 @@
+import {code} from "./code"
+import Demo from "./demo"
+
+# Avatar
+
+A simple avatar component built with Haitch UI and Tailwind CSS.
+
+
+<CodePreview code={code} lang="tsx">
+  <Demo.Primary />
+</CodePreview>
+
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add avatar
+```
+
+
+
+
+Install the following dependencies:
+
+```bash
+npm install @radix-ui/react-avatar
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+```
+
+```tsx showLineNumbers
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```

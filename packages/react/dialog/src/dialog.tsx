@@ -2,140 +2,79 @@
 "use client";
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+
+import {
+	autoUpdate,
+	useDismiss,
+	useFloating,
+	useInteractions,
+	useRole,
+	useTransitionStyles,
+	FloatingPortal,
+	FloatingFocusManager,
+	FloatingOverlay,
+	type FloatingContext,
+} from "@floating-ui/react";
 
 import { Slot } from "@haitch/react-slot";
 import { composeRefs } from "@haitch/react-compose-refs";
 import { useOverlayDOMManager, type OverlayDOM } from "@haitch/react-overlay";
 
 type DialogContextValue = {
-  open: boolean;
-  setOpen: (next: boolean) => void;
+	open: boolean;
+	setOpen: (next: boolean) => void;
 
-  disabled: boolean;
-  modal: boolean;
+	disabled: boolean;
+	modal: boolean;
 
-  closeOnEscape: boolean;
-  closeOnOutsidePress: boolean;
+	closeOnEscape: boolean;
+	closeOnOutsidePress: boolean;
 
-  titleId: string;
-  descriptionId: string;
-  contentId: string;
+	titleId: string;
+	descriptionId: string;
+	contentId: string;
 
-  triggerRef: React.RefObject<HTMLElement | null>;
-  contentRef: React.RefObject<HTMLDivElement | null>;
-  lastActiveElementRef: React.RefObject<HTMLElement | null>;
+	// Refs (kept for compatibility / userland access)
+	triggerRef: React.RefObject<HTMLElement | null>;
+	contentRef: React.RefObject<HTMLDivElement | null>;
+	lastActiveElementRef: React.RefObject<HTMLElement | null>;
 
-  portalRoot: HTMLElement | null;
-  dom: OverlayDOM;
+	portalRoot: HTMLElement | null;
+	dom: OverlayDOM;
 
-  isMounted: boolean;
-  transitionStyles: React.CSSProperties;
+	// Floating UI
+	floating: ReturnType<typeof useFloating> & { context: FloatingContext };
+	getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
+	getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
+
+	// Presence/transition
+	isMounted: boolean;
+	transitionStyles: React.CSSProperties;
 };
 
 const DialogContext = React.createContext<DialogContextValue | null>(null);
 
 function useDialogContext(componentName: string): DialogContextValue {
-  const ctx = React.useContext(DialogContext);
-  if (!ctx) throw new Error(`${componentName} must be used within <Dialog.Root>.`);
-  return ctx;
+	const ctx = React.useContext(DialogContext);
+	if (!ctx) throw new Error(`${componentName} must be used within <Dialog.Root>.`);
+	return ctx;
 }
 
-function useControllableOpen(opts: {
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  disabled: boolean;
-}) {
-  const [uncontrolled, setUncontrolled] = React.useState<boolean>(opts.defaultOpen ?? false);
-  const controlled = typeof opts.open === "boolean";
-  const open = controlled ? (opts.open as boolean) : uncontrolled;
+function useControllableOpen(opts: { open?: boolean; defaultOpen?: boolean; onOpenChange?: (open: boolean) => void; disabled: boolean }) {
+	const [uncontrolled, setUncontrolled] = React.useState<boolean>(opts.defaultOpen ?? false);
+	const controlled = typeof opts.open === "boolean";
+	const open = controlled ? (opts.open as boolean) : uncontrolled;
 
-  const setOpen = React.useCallback(
-    (next: boolean) => {
-      if (opts.disabled) return;
-      if (!controlled) setUncontrolled(next);
-      opts.onOpenChange?.(next);
-    },
-    [controlled, opts.disabled, opts.onOpenChange]
-  );
+	const setOpen = React.useCallback(
+		(next: boolean) => {
+			if (opts.disabled) return;
+			if (!controlled) setUncontrolled(next);
+			opts.onOpenChange?.(next);
+		},
+		[controlled, opts.disabled, opts.onOpenChange]
+	);
 
-  return { open, setOpen };
-}
-
-function getFocusableWithin(root: HTMLElement): HTMLElement[] {
-  const candidates = root.querySelectorAll<HTMLElement>(
-    [
-      'button:not([disabled])',
-      '[href]',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])',
-    ].join(",")
-  );
-
-  return Array.from(candidates).filter((el) => {
-    if (el.hasAttribute("disabled")) return false;
-    if (el.getAttribute("aria-hidden") === "true") return false;
-    if (el.hidden) return false;
-    return true;
-  });
-}
-
-function usePresence(open: boolean, durations?: { open?: number; close?: number }) {
-  const openMs = durations?.open ?? 120;
-  const closeMs = durations?.close ?? 100;
-
-  const [isMounted, setIsMounted] = React.useState(open);
-  const [styles, setStyles] = React.useState<React.CSSProperties>(() => ({
-    opacity: open ? 1 : 0,
-    transform: open ? "scale(1)" : "scale(0.95)",
-  }));
-
-  const rafRef = React.useRef<number | null>(null);
-  const tRef = React.useRef<number | null>(null);
-
-  const clearTimers = React.useCallback(() => {
-    if (rafRef.current != null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    if (tRef.current != null) {
-      window.clearTimeout(tRef.current);
-      tRef.current = null;
-    }
-  }, []);
-
-  React.useEffect(() => {
-    clearTimers();
-
-    if (open) {
-      setIsMounted(true);
-      setStyles({ opacity: 0, transform: "scale(0.95)" });
-
-      rafRef.current = requestAnimationFrame(() => {
-        setStyles({
-          opacity: 1,
-          transform: "scale(1)",
-          transition: `opacity ${openMs}ms ease, transform ${openMs}ms ease`,
-        });
-      });
-
-      return () => clearTimers();
-    }
-
-    setStyles({
-      opacity: 0,
-      transform: "scale(0.95)",
-      transition: `opacity ${closeMs}ms ease, transform ${closeMs}ms ease`,
-    });
-
-    tRef.current = window.setTimeout(() => setIsMounted(false), closeMs);
-    return () => clearTimers();
-  }, [open, openMs, closeMs, clearTimers]);
-
-  return { isMounted, styles };
+	return { open, setOpen };
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -143,213 +82,173 @@ function usePresence(open: boolean, durations?: { open?: number; close?: number 
  * ------------------------------------------------------------------------------------------------- */
 
 export type DialogRootProps = {
-  dom?: OverlayDOM;
+	dom?: OverlayDOM;
 
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
+	open?: boolean;
+	defaultOpen?: boolean;
+	onOpenChange?: (open: boolean) => void;
 
-  modal?: boolean;
-  disabled?: boolean;
+	modal?: boolean;
+	disabled?: boolean;
 
-  closeOnEscape?: boolean;
-  closeOnOutsidePress?: boolean;
+	closeOnEscape?: boolean;
+	closeOnOutsidePress?: boolean;
 
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 function Root({
-  dom: domOverride,
-  open: controlledOpen,
-  defaultOpen,
-  onOpenChange,
+	dom: domOverride,
+	open: controlledOpen,
+	defaultOpen,
+	onOpenChange,
 
-  modal = true,
-  disabled = false,
+	modal = true,
+	disabled = false,
 
-  closeOnEscape = true,
-  closeOnOutsidePress = true,
+	closeOnEscape = true,
+	closeOnOutsidePress = true,
 
-  children,
+	children,
 }: DialogRootProps) {
-  const parentManager = useOverlayDOMManager();
-  const manager = React.useMemo(() => parentManager.fork(domOverride), [parentManager, domOverride]);
-  const dom = manager.dom;
+	const parentManager = useOverlayDOMManager();
+	const manager = React.useMemo(() => parentManager.fork(domOverride), [parentManager, domOverride]);
+	const dom = manager.dom;
 
-  const { open, setOpen } = useControllableOpen({
-    open: controlledOpen,
-    defaultOpen,
-    onOpenChange,
-    disabled,
-  });
+	const { open, setOpen } = useControllableOpen({
+		open: controlledOpen,
+		defaultOpen,
+		onOpenChange,
+		disabled,
+	});
 
-  const triggerRef = React.useRef<HTMLElement | null>(null);
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const lastActiveElementRef = React.useRef<HTMLElement | null>(null);
+	const triggerRef = React.useRef<HTMLElement | null>(null);
+	const contentRef = React.useRef<HTMLDivElement | null>(null);
+	const lastActiveElementRef = React.useRef<HTMLElement | null>(null);
 
-  const titleId = React.useId();
-  const descriptionId = React.useId();
-  const contentId = React.useId();
+	const titleId = React.useId();
+	const descriptionId = React.useId();
+	const contentId = React.useId();
 
-  const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
+	const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
+	React.useEffect(() => {
+		setPortalRoot(dom.getPortalContainer());
+	}, [dom]);
 
-  React.useEffect(() => {
-    setPortalRoot(dom.getPortalContainer());
-  }, [dom]);
+	// Track last active element before opening; restore focus on close.
+	React.useEffect(() => {
+		if (typeof document === "undefined") return;
 
-  const { isMounted, styles: transitionStyles } = usePresence(open, { open: 120, close: 100 });
+		if (open) {
+			const active = document.activeElement as HTMLElement | null;
+			if (active && active !== document.body && active !== document.documentElement) {
+				lastActiveElementRef.current = active;
+			}
+		} else {
+			queueMicrotask(() => {
+				(triggerRef.current ?? lastActiveElementRef.current)?.focus?.();
+			});
+		}
+	}, [open]);
 
-  // Track last active element before opening; restore focus on close.
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
+	// Floating UI setup
+	const floating = useFloating({
+		open,
+		onOpenChange: (next) => {
+			// gate with disabled here as well (dismiss can call onOpenChange)
+			if (disabled) return;
+			setOpen(next);
+		},
+		whileElementsMounted: autoUpdate,
+	});
 
-    if (open) {
-      const active = document.activeElement as HTMLElement | null;
-      if (active && active !== document.body && active !== document.documentElement) {
-        lastActiveElementRef.current = active;
-      }
-    } else {
-      queueMicrotask(() => {
-        (triggerRef.current ?? lastActiveElementRef.current)?.focus?.();
-      });
-    }
-  }, [open]);
+	// Role="dialog"
+	const role = useRole(floating.context, { role: "dialog" });
 
-  // Scroll lock when modal open
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-    if (!open || !modal) return;
+	// Dismiss (escape + outside press)
+	const dismiss = useDismiss(floating.context, {
+		enabled: open && !disabled,
+		escapeKey: closeOnEscape,
+		outsidePress: closeOnOutsidePress
+			? (event) => {
+					// Shadow/portal safe outside-press check using your OverlayDOM.
+					const trigger = triggerRef.current;
+					const content = contentRef.current;
+					if (!content) return true;
 
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
-    };
-  }, [open, modal]);
+					// If click is inside trigger or content => not outside press
+					const target = (event as Event).target as Node | null;
+					if (target && (content.contains(target) || trigger?.contains(target))) return false;
 
-  // Escape to close
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-    if (!open) return;
-    if (!closeOnEscape) return;
-    if (disabled) return;
+					// Otherwise defer to overlay dom manager
+					return dom.isEventOutside(event as any, [trigger as any, content as any]);
+				}
+			: false,
+	});
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "Escape") return;
-      e.stopPropagation();
-      setOpen(false);
-    };
+	const { getReferenceProps, getFloatingProps } = useInteractions([role, dismiss]);
 
-    document.addEventListener("keydown", onKeyDown, { capture: true });
-    return () => document.removeEventListener("keydown", onKeyDown, { capture: true } as any);
-  }, [open, closeOnEscape, disabled, setOpen]);
+	// Presence/transition styles
+	const { isMounted, styles: transitionStyles } = useTransitionStyles(floating.context, {
+		duration: { open: 120, close: 100 },
+		initial: { opacity: 0, transform: "scale(0.95)" },
+		open: { opacity: 1, transform: "scale(1)" },
+		close: { opacity: 0, transform: "scale(0.95)" },
+	});
 
-  // Outside press (shadow-dom safe)
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-    if (!open) return;
-    if (!closeOnOutsidePress) return;
-    if (disabled) return;
+	const value = React.useMemo<DialogContextValue>(
+		() => ({
+			open,
+			setOpen,
 
-    const onPointerDown = (event: PointerEvent) => {
-      const trigger = triggerRef.current;
-      const content = contentRef.current;
-      if (!content) return;
+			disabled,
+			modal,
+			closeOnEscape,
+			closeOnOutsidePress,
 
-      const target = event.target as Node | null;
+			titleId,
+			descriptionId,
+			contentId,
 
-      // Normal DOM fast-path
-      if (target && (content.contains(target) || trigger?.contains(target))) return;
+			triggerRef,
+			contentRef,
+			lastActiveElementRef,
 
-      // Shadow/portal safe fallback
-      if (!dom.isEventOutside(event, [trigger as any, content as any])) return;
+			portalRoot,
+			dom,
 
-      setOpen(false);
-    };
+			floating: Object.assign(floating, { context: floating.context }),
+			getReferenceProps,
+			getFloatingProps,
 
-    document.addEventListener("pointerdown", onPointerDown, { capture: true });
-    return () =>
-      document.removeEventListener("pointerdown", onPointerDown, { capture: true } as any);
-  }, [open, closeOnOutsidePress, disabled, dom, setOpen]);
+			isMounted,
+			transitionStyles,
+		}),
+		[
+			open,
+			setOpen,
+			disabled,
+			modal,
+			closeOnEscape,
+			closeOnOutsidePress,
+			titleId,
+			descriptionId,
+			contentId,
+			portalRoot,
+			dom,
+			floating,
+			getReferenceProps,
+			getFloatingProps,
+			isMounted,
+			transitionStyles,
+		]
+	);
 
-  // Focus management (modal trap)
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-    if (!open) return;
-
-    const node = contentRef.current;
-    if (!node) return;
-
-    queueMicrotask(() => {
-      const focusables = getFocusableWithin(node);
-      (focusables[0] ?? node).focus?.();
-    });
-
-    if (!modal) return;
-
-    const onFocusIn = (event: FocusEvent) => {
-      const contentEl = contentRef.current;
-      if (!contentEl) return;
-
-      const target = event.target as Node | null;
-      if (!target) return;
-
-      if (contentEl.contains(target)) return;
-
-      const focusables = getFocusableWithin(contentEl);
-      (focusables[0] ?? contentEl).focus?.();
-    };
-
-    document.addEventListener("focusin", onFocusIn, { capture: true });
-    return () => document.removeEventListener("focusin", onFocusIn, { capture: true } as any);
-  }, [open, modal]);
-
-  const value = React.useMemo<DialogContextValue>(
-    () => ({
-      open,
-      setOpen,
-
-      disabled,
-      modal,
-      closeOnEscape,
-      closeOnOutsidePress,
-
-      titleId,
-      descriptionId,
-      contentId,
-
-      triggerRef,
-      contentRef,
-      lastActiveElementRef,
-
-      portalRoot,
-      dom,
-
-      isMounted,
-      transitionStyles,
-    }),
-    [
-      open,
-      setOpen,
-      disabled,
-      modal,
-      closeOnEscape,
-      closeOnOutsidePress,
-      titleId,
-      descriptionId,
-      contentId,
-      portalRoot,
-      dom,
-      isMounted,
-      transitionStyles,
-    ]
-  );
-
-  return (
-    <DialogContext.Provider value={value}>
-      <div data-slot="dialog-root">{children}</div>
-    </DialogContext.Provider>
-  );
+	return (
+		<DialogContext.Provider value={value}>
+			<div data-slot="dialog-root">{children}</div>
+		</DialogContext.Provider>
+	);
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -357,68 +256,80 @@ function Root({
  * ------------------------------------------------------------------------------------------------- */
 
 export type DialogTriggerProps = React.HTMLAttributes<HTMLElement> & {
-  asChild?: boolean;
+	asChild?: boolean;
 };
 
-const Trigger = React.forwardRef<HTMLElement, DialogTriggerProps>(function Trigger(
-  { asChild, onClick, children, ...props },
-  forwardedRef
-) {
-  const { open, setOpen, contentId, triggerRef, disabled } = useDialogContext("Dialog.Trigger");
+const Trigger = React.forwardRef<HTMLElement, DialogTriggerProps>(function Trigger({ asChild, onClick, children, ...props }, forwardedRef) {
+	const { open, setOpen, contentId, disabled, triggerRef, floating, getReferenceProps } = useDialogContext("Dialog.Trigger");
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    onClick?.(e);
-    if (e.defaultPrevented) return;
+	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+		onClick?.(e);
+		if (e.defaultPrevented) return;
 
-    if (e.currentTarget instanceof HTMLButtonElement && e.currentTarget.type === "submit") {
-      e.preventDefault();
-    }
+		if (e.currentTarget instanceof HTMLButtonElement && e.currentTarget.type === "submit") {
+			e.preventDefault();
+		}
 
-    setOpen(true);
-  };
+		setOpen(true);
+	};
 
-  const triggerProps: React.HTMLAttributes<HTMLElement> & Record<string, unknown> = {
-    ...props,
-    "data-slot": "dialog-trigger",
-    "data-state": open ? "open" : "closed",
-    "aria-haspopup": "dialog",
-    "aria-expanded": open,
-    "aria-controls": contentId,
-    "aria-disabled": disabled ? "true" : undefined,
-    onClick: disabled ? undefined : handleClick,
-    ref: composeRefs(forwardedRef, (node: HTMLElement | null) => {
-      triggerRef.current = node;
-    }),
-  };
+	const mergedRef = composeRefs(forwardedRef, (node: HTMLElement | null) => {
+		triggerRef.current = node;
+		floating.refs.setReference(node);
+	});
 
-  if (asChild) return <Slot {...triggerProps}>{children}</Slot>;
+	const triggerProps = getReferenceProps({
+		...props,
+		ref: mergedRef,
+		// keep only strongly-typed props here
+		"aria-haspopup": "dialog",
+		"aria-expanded": open,
+		"aria-controls": contentId,
+		"aria-disabled": disabled ? "true" : undefined,
+		onClick: disabled ? undefined : handleClick,
+	});
 
-  return (
-    <button
-      {...(triggerProps as Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "ref">)}
-      ref={triggerProps.ref as React.Ref<HTMLButtonElement>}
-      type="button"
-    >
-      {children}
-    </button>
-  );
+	// attach data attrs after (no TS complaint)
+	(triggerProps as any)["data-slot"] = "dialog-trigger";
+	(triggerProps as any)["data-state"] = open ? "open" : "closed";
+
+	if (asChild) return <Slot {...triggerProps}>{children}</Slot>;
+
+	return (
+		<button
+			{...(triggerProps as Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "ref">)}
+			ref={triggerProps.ref as React.Ref<HTMLButtonElement>}
+			type="button"
+		>
+			{children}
+		</button>
+	);
 });
 
 /* -------------------------------------------------------------------------------------------------
- * Portal
+ * Portal (kept for API compatibility)
  * ------------------------------------------------------------------------------------------------- */
 
 export type DialogPortalProps = {
-  container?: Element | null;
-  children: React.ReactNode;
+	container?: Element | null;
+	children: React.ReactNode;
 };
 
 function Portal({ container, children }: DialogPortalProps) {
-  const { portalRoot } = useDialogContext("Dialog.Portal");
-  if (typeof document === "undefined") return null;
+	const { portalRoot } = useDialogContext("Dialog.Portal");
 
-  const target = (container ?? portalRoot) ?? document.body;
-  return ReactDOM.createPortal(<div data-slot="dialog-portal">{children}</div>, target);
+	const [mounted, setMounted] = React.useState(false);
+	React.useEffect(() => setMounted(true), []);
+
+	if (!mounted) return null;
+
+	const root = (container instanceof HTMLElement ? container : null) ?? portalRoot ?? document.body;
+
+	return (
+		<FloatingPortal root={root}>
+			<div data-slot="dialog-portal">{children}</div>
+		</FloatingPortal>
+	);
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -426,40 +337,37 @@ function Portal({ container, children }: DialogPortalProps) {
  * ------------------------------------------------------------------------------------------------- */
 
 export type DialogCloseProps = React.HTMLAttributes<HTMLElement> & {
-  asChild?: boolean;
+	asChild?: boolean;
 };
 
-const Close = React.forwardRef<HTMLElement, DialogCloseProps>(function Close(
-  { asChild, onClick, children, ...props },
-  forwardedRef
-) {
-  const { setOpen, disabled } = useDialogContext("Dialog.Close");
+const Close = React.forwardRef<HTMLElement, DialogCloseProps>(function Close({ asChild, onClick, children, ...props }, forwardedRef) {
+	const { setOpen, disabled } = useDialogContext("Dialog.Close");
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    onClick?.(e);
-    if (e.defaultPrevented) return;
-    setOpen(false);
-  };
+	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+		onClick?.(e);
+		if (e.defaultPrevented) return;
+		setOpen(false);
+	};
 
-  const closeProps: React.HTMLAttributes<HTMLElement> & Record<string, unknown> = {
-    ...props,
-    "data-slot": "dialog-close",
-    "aria-disabled": disabled ? "true" : undefined,
-    onClick: disabled ? undefined : handleClick,
-    ref: forwardedRef,
-  };
+	const closeProps: React.HTMLAttributes<HTMLElement> & Record<string, unknown> = {
+		...props,
+		"data-slot": "dialog-close",
+		"aria-disabled": disabled ? "true" : undefined,
+		onClick: disabled ? undefined : handleClick,
+		ref: forwardedRef,
+	};
 
-  if (asChild) return <Slot {...closeProps}>{children}</Slot>;
+	if (asChild) return <Slot {...closeProps}>{children}</Slot>;
 
-  return (
-    <button
-      {...(closeProps as Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "ref">)}
-      ref={forwardedRef as React.Ref<HTMLButtonElement>}
-      type="button"
-    >
-      {children}
-    </button>
-  );
+	return (
+		<button
+			{...(closeProps as Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "ref">)}
+			ref={forwardedRef as React.Ref<HTMLButtonElement>}
+			type="button"
+		>
+			{children}
+		</button>
+	);
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -468,27 +376,26 @@ const Close = React.forwardRef<HTMLElement, DialogCloseProps>(function Close(
 
 export type DialogOverlayProps = React.ComponentPropsWithoutRef<"div">;
 
-const Overlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(function Overlay(
-  { style, ...props },
-  forwardedRef
-) {
-  const { open, isMounted, transitionStyles, modal } = useDialogContext("Dialog.Overlay");
+const Overlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(function Overlay({ style, ...props }, forwardedRef) {
+	const { open, isMounted, transitionStyles, modal } = useDialogContext("Dialog.Overlay");
 
-  if (!modal || !isMounted) return null;
+	if (!modal || !isMounted) return null;
 
-  return (
-    <div
-      data-slot="dialog-overlay"
-      data-state={open ? "open" : "closed"}
-      {...props}
-      ref={forwardedRef}
-      style={{
-        opacity: open ? 1 : 0,
-        transition: transitionStyles.transition,
-        ...style,
-      }}
-    />
-  );
+	// Rendered inside Content (same pattern as your old code),
+	// but this component remains usable directly if needed.
+	return (
+		<FloatingOverlay
+			data-slot="dialog-overlay"
+			data-state={open ? "open" : "closed"}
+			lockScroll
+			{...props}
+			ref={forwardedRef}
+			style={{
+				...transitionStyles,
+				...style,
+			}}
+		/>
+	);
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -496,100 +403,78 @@ const Overlay = React.forwardRef<HTMLDivElement, DialogOverlayProps>(function Ov
  * ------------------------------------------------------------------------------------------------- */
 
 export type DialogContentProps = Omit<React.ComponentPropsWithoutRef<"div">, "role"> & {
-  forceMount?: boolean;
-  container?: Element | null;
+	forceMount?: boolean;
+	container?: Element | null;
 };
 
 const Content = React.forwardRef<HTMLDivElement, DialogContentProps>(function Content(
-  { children, forceMount = false, container, style, onKeyDown, ...props },
-  forwardedRef
+	{ children, forceMount = false, container, style, ...props },
+	forwardedRef
 ) {
-  const {
-    open,
-    setOpen,
-    contentId,
-    titleId,
-    descriptionId,
-    contentRef,
-    modal,
-    disabled,
-    isMounted,
-    transitionStyles,
-  } = useDialogContext("Dialog.Content");
+	const {
+		open,
+		contentId,
+		titleId,
+		descriptionId,
+		contentRef,
+		modal,
+		disabled,
+		isMounted,
+		transitionStyles,
+		portalRoot,
+		floating,
+		getFloatingProps,
+	} = useDialogContext("Dialog.Content");
 
-  const mounted = forceMount || isMounted;
+	const mounted = forceMount || isMounted;
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(e);
-    if (e.defaultPrevented) return;
-    if (disabled) return;
+	if (!mounted) return null;
 
-    if (e.key === "Escape") {
-      e.stopPropagation();
-      setOpen(false);
-      return;
-    }
+	const root = (container instanceof HTMLElement ? container : null) ?? portalRoot ?? document.body;
 
-    if (!modal) return;
-    if (e.key !== "Tab") return;
+	const mergedRef = composeRefs(forwardedRef, (node: HTMLDivElement | null) => {
+		contentRef.current = node;
+		floating.refs.setFloating(node);
+	});
 
-    const node = contentRef.current;
-    if (!node) return;
+	const floatingProps = getFloatingProps({
+		...props,
+		ref: mergedRef,
+		id: contentId,
+		role: "dialog",
+		"aria-modal": modal ? "true" : undefined,
+		"aria-labelledby": titleId,
+		"aria-describedby": descriptionId,
+		tabIndex: -1,
+		"aria-hidden": open ? "false" : "true",
+		hidden: !open,
+		style: { ...transitionStyles, ...style },
+	});
 
-    const focusables = getFocusableWithin(node);
-    if (focusables.length === 0) {
-      e.preventDefault();
-      node.focus();
-      return;
-    }
+	(floatingProps as any)["data-slot"] = "dialog-content";
+	(floatingProps as any)["data-state"] = open ? "open" : "closed";
 
-    const first = focusables[0]!;
-    const last = focusables[focusables.length - 1]!;
-    const active = document.activeElement as HTMLElement | null;
+	return (
+		<FloatingPortal root={root}>
+			<div data-slot="dialog-portal">
+				{/* Modal overlay + scroll lock when modal */}
+				{modal ? (
+					<FloatingOverlay data-slot="dialog-overlay" data-state={open ? "open" : "closed"} lockScroll style={transitionStyles} />
+				) : null}
 
-    if (e.shiftKey) {
-      if (!active || active === first || !node.contains(active)) {
-        e.preventDefault();
-        last.focus();
-      }
-    } else {
-      if (!active || active === last || !node.contains(active)) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  };
-
-  if (!mounted) return null;
-
-  return (
-    <Portal container={container}>
-      <Overlay />
-      <div
-        data-slot="dialog-content"
-        data-state={open ? "open" : "closed"}
-        {...props}
-        ref={composeRefs(forwardedRef, (node: HTMLDivElement | null) => {
-          contentRef.current = node;
-        })}
-        id={contentId}
-        role="dialog"
-        aria-modal={modal ? "true" : undefined}
-        aria-labelledby={titleId}
-        aria-describedby={descriptionId}
-        tabIndex={-1}
-        onKeyDown={handleKeyDown}
-        aria-hidden={open ? "false" : "true"}
-        hidden={!open}
-        style={{
-          ...transitionStyles,
-          ...style,
-        }}
-      >
-        {children}
-      </div>
-    </Portal>
-  );
+				<FloatingFocusManager
+					context={floating.context}
+					modal={modal}
+					disabled={!open || disabled}
+					// keep focus behavior similar to Radix: focus first on open, restore on close
+					initialFocus={-1}
+					returnFocus
+				>
+					<div {...floatingProps}>{children}</div>
+				</FloatingFocusManager>
+			</div>
+		</FloatingPortal>
+	);
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -598,12 +483,12 @@ const Content = React.forwardRef<HTMLDivElement, DialogContentProps>(function Co
 
 export type DialogHeaderProps = React.ComponentPropsWithoutRef<"div">;
 function Header(props: DialogHeaderProps) {
-  return <div data-slot="dialog-header" {...props} />;
+	return <div data-slot="dialog-header" {...props} />;
 }
 
 export type DialogFooterProps = React.ComponentPropsWithoutRef<"div">;
 function Footer(props: DialogFooterProps) {
-  return <div data-slot="dialog-footer" {...props} />;
+	return <div data-slot="dialog-footer" {...props} />;
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -612,24 +497,18 @@ function Footer(props: DialogFooterProps) {
 
 export type DialogTitleProps = React.ComponentPropsWithoutRef<"h2"> & { asChild?: boolean };
 
-const Title = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(function Title(
-  { asChild, ...props },
-  forwardedRef
-) {
-  const { titleId } = useDialogContext("Dialog.Title");
-  const Comp = asChild ? Slot : "h2";
-  return <Comp data-slot="dialog-title" {...props} ref={forwardedRef} id={titleId} />;
+const Title = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(function Title({ asChild, ...props }, forwardedRef) {
+	const { titleId } = useDialogContext("Dialog.Title");
+	const Comp = asChild ? Slot : "h2";
+	return <Comp data-slot="dialog-title" {...props} ref={forwardedRef} id={titleId} />;
 });
 
 export type DialogDescriptionProps = React.ComponentPropsWithoutRef<"p"> & { asChild?: boolean };
 
-const Description = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(function Description(
-  { asChild, ...props },
-  forwardedRef
-) {
-  const { descriptionId } = useDialogContext("Dialog.Description");
-  const Comp = asChild ? Slot : "p";
-  return <Comp data-slot="dialog-description" {...props} ref={forwardedRef} id={descriptionId} />;
+const Description = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(function Description({ asChild, ...props }, forwardedRef) {
+	const { descriptionId } = useDialogContext("Dialog.Description");
+	const Comp = asChild ? Slot : "p";
+	return <Comp data-slot="dialog-description" {...props} ref={forwardedRef} id={descriptionId} />;
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -637,27 +516,16 @@ const Description = React.forwardRef<HTMLParagraphElement, DialogDescriptionProp
  * ------------------------------------------------------------------------------------------------- */
 
 export const Dialog = {
-  Root,
-  Trigger,
-  Portal,
-  Overlay,
-  Content,
-  Close,
-  Header,
-  Footer,
-  Title,
-  Description,
+	Root,
+	Trigger,
+	Portal,
+	Overlay,
+	Content,
+	Close,
+	Header,
+	Footer,
+	Title,
+	Description,
 } as const;
 
-export {
-  Root,
-  Trigger,
-  Portal,
-  Overlay,
-  Content,
-  Close,
-  Header,
-  Footer,
-  Title,
-  Description,
-};
+export { Root, Trigger, Portal, Overlay, Content, Close, Header, Footer, Title, Description };

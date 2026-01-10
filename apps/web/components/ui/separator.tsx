@@ -9,12 +9,12 @@ export interface SeparatorProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const orientationStyles = {
-    horizontal: "w-full h-px",
-    vertical: "h-full w-px",
+  horizontal: "w-full h-px",
+  vertical: "self-stretch w-px",
 };
 
 const baseStyles =
-    "shrink-0 bg-border dark:bg-border/60";
+    "shrink-0 bg-border";
 
 export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
     (

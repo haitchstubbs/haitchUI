@@ -1,33 +1,38 @@
-/* "use client";
+"use client";
 
 import * as React from "react";
 import {
 	FloatingPortal,
+	FloatingFocusManager,
 	autoUpdate,
 	flip,
 	offset,
 	shift,
 	size,
+	useClick,
 	useDismiss,
 	useFloating,
 	useInteractions,
+	useListItem,
+	useListNavigation,
 	useRole,
-	useClick,
 	useTransitionStyles,
+	useTypeahead,
+	type Alignment,
+	type Placement as FloatingPlacement,
 	type Side,
-	type Align,
-	Placement,
-	FloatingPlacement,
-	MenuFocus,
-} from "@haitch/react-core";
+} from "@floating-ui/react";
 import { Slot } from "@haitch/react-slot";
 import { composeRefs } from "@haitch/react-compose-refs";
 import { useOverlayDOMManager } from "@haitch/react-overlay";
 
+/* -------------------------------------------------------------------------------------------------
+ * Types
+ * -----------------------------------------------------------------------------------------------*/
 
 export type SelectValue = string;
-
 export type SelectPosition = "item-aligned" | "popper";
+export type Align = Alignment | "center";
 
 export type RootProps = React.PropsWithChildren<{
 	// open
@@ -51,12 +56,10 @@ export type RootProps = React.PropsWithChildren<{
 	name?: string;
 }>;
 
-export type TriggerProps = React.HTMLAttributes<HTMLElement> & {
+export type TriggerProps = React.ComponentPropsWithoutRef<"button"> & {
 	asChild?: boolean;
-	disabled?: boolean;
 };
-
-export type ValueProps = React.HTMLAttributes<HTMLSpanElement> & {
+export type ValueProps = React.ComponentPropsWithoutRef<"span"> & {
 	placeholder?: React.ReactNode;
 };
 
@@ -64,38 +67,78 @@ export type PortalProps = React.PropsWithChildren<{
 	container?: HTMLElement | null;
 }>;
 
-export type ContentProps = React.HTMLAttributes<HTMLDivElement> & {
+export type ContentProps = React.ComponentPropsWithoutRef<"div"> & {
 	position?: SelectPosition;
 	align?: Align;
 	sideOffset?: number;
 };
 
-export type ViewportProps = React.HTMLAttributes<HTMLDivElement>;
+export type ViewportProps = React.ComponentPropsWithoutRef<"div">;
+export type GroupProps = React.ComponentPropsWithoutRef<"div">;
+export type LabelProps = React.ComponentPropsWithoutRef<"div">;
 
-export type GroupProps = React.HTMLAttributes<HTMLDivElement>;
-
-export type LabelProps = React.HTMLAttributes<HTMLDivElement>;
-
-export type ItemProps = React.HTMLAttributes<HTMLDivElement> & {
+export type ItemProps = React.ComponentPropsWithoutRef<"div"> & {
 	value: SelectValue;
 	disabled?: boolean;
 	textValue?: string;
 };
 
-export type ItemTextProps = React.HTMLAttributes<HTMLSpanElement>;
+export type ItemTextProps = React.ComponentPropsWithoutRef<"span">;
 
-export type ItemIndicatorProps = React.HTMLAttributes<HTMLSpanElement> & {
+export type ItemIndicatorProps = React.ComponentPropsWithoutRef<"span"> & {
 	forceMount?: boolean;
 };
 
-export type SeparatorProps = React.HTMLAttributes<HTMLDivElement>;
-
-export type IconProps = React.HTMLAttributes<HTMLElement> & {
+export type SeparatorProps = React.ComponentPropsWithoutRef<"div">;
+export type ScrollButtonProps = React.ComponentPropsWithoutRef<"div">;
+export type IconProps = React.ComponentPropsWithoutRef<"span"> & {
 	asChild?: boolean;
 };
 
-export type ScrollButtonProps = React.HTMLAttributes<HTMLDivElement>;
+/* -------------------------------------------------------------------------------------------------
+ * Small utils
+ * -----------------------------------------------------------------------------------------------*/
 
+function toPlacement(side: Side, align: Align): FloatingPlacement {
+	// Floating UI placement strings are like: "bottom-start"
+	return align ? (`${side}-${align}` as FloatingPlacement) : (side as FloatingPlacement);
+}
+
+function useControllableBoolean(opts: { value?: boolean; defaultValue?: boolean; onChange?: (v: boolean) => void }) {
+	const [uncontrolled, setUncontrolled] = React.useState<boolean>(opts.defaultValue ?? false);
+	const controlled = typeof opts.value === "boolean";
+	const value = controlled ? (opts.value as boolean) : uncontrolled;
+
+	const setValue = React.useCallback(
+		(next: boolean) => {
+			if (!controlled) setUncontrolled(next);
+			opts.onChange?.(next);
+		},
+		[controlled, opts.onChange]
+	);
+
+	return { value, setValue };
+}
+
+function useControllableString(opts: { value?: string; defaultValue?: string; onChange?: (v: string) => void }) {
+	const [uncontrolled, setUncontrolled] = React.useState<string | null>(opts.defaultValue ?? null);
+	const controlled = typeof opts.value === "string";
+	const value = controlled ? (opts.value as string) : uncontrolled;
+
+	const setValue = React.useCallback(
+		(next: string) => {
+			if (!controlled) setUncontrolled(next);
+			opts.onChange?.(next);
+		},
+		[controlled, opts.onChange]
+	);
+
+	return { value, setValue };
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Context
+ * -----------------------------------------------------------------------------------------------*/
 
 type RootCtx = {
 	disabled: boolean;
@@ -115,16 +158,16 @@ type RootCtx = {
 	contentElRef: React.MutableRefObject<HTMLDivElement | null>;
 	viewportElRef: React.MutableRefObject<HTMLDivElement | null>;
 
-	// floating-ui
-	placement: FloatingPlacement;
-	refs: ReturnType<typeof useFloating>["refs"];
-	floatingStyles: React.CSSProperties;
-	getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
-	getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
-	floatingContext: ReturnType<typeof useFloating>["context"];
-
 	// portal root (shadow-safe)
 	portalRoot: HTMLElement | null;
+
+	// floating-ui
+	placement: FloatingPlacement;
+	floatingStyles: React.CSSProperties;
+	floatingContext: ReturnType<typeof useFloating>["context"];
+	refs: ReturnType<typeof useFloating>["refs"];
+	getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
+	getFloatingProps: ReturnType<typeof useInteractions>["getFloatingProps"];
 
 	// transitions
 	isMounted: boolean;
@@ -132,6 +175,16 @@ type RootCtx = {
 
 	// CSS vars (Radix-compatible names used by shadcn styles)
 	cssVars: React.CSSProperties;
+
+	// listbox navigation + typeahead
+	activeIndex: number | null;
+	setActiveIndex: (i: number | null) => void;
+	selectedIndex: number | null;
+
+	elementsRef: React.MutableRefObject<Array<HTMLElement | null>>;
+	labelsRef: React.MutableRefObject<Array<string | null>>;
+	valuesRef: React.MutableRefObject<Array<SelectValue | null>>;
+	disabledRef: React.MutableRefObject<Array<boolean>>;
 };
 
 const RootContext = React.createContext<RootCtx | null>(null);
@@ -145,6 +198,7 @@ function useRoot() {
 type ItemCtx = {
 	selected: boolean;
 	disabled: boolean;
+	index: number;
 };
 const ItemContext = React.createContext<ItemCtx | null>(null);
 
@@ -154,46 +208,9 @@ function useItem() {
 	return ctx;
 }
 
-function useControllableBoolean(opts: {
-	value?: boolean;
-	defaultValue?: boolean;
-	onChange?: (v: boolean) => void;
-}) {
-	const [uncontrolled, setUncontrolled] = React.useState<boolean>(opts.defaultValue ?? false);
-	const controlled = typeof opts.value === "boolean";
-	const value = controlled ? (opts.value as boolean) : uncontrolled;
-
-	const setValue = React.useCallback(
-		(next: boolean) => {
-			if (!controlled) setUncontrolled(next);
-			opts.onChange?.(next);
-		},
-		[controlled, opts.onChange]
-	);
-
-	return { value, setValue };
-}
-
-function useControllableString(opts: {
-	value?: string;
-	defaultValue?: string;
-	onChange?: (v: string) => void;
-}) {
-	const [uncontrolled, setUncontrolled] = React.useState<string | null>(opts.defaultValue ?? null);
-	const controlled = typeof opts.value === "string";
-	const value = controlled ? (opts.value as string) : uncontrolled;
-
-	const setValue = React.useCallback(
-		(next: string) => {
-			if (!controlled) setUncontrolled(next);
-			opts.onChange?.(next);
-		},
-		[controlled, opts.onChange]
-	);
-
-	return { value, setValue };
-}
-
+/* -------------------------------------------------------------------------------------------------
+ * Root
+ * -----------------------------------------------------------------------------------------------*/
 
 function Root(props: RootProps) {
 	const parentManager = useOverlayDOMManager();
@@ -220,10 +237,23 @@ function Root(props: RootProps) {
 	const contentElRef = React.useRef<HTMLDivElement | null>(null);
 	const viewportElRef = React.useRef<HTMLDivElement | null>(null);
 
+	const elementsRef = React.useRef<Array<HTMLElement | null>>([]);
+	const labelsRef = React.useRef<Array<string | null>>([]);
+	const valuesRef = React.useRef<Array<SelectValue | null>>([]);
+	const disabledRef = React.useRef<Array<boolean>>([]);
+
+	const selectedIndex = React.useMemo(() => {
+		if (!value) return null;
+		const idx = valuesRef.current.findIndex((v) => v === value);
+		return idx >= 0 ? idx : null;
+	}, [value]);
+
+	const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+
 	const placement = React.useMemo<FloatingPlacement>(() => {
 		const side: Side = props.side ?? "bottom";
 		const align: Align = props.align ?? "start";
-		return Placement.fromSideAlign(side, align);
+		return toPlacement(side, align);
 	}, [props.side, props.align]);
 
 	const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(() => {
@@ -238,11 +268,12 @@ function Root(props: RootProps) {
 
 	const [cssVars, setCssVars] = React.useState<React.CSSProperties>({});
 
-	const floating = useFloating({
+	const floating = useFloating<HTMLElement>({
 		open,
 		onOpenChange: setOpen,
 		placement,
 		strategy: "fixed",
+		whileElementsMounted: autoUpdate,
 		middleware: [
 			offset(props.sideOffset ?? 4),
 			flip(),
@@ -253,17 +284,14 @@ function Root(props: RootProps) {
 					const triggerW = Math.round(rects.reference.width);
 					const triggerH = Math.round(rects.reference.height);
 
-					// These names match what shadcn expects (Radix Select vars)
 					elements.floating.style.setProperty("--radix-select-trigger-width", `${triggerW}px`);
 					elements.floating.style.setProperty("--radix-select-trigger-height", `${triggerH}px`);
 					elements.floating.style.setProperty("--radix-select-content-available-height", `${Math.floor(availableHeight)}px`);
 				},
 			}),
 		],
-		whileElementsMounted: autoUpdate,
 	});
 
-	// Clicking the trigger toggles open (unless disabled)
 	const click = useClick(floating.context, {
 		enabled: !disabled,
 		event: "mousedown",
@@ -276,10 +304,28 @@ function Root(props: RootProps) {
 		outsidePressEvent: "pointerdown",
 	});
 
-	// Listbox semantics
 	const role = useRole(floating.context, { role: "listbox" });
 
-	const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
+	// Keyboard nav + typeahead come from Floating UI (instead of custom MenuFocus)
+	const listNav = useListNavigation(floating.context, {
+		listRef: elementsRef,
+		activeIndex,
+		selectedIndex,
+		onNavigate: setActiveIndex,
+		loop: true,
+		// This makes opening feel “select-like”: it focuses an option when opened
+		focusItemOnOpen: true,
+		virtual: true,
+	});
+
+	const typeahead = useTypeahead(floating.context, {
+		listRef: labelsRef,
+		activeIndex,
+		onMatch: setActiveIndex,
+		enabled: open,
+	});
+
+	const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role, listNav, typeahead]);
 
 	const { isMounted, styles: transitionStyles } = useTransitionStyles(floating.context, {
 		duration: { open: 120, close: 100 },
@@ -288,25 +334,32 @@ function Root(props: RootProps) {
 		close: { opacity: 0, transform: "scale(0.98)" },
 	});
 
-	// Maintain a Radix-like origin var so shadcn animations can hook in
+	// Transform origin var for shadcn animations (Radix-ish)
 	React.useEffect(() => {
-		const side = Placement.side(placement);
-		// good-enough transform origin for headless primitive
-		const origin =
-			side === "top"
-				? "bottom"
-				: side === "bottom"
-					? "top"
-					: side === "left"
-						? "right"
-						: "left";
+		const side = (placement.split("-")[0] as Side) ?? "bottom";
+		const origin = side === "top" ? "bottom" : side === "bottom" ? "top" : side === "left" ? "right" : "left";
 
 		setCssVars((prev) => ({
 			...prev,
-			// used by shadcn className: origin-(--radix-select-content-transform-origin)
 			["--radix-select-content-transform-origin" as unknown as string]: origin,
 		}));
 	}, [placement]);
+
+	// When opening, set activeIndex to selectedIndex, else first enabled
+	React.useEffect(() => {
+		if (!open) return;
+
+		queueMicrotask(() => {
+			const sel = selectedIndex;
+			if (sel != null && !disabledRef.current[sel]) {
+				setActiveIndex(sel);
+				return;
+			}
+
+			const first = disabledRef.current.findIndex((d) => !d);
+			setActiveIndex(first >= 0 ? first : null);
+		});
+	}, [open, selectedIndex]);
 
 	// Restore focus to trigger after close
 	React.useEffect(() => {
@@ -323,21 +376,35 @@ function Root(props: RootProps) {
 			setOpen,
 			value,
 			setValue,
+
 			contentId,
 			labelId,
+
 			triggerElRef,
 			contentElRef,
 			viewportElRef,
+
+			portalRoot,
+
 			placement,
 			refs: floating.refs,
 			floatingContext: floating.context,
 			floatingStyles: floating.floatingStyles,
 			getReferenceProps,
 			getFloatingProps,
-			portalRoot,
+
 			isMounted,
 			transitionStyles,
 			cssVars,
+
+			activeIndex,
+			setActiveIndex,
+			selectedIndex,
+
+			elementsRef,
+			labelsRef,
+			valuesRef,
+			disabledRef,
 		}),
 		[
 			disabled,
@@ -347,16 +414,18 @@ function Root(props: RootProps) {
 			setValue,
 			contentId,
 			labelId,
+			portalRoot,
 			placement,
 			floating.refs,
 			floating.context,
 			floating.floatingStyles,
 			getReferenceProps,
 			getFloatingProps,
-			portalRoot,
 			isMounted,
 			transitionStyles,
 			cssVars,
+			activeIndex,
+			selectedIndex,
 		]
 	);
 
@@ -368,7 +437,11 @@ function Root(props: RootProps) {
 	);
 }
 
-const Trigger = React.forwardRef<HTMLElement, TriggerProps>(function Trigger(
+/* -------------------------------------------------------------------------------------------------
+ * Trigger / Icon / Value / Portal
+ * -----------------------------------------------------------------------------------------------*/
+
+const Trigger = React.forwardRef<HTMLButtonElement, TriggerProps>(function Trigger(
 	{ asChild, disabled: disabledProp, children, onKeyDown, ...rest },
 	forwardedRef
 ) {
@@ -379,54 +452,52 @@ const Trigger = React.forwardRef<HTMLElement, TriggerProps>(function Trigger(
 
 	const mergedRef = composeRefs(
 		forwardedRef,
-		(node: HTMLElement | null) => {
+		(node: HTMLButtonElement | null) => {
 			ctx.triggerElRef.current = node;
 		},
-		ctx.refs.setReference as unknown as React.Ref<HTMLElement>
+		ctx.refs.setReference as unknown as React.Ref<HTMLButtonElement>
 	);
 
-	const handleKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+	const handleKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = (e) => {
 		if (disabled) return;
 
-		// Open with common Select keys
 		if (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter" || e.key === " ") {
 			e.preventDefault();
 			ctx.setOpen(true);
-
-			queueMicrotask(() => {
-				const viewport = ctx.viewportElRef.current ?? ctx.contentElRef.current;
-				if (!viewport) return;
-				if (e.key === "ArrowUp") MenuFocus.listboxEnd(viewport);
-				else MenuFocus.listboxFirst(viewport);
-			});
 		}
 
 		onKeyDown?.(e);
 	};
 
+	// NOTE: do NOT pass `ref` or `data-*` here
 	const referenceProps = ctx.getReferenceProps({
-		...(rest as React.HTMLAttributes<HTMLElement>),
+		...rest,
+		onKeyDown: handleKeyDown,
+	});
+
+	const common = {
 		ref: mergedRef,
-		role: "combobox",
+		type: "button" as const,
+		disabled,
+		role: "combobox" as const,
 		"aria-controls": ctx.contentId,
 		"aria-expanded": ctx.open,
-		"aria-haspopup": "listbox",
+		"aria-haspopup": "listbox" as const,
 		"aria-labelledby": ctx.labelId,
-		"aria-disabled": disabled ? "true" : undefined,
 		"data-state": ctx.open ? "open" : "closed",
 		"data-disabled": disabled ? "" : undefined,
-		onKeyDown: handleKeyDown as unknown as React.KeyboardEventHandler<HTMLElement>,
-	} as React.HTMLAttributes<HTMLElement>);
+	};
 
 	return asChild ? (
-		<Comp {...(referenceProps as React.HTMLAttributes<HTMLElement>)}>{children}</Comp>
+		<Comp {...(referenceProps as any)} {...(common as any)}>
+			{children}
+		</Comp>
 	) : (
-		<button type="button" {...(referenceProps as React.ButtonHTMLAttributes<HTMLButtonElement>)}>
+		<button {...referenceProps} {...common}>
 			{children}
 		</button>
 	);
 });
-
 
 const Icon = React.forwardRef<HTMLElement, IconProps>(function Icon({ asChild, ...props }, ref) {
 	const Comp = asChild ? Slot : "span";
@@ -437,11 +508,7 @@ const Icon = React.forwardRef<HTMLElement, IconProps>(function Icon({ asChild, .
 	);
 });
 
-
-const Value = React.forwardRef<HTMLSpanElement, ValueProps>(function Value(
-	{ placeholder = null, children, ...props },
-	forwardedRef
-) {
+const Value = React.forwardRef<HTMLSpanElement, ValueProps>(function Value({ placeholder = null, children, ...props }, forwardedRef) {
 	const ctx = useRoot();
 	const hasValue = ctx.value != null && ctx.value !== "";
 
@@ -452,166 +519,81 @@ const Value = React.forwardRef<HTMLSpanElement, ValueProps>(function Value(
 	);
 });
 
-
 function Portal({ children, container }: PortalProps) {
 	const ctx = useRoot();
 	const root = container ?? ctx.portalRoot;
 	return <FloatingPortal root={root}>{children}</FloatingPortal>;
 }
 
+/* -------------------------------------------------------------------------------------------------
+ * Content / Viewport
+ * -----------------------------------------------------------------------------------------------*/
 
 const Content = React.forwardRef<HTMLDivElement, ContentProps>(function Content(
-	{
-		children,
-		style,
-		onKeyDown,
-		position = "item-aligned",
-		align = "center",
-		...props
-	},
+	{ children, style, position = "item-aligned", align, ...props },
 	forwardedRef
 ) {
 	const ctx = useRoot();
 
-	// If caller supplies align on Content, it overrides Root's align for this render.
-	// (This matches how shadcn passes align="center".)
-	const placement = React.useMemo<FloatingPlacement>(() => {
-		const side = Placement.side(ctx.placement);
-		const resolvedAlign = align;
-		return Placement.fromSideAlign(side, resolvedAlign);
-	}, [ctx.placement, align]);
+	const resolvedAlign: Align = align ?? ((ctx.placement.split("-")[1] as Align) || "start");
+	const side = (ctx.placement.split("-")[0] as Side) ?? "bottom";
 
-	React.useEffect(() => {
-		// Keep floating placement in sync (only when open)
-		// We do this by calling update and setting placement via refs:
-		// simplest: re-run floating's compute by forcing update; placement is fixed at hook init,
-		// so we *don't* change hook placement here to avoid tearing.
-		// For your wrapper, align generally doesn't need to change dynamically after mount.
-		void placement;
-	}, [placement]);
+	if (!ctx.isMounted) return null;
 
-	const typeaheadRef = React.useRef<{ buffer: string; timer: number | null }>({
-		buffer: "",
-		timer: null,
-	});
-
-	React.useEffect(() => {
-		return () => {
-			if (typeaheadRef.current.timer != null) {
-				window.clearTimeout(typeaheadRef.current.timer);
-				typeaheadRef.current.timer = null;
-			}
-		};
-	}, []);
-
-	// Focus selected (or first) when opened
-	React.useLayoutEffect(() => {
-		if (!ctx.open) return;
-
-		queueMicrotask(() => {
-			const viewport = ctx.viewportElRef.current ?? ctx.contentElRef.current;
-			if (!viewport) return;
-
-			const selected = viewport.querySelector<HTMLElement>(
-				'[role="option"][aria-selected="true"]:not([aria-disabled="true"]):not([data-disabled])'
-			);
-			if (selected) selected.focus();
-			else MenuFocus.listboxFirst(viewport);
-		});
-	}, [ctx.open]);
-
-	const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
-		const root = ctx.viewportElRef.current ?? ctx.contentElRef.current;
-
-		if (e.key === "ArrowDown") {
-			e.preventDefault();
-			MenuFocus.listboxNext(root, 1);
-		} else if (e.key === "ArrowUp") {
-			e.preventDefault();
-			MenuFocus.listboxNext(root, -1);
-		} else if (e.key === "Home") {
-			e.preventDefault();
-			MenuFocus.listboxFirst(root);
-		} else if (e.key === "End") {
-			e.preventDefault();
-			MenuFocus.listboxEnd(root);
-		} else if (e.key === "Enter" || e.key === " ") {
-			const active = document.activeElement as HTMLElement | null;
-			if (active && root?.contains(active)) {
-				e.preventDefault();
-				active.click();
-			}
-		} else if (e.key === "Escape") {
-			e.preventDefault();
-			ctx.setOpen(false);
-		} else if (MenuFocus.isPrintableKey(e)) {
-			typeaheadRef.current.buffer += e.key.toLowerCase();
-			if (typeaheadRef.current.timer != null) window.clearTimeout(typeaheadRef.current.timer);
-			typeaheadRef.current.timer = window.setTimeout(() => {
-				typeaheadRef.current.buffer = "";
-				typeaheadRef.current.timer = null;
-			}, 500);
-
-			MenuFocus.focusTypeAhead(root, typeaheadRef.current.buffer);
-		}
-
-		onKeyDown?.(e);
-	};
-
-	if (!ctx.open) return null;
-
-	const side = Placement.side(ctx.placement);
-	const dataAlign = Placement.align(ctx.placement);
-
+	// NOTE: do NOT pass `ref` or `data-*` here
 	const floatingProps = ctx.getFloatingProps({
 		...props,
-		ref: composeRefs(
-			forwardedRef,
-			(node: HTMLDivElement | null) => {
-				ctx.contentElRef.current = node;
-			},
-			ctx.refs.setFloating as unknown as React.Ref<HTMLDivElement>
-		),
-		id: ctx.contentId,
-		role: "listbox",
-		tabIndex: -1,
-		"aria-labelledby": ctx.labelId,
-		"data-state": ctx.open ? "open" : "closed",
-		"data-side": side,
-		"data-align": dataAlign,
-		"data-position": position,
 		style: {
 			...ctx.floatingStyles,
 			...ctx.transitionStyles,
 			...ctx.cssVars,
 			...style,
-			// Merge transforms (floating-ui sets translate; transition sets scale)
-			transform: [ctx.floatingStyles.transform, ctx.transitionStyles.transform, style?.transform]
-				.filter(Boolean)
-				.join(" "),
+			transform: [ctx.floatingStyles.transform, ctx.transitionStyles.transform, style?.transform].filter(Boolean).join(" "),
 		},
-		onKeyDown: handleKeyDown,
-	} as React.HTMLAttributes<HTMLDivElement>);
+	});
 
-	// For "item-aligned" we keep the same floating positioning. Your UI layer controls padding,
-	// and Viewport gives the “scroll-my-1” behavior.
-	// For "popper" shadcn adds extra translate classes, so primitives don’t need to change behavior.
+	const mergedRef = composeRefs(
+		forwardedRef,
+		(node: HTMLDivElement | null) => {
+			ctx.contentElRef.current = node;
+		},
+		ctx.refs.setFloating as unknown as React.Ref<HTMLDivElement>
+	);
 
-	return <div {...floatingProps}>{children}</div>;
+	return (
+		<FloatingFocusManager context={ctx.floatingContext} modal={false} returnFocus>
+			<div
+				{...floatingProps}
+				ref={mergedRef}
+				id={ctx.contentId}
+				role="listbox"
+				tabIndex={-1}
+				aria-labelledby={ctx.labelId}
+				data-state={ctx.open ? "open" : "closed"}
+				data-side={side}
+				data-align={resolvedAlign}
+				data-position={position}
+			>
+				{children}
+			</div>
+		</FloatingFocusManager>
+	);
 });
-
 
 const Viewport = React.forwardRef<HTMLDivElement, ViewportProps>(function Viewport(props, forwardedRef) {
 	const ctx = useRoot();
 	return (
 		<div
 			{...props}
-			ref={composeRefs(forwardedRef, (node: HTMLDivElement | null) => { ctx.viewportElRef.current = node; })}
+			ref={composeRefs(forwardedRef, (node: HTMLDivElement | null) => void (ctx.viewportElRef.current = node))}
 			data-slot="select-viewport"
 		/>
 	);
 });
 
+/* -------------------------------------------------------------------------------------------------
+ * Group / Label / Separator
+ * -----------------------------------------------------------------------------------------------*/
 
 const Group = React.forwardRef<HTMLDivElement, GroupProps>(function Group(props, ref) {
 	return <div {...props} ref={ref} role="group" data-slot="select-group" />;
@@ -622,13 +604,34 @@ const Label = React.forwardRef<HTMLDivElement, LabelProps>(function Label(props,
 	return <div {...props} ref={ref} id={ctx.labelId} data-slot="select-label" />;
 });
 
+const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(function Separator(props, ref) {
+	return <div {...props} ref={ref} role="separator" data-slot="select-separator" />;
+});
+
+/* -------------------------------------------------------------------------------------------------
+ * Item / ItemText / ItemIndicator
+ * -----------------------------------------------------------------------------------------------*/
+
 const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(
 	{ value, disabled = false, textValue, onClick, onKeyDown, ...props },
 	forwardedRef
 ) {
 	const ctx = useRoot();
 	const isDisabled = ctx.disabled || disabled;
+
+	// Register with Floating UI list system
+	const { ref, index } = useListItem({ label: textValue ?? (props.children ? undefined : value) });
+
+	// Keep parallel arrays for value + disabled + label (typeahead uses labelsRef)
+	React.useLayoutEffect(() => {
+		ctx.valuesRef.current[index] = value;
+		ctx.disabledRef.current[index] = isDisabled;
+		// `useListItem({label})` feeds typeahead internally, but we also keep a mirror
+		ctx.labelsRef.current[index] = textValue ?? value;
+	}, [ctx, index, value, isDisabled, textValue]);
+
 	const selected = ctx.value === value;
+	const active = ctx.activeIndex === index;
 
 	const selectValue = (target: HTMLElement, originalEvent?: Event) => {
 		// cancelable event so consumers can prevent close (Radix-ish)
@@ -640,25 +643,30 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(
 		target.dispatchEvent(ev);
 
 		ctx.setValue(value);
+		ctx.setActiveIndex(index);
+
 		if (!ev.defaultPrevented) ctx.setOpen(false);
 	};
 
 	return (
-		<ItemContext.Provider value={{ selected, disabled: isDisabled }}>
+		<ItemContext.Provider value={{ selected, disabled: isDisabled, index }}>
 			<div
 				{...props}
-				ref={forwardedRef}
+				ref={composeRefs(forwardedRef, ref)}
 				role="option"
-				tabIndex={isDisabled ? undefined : -1}
+				tabIndex={isDisabled ? undefined : active ? 0 : -1}
 				aria-disabled={isDisabled ? "true" : undefined}
 				aria-selected={selected}
 				data-disabled={isDisabled ? "" : undefined}
 				data-state={selected ? "checked" : "unchecked"}
+				data-highlighted={active ? "" : undefined}
 				data-value={value}
 				data-text-value={textValue}
 				onKeyDown={(e) => {
 					if (isDisabled) return;
 
+					// Let Floating UI list navigation handle arrows/home/end etc.
+					// Keep “select” keys as Radix-ish behavior.
 					if (e.key === "Enter" || e.key === " ") {
 						e.preventDefault();
 						selectValue(e.currentTarget, e.nativeEvent);
@@ -666,6 +674,10 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(
 					}
 
 					onKeyDown?.(e);
+				}}
+				onPointerMove={() => {
+					// Hover to highlight (common select behavior)
+					if (!isDisabled) ctx.setActiveIndex(index);
 				}}
 				onClick={(e) => {
 					if (isDisabled) {
@@ -685,20 +697,15 @@ const ItemText = React.forwardRef<HTMLSpanElement, ItemTextProps>(function ItemT
 	return <span {...props} ref={ref} data-slot="select-item-text" />;
 });
 
-const ItemIndicator = React.forwardRef<HTMLSpanElement, ItemIndicatorProps>(function ItemIndicator(
-	{ forceMount, ...props },
-	ref
-) {
+const ItemIndicator = React.forwardRef<HTMLSpanElement, ItemIndicatorProps>(function ItemIndicator({ forceMount, ...props }, ref) {
 	const item = useItem();
 	if (!forceMount && !item.selected) return null;
 	return <span {...props} ref={ref} aria-hidden="true" data-slot="select-item-indicator" />;
 });
 
-
-const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(function Separator(props, ref) {
-	return <div {...props} ref={ref} role="separator" data-slot="select-separator" />;
-});
-
+/* -------------------------------------------------------------------------------------------------
+ * Scroll buttons (unchanged; they’re not really Floating UI territory)
+ * -----------------------------------------------------------------------------------------------*/
 
 function useViewportScroll(ctx: RootCtx) {
 	const [canScrollUp, setCanScrollUp] = React.useState(false);
@@ -828,6 +835,9 @@ const ScrollDownButton = React.forwardRef<HTMLDivElement, ScrollButtonProps>(fun
 	);
 });
 
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
 
 export {
 	Root,
@@ -846,4 +856,3 @@ export {
 	ScrollUpButton,
 	ScrollDownButton,
 };
- */
