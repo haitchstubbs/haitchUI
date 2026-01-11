@@ -12,7 +12,8 @@
 		"test": "turbo run test --filter=@haitch-ui/tests",
 		"test:watch": "turbo run test:watch --filter=@haitch-ui/tests",
 		"test:ui": "turbo run test --filter=@haitch-ui/tests",
-		"test:tests": "npm run -w @haitch-ui/tests test"
+		"test:tests": "npm run -w @haitch-ui/tests test",
+		"sync:licenses": "node scripts/sync-licenses.mjs"
 	},
 	"devDependencies": {
 		"prettier": "^3.7.4",
