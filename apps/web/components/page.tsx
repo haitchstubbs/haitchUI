@@ -9,6 +9,7 @@ import { cn } from "../lib/util";
 import { IconLayoutSidebar } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import { AppCommandMenu } from "./app-command";
+import Image from "next/image";
 
 function getBreadcrumbData(pathname: string) {
 	const { isMobile, open } = useSidebar();
@@ -46,32 +47,78 @@ export function Page({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const { isMobile, open, section, pageTitle, pageSubtitle, useBreadcrumb } = getBreadcrumbData(pathname);
 	return (
-		<div className="flex h-full flex-col overflow-auto">
+		<div className="flex h-full flex-col overflow-auto min-w-0">
 			<header
 				className={cn(
 					"bg-sidebar flex h-16 shrink-0 items-center justify-between gap-2 antialiased sticky top-0 z-10 border-b border-border backdrop-blur-md"
 				)}
 			>
-				<div className="flex items-center gap-2 px-4">
+				<div className="flex items-center gap-2 pr-4">
 					{isMobile && (
 						<>
 							<SidebarTrigger />
-							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
-								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
-							</h1>
+							<Image src="/haitch-ui-logo.png" alt="Haitch UI Logo" width={32} height={32} />
 						</>
 					)}
+					<div className="flex items-center justify-center w-[var(--sidebar-width)] h-14 ">
+						<div className="rounded-full">
+							<a
+								href="/"
+								aria-label="Go to home"
+								className="
+      group relative inline-flex items-center gap-2
+      h-11 px-4 rounded-full
+
+      /* clear dark glass body */
+      bg-[linear-gradient(to_bottom,rgba(255,255,255,0.18),rgba(255,255,255,0.04)_45%,rgba(0,0,0,0.35))]
+      backdrop-blur-md backdrop-saturate-125
+
+      /* crisp edge + inner bevel */
+      border border-white/20
+      shadow-[0_6px_14px_-2px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-1px_0_rgba(0,0,0,0.6)]
+
+      transition-all duration-200 ease-out
+      hover:-translate-y-[1px]
+      hover:shadow-[0_9px_18px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.42),inset_0_-1px_0_rgba(0,0,0,0.7)]
+
+      focus-visible:outline-none
+      focus-visible:ring-2 focus-visible:ring-white/30
+      focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+    "
+							>
+								{/* secondary soft reflection */}
+								<span
+									aria-hidden
+									className="
+        pointer-events-none absolute inset-x-2 top-2 h-3
+        rounded-full
+        bg-white/10
+        blur-sm
+        opacity-60
+      "
+								/>
+
+								{/* inner clarity rim */}
+								<span
+									aria-hidden
+									className="
+        pointer-events-none absolute inset-[1px] rounded-full
+        ring-1 ring-white/12
+      "
+								/>
+
+								<span className="relative grid place-items-center h-7">
+									<h1 className="text-lg font-sans font-semibold leading-none tracking-tighter text-foreground drop-shadow-sm">
+										@haitch-ui{" "}
+									</h1>
+								</span>
+
+								<span className="sr-only">Haitch UI</span>
+							</a>
+						</div>
+					</div>
 					{useBreadcrumb && (
 						<>
-							<div className="block">
-								<Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
-							</div>
-
-							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
-								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
-							</h1>
 							<Separator orientation="vertical" className="block shrink-0 mr-2 data-[orientation=vertical]:h-4" />
 							<Breadcrumb>
 								<BreadcrumbList>
