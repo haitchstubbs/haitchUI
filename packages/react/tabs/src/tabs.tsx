@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Slot } from "@haitch/react-slot"
+import { Slot } from "@haitch-ui/react-slot"
 
 /**
  * Tabs primitives (Base-UI-style), built for shadcn-style wrappers.
@@ -22,7 +22,7 @@ import { Slot } from "@haitch/react-slot"
  *    - List: role="tablist"
  *    - Trigger: role="tab" aria-selected aria-controls id
  *    - Panel: role="tabpanel" aria-labelledby id, hidden when inactive
- * - asChild support using @haitch/react-slot on List/Trigger/Panel/Root
+ * - asChild support using @haitch-ui/react-slot on List/Trigger/Panel/Root
  * - Data attrs for styling: data-[state=active|inactive], data-[orientation], data-[disabled]
  *
  * Notes:

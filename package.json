@@ -1,6 +1,6 @@
 {
-	"name": "@haitch/monorepo",
-	"private": true,
+	"name": "@haitch-ui/monorepo",
+	"private": false,
 	"license": "MIT",
 	"scripts": {
 		"build": "turbo run build",
@@ -9,28 +9,32 @@
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types",
-		"test": "turbo run test --filter=@haitch/tests",
-		"test:watch": "turbo run test:watch --filter=@haitch/tests",
-		"test:ui": "turbo run test --filter=@haitch/tests",
-		"test:tests": "npm run -w @haitch/tests test"
+		"test": "turbo run test --filter=@haitch-ui/tests",
+		"test:watch": "turbo run test:watch --filter=@haitch-ui/tests",
+		"test:ui": "turbo run test --filter=@haitch-ui/tests",
+		"test:tests": "npm run -w @haitch-ui/tests test",
+		"sync:licenses": "node scripts/sync-licenses.mjs"
 	},
 	"devDependencies": {
 		"prettier": "^3.7.4",
 		"turbo": "^2.7.0",
 		"typescript": "5.9.2",
-		"@haitch/eslint-config": "workspace:*",
-		"@haitch/ui": "workspace:*",
-		"@haitch/typescript-config": "workspace:*",
-		"@haitch/core": "workspace:*",
-		"@haitch/tests": "workspace:*",
-		"@haitch/react-popover": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
-		"@haitch/react-rect": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-context-menu": "workspace:*",
-		"@haitch/react-tooltip": "workspace:*"
+		"react": "19.2.0",
+		"react-dom": "19.2.0",
+		"@types/react": "19.2.2",
+		"@types/react-dom": "19.2.2",
+		"@haitch-ui/eslint-config": "workspace:*",
+		"@haitch-ui/typescript-config": "workspace:*",
+		"@haitch-ui/core": "workspace:*",
+		"@haitch-ui/tests": "workspace:*",
+		"@haitch-ui/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
+		"@haitch-ui/react-popover": "workspace:*",
+		"@haitch-ui/react-rect": "workspace:*",
+		"@haitch-ui/react-virtual-element": "workspace:*",
+		"@haitch-ui/react-overlay": "workspace:*",
+		"@haitch-ui/react-context-menu": "workspace:*",
+		"@haitch-ui/react-tooltip": "workspace:*"
 	},
 	"overrides": {
 		"next": "16.0.10",
@@ -48,6 +52,7 @@
 		"apps/*",
 		"packages/*",
 		"packages/primitives/*",
-		".devtools/**"
+		".devtools/**",
+		"scripts/**"
 	]
 }

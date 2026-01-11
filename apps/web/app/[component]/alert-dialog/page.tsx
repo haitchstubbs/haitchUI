@@ -1,4 +1,4 @@
-import { highlight } from "@haitch/react-code-block/server";
+import { highlight } from "@haitch-ui/react-code-block/server";
 import { Separator } from "../../../components/ui/separator";
 import DemoCard from "../../components/_ui/demo-card";
 import { code, Component, wrapper } from "./code";

@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-dropdown-menu",
+	"name": "@haitch-ui/react-dropdown-menu",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -17,13 +17,11 @@
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
 		"react": ">=18",
-		"@haitch/react-slot": "workspace:*",
-		"@floating-ui/react": "^0.26.0"
+		"react-dom": ">=18"
 	},
 	"dependencies": {
-		"@haitch/react-slot": "workspace:*",
-		"@floating-ui/react": "^0.26.0",
-		"react": ">=18"
+		"@haitch-ui/react-slot": "workspace:*",
+		"@floating-ui/react": "^0.26.0"
 	},
 	"scripts": {
 		"build": "tsup",

@@ -3,7 +3,7 @@
 /** React Imports */
 import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 
-/** @haitch/react-core Imports */
+/** @haitch-ui/react-core Imports */
 import {
 	// Types
 	type Alignment as Align,
@@ -25,10 +25,10 @@ import {
 } from "@floating-ui/react";
 
 /** Primitive Imports */
-import { useOverlayDOMManager } from "@haitch/react-overlay";
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
-import type { VirtualElement } from "@haitch/react-virtual-element";
+import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
+import type { VirtualElement } from "@haitch-ui/react-virtual-element";
 
 /** Local Imports for Popover */
 import { useControllableState } from "./hooks.js"; // adjust path

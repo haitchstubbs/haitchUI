@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-dialog",
+  "name": "@haitch-ui/react-dialog",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -17,16 +17,15 @@
   "types": "./dist/index.d.ts",
   "peerDependencies": {
     "react": ">=18",
-    "@haitch/react-core": "workspace:*",
-    "@haitch/react-compose-refs": "workspace:*",
-    "@haitch/react-overlay": "workspace:*",
-    "@haitch/react-rect": "workspace:*"
+    "@haitch-ui/react-core": "workspace:*",
+    "@haitch-ui/react-overlay": "workspace:*",
+    "@haitch-ui/react-rect": "workspace:*"
   },
   "dependencies": {
-    "@haitch/react-core": "workspace:*",
-    "@haitch/react-compose-refs": "workspace:*",
-    "@haitch/react-overlay": "workspace:*",
-    "@haitch/react-rect": "workspace:*"
+    "@haitch-ui/react-core": "workspace:*",
+    "@haitch-ui/react-compose-refs": "workspace:*",
+    "@haitch-ui/react-overlay": "workspace:*",
+    "@haitch-ui/react-rect": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

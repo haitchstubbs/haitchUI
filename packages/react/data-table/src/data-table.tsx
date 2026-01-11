@@ -260,7 +260,7 @@ export const PerfTable: PerfTableApi = {
 		return (
 			<div
 				className={cx(
-					"sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/75",
+					"sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/75",
 					props.className
 				)}
 				role="rowgroup"

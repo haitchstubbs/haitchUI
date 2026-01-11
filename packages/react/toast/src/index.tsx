@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * @haitch/react-toast — single-file toaster (targets Sonner v2.0.7 API)
+ * @haitch-ui/react-toast — single-file toaster (targets Sonner v2.0.7 API)
  *
  * Exports:
  * - <Toaster /> (Sonner-compatible props incl. id/toasterId support)
@@ -721,7 +721,7 @@ export function useToast() {
  * -----------------------------------------------------------------------------------------------*/
 
 const baseCss = css`
-/* @haitch/react-toast base styles */
+/* @haitch-ui/react-toast base styles */
 [data-ht-toaster]{
   position: fixed;
   z-index: 9999;

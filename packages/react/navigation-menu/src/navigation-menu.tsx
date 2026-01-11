@@ -17,7 +17,7 @@ import {
 	useTransitionStyles,
 	type Placement,
 } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 
 /* -------------------------------------------------------------------------------------------------
  * Types + utils (kept intentionally similar to your menubar file)

@@ -11,7 +11,7 @@ import {
   Carousel as CarouselPrimitive,
   type CarouselApi,
   type UseCarouselEngineOptions,
-} from "@haitch/react-carousel";
+} from "@haitch-ui/react-carousel";
 
 type CarouselOptions = UseCarouselEngineOptions;
 type CarouselPlugin = never;

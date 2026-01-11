@@ -2,7 +2,7 @@ import * as React from "react";
 import type { HTMLAttributes } from "react";
 
 // server function (your shiki wrapper)
-import { highlight } from "@haitch/react-code-block/server";
+import { highlight } from "@haitch-ui/react-code-block/server";
 import { MdxCodeBlock } from "./code-block";
 
 type PreProps = HTMLAttributes<HTMLPreElement>;

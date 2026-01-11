@@ -19,7 +19,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "@haitch/ui";
+} from "@haitch-ui/ui";
 
 type RenderContextMenu = () => React.ReactElement;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as RadioGroupPrimitive from "@haitch/react-radio-group";
+import * as RadioGroupPrimitive from "@haitch-ui/react-radio-group";
 import { IconCircle as CircleIcon } from "@tabler/icons-react";
 
 import { cn } from "../../lib/util";

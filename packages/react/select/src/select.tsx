@@ -22,9 +22,9 @@ import {
 	type Placement as FloatingPlacement,
 	type Side,
 } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
-import { useOverlayDOMManager } from "@haitch/react-overlay";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
+import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
 
 /* -------------------------------------------------------------------------------------------------
  * Types

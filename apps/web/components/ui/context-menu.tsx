@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as ContextMenuPrimitive from "@haitch/react-context-menu"
+import * as ContextMenuPrimitive from "@haitch-ui/react-context-menu"
 import { IconCheck, IconChevronRight, IconCircle } from "@tabler/icons-react"
 
 import { cn } from "../../lib/util"

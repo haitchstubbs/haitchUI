@@ -1,9 +1,9 @@
-import { highlight } from "@haitch/react-code-block/server";
+import { highlight } from "@haitch-ui/react-code-block/server";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import AccordionDemo from "./accordion.component";
 import AccordionWrapper from "./accordion.wrapper";
-import { Separator } from "@haitch/ui";
+import { Separator } from "@haitch-ui/ui";
 
 export default async function AccordionPage() {
 	const code = accordionCode;

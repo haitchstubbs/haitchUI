@@ -1,8 +1,8 @@
-# @haitch/react-scroll-area
+# @haitch-ui/react-scroll-area
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-scroll-area
+pnpm add @haitch-ui/react-scroll-area
 ```

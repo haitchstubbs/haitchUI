@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-virtual-element",
+  "name": "@haitch-ui/react-virtual-element",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -16,10 +16,11 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch/react-overlay": "workspace:*"
+    "@haitch-ui/react-overlay": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

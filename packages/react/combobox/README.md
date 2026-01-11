@@ -1,10 +1,10 @@
-# @haitch/react-combobox
+# @haitch-ui/react-combobox
 
 Scaffolded primitive package.
 
 ## Usage
 ```tsx
-import * as Combobox from "@haitch/react-combobox";
+import * as Combobox from "@haitch-ui/react-combobox";
 
 export function Example() {
   return (
@@ -28,5 +28,5 @@ export function Example() {
 
 ## Install
 ```sh
-pnpm add @haitch/react-combobox
+pnpm add @haitch-ui/react-combobox
 ```

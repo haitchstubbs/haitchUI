@@ -1,7 +1,7 @@
 import * as React from "react";
 import { forwardRef } from "react";
 import type { TriggerProps } from "../types";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { useMergeRefs } from "@floating-ui/react";
 import { useCtx } from "../context/useRootContext";
 

@@ -1,8 +1,8 @@
-# @haitch/react-aspect-ratio
+# @haitch-ui/react-aspect-ratio
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-aspect-ratio
+pnpm add @haitch-ui/react-aspect-ratio
 ```

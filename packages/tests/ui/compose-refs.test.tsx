@@ -1,6 +1,6 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { composeRefs } from "@haitch/ui"; // or relative path if not exported
+import { composeRefs } from "@haitch-ui/ui"; // or relative path if not exported
 
 describe("composeRefs", () => {
 	it("writes to object refs", () => {

@@ -1,8 +1,8 @@
-# @haitch/react-avatar
+# @haitch-ui/react-avatar
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-avatar
+pnpm add @haitch-ui/react-avatar
 ```

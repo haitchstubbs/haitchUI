@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-context-menu",
+	"name": "@haitch-ui/react-context-menu",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -16,18 +16,17 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
-		"@haitch/react-core": "workspace:*",
+		"@haitch-ui/react-core": "workspace:*",
 		"react": ">=18",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
+		"@haitch-ui/react-overlay": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
 		"@floating-ui/react": "^0.26.0"
 	},
 	"dependencies": {
-		"@haitch/react-core": "workspace:*",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
+		"@haitch-ui/react-core": "workspace:*",
+		"@haitch-ui/react-overlay": "workspace:*",
+		"@haitch-ui/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
 		"@floating-ui/react": "^0.26.0"
 	},
 	"scripts": {

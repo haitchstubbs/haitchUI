@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@haitch/ui";
+} from "@haitch-ui/ui";
 
 import { runDialogContract } from "../contracts/dialog";
 

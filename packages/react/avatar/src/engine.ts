@@ -2,7 +2,7 @@
 "use client";
 
 import * as React from "react";
-import { composeRefs } from "@haitch/react-compose-refs";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
 
 export type AvatarLoadingStatus = "idle" | "loading" | "loaded" | "error";
 

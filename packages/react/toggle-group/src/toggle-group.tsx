@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Slot } from "@haitch/react-slot"
+import { Slot } from "@haitch-ui/react-slot"
 
 /**
  * Toggle + ToggleGroup primitives (Base-UI-style), single file.
@@ -26,7 +26,7 @@ import { Slot } from "@haitch/react-slot"
  * - Home/End jump to first/last enabled item
  *
  * asChild:
- * - All three primitives support `asChild` using @haitch/react-slot
+ * - All three primitives support `asChild` using @haitch-ui/react-slot
  *
  * Form integration:
  * - ToggleGroupRoot can render hidden inputs when `name` is provided

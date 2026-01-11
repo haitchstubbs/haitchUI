@@ -1,28 +1,59 @@
 {
-  "name": "@haitch/react-compose-refs",
-  "version": "0.0.0",
-  "private": false,
-  "type": "module",
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "peerDependencies": {
-    "react": ">=18"
-  },
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "check-types": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint .",
-    "test": "vitest run"
-  }
+	"name": "@haitch-ui/react-compose-refs",
+	"version": "0.1.1",
+	"description": "Compose multiple React refs into a single ref callback.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hicklebirry/haitchUI.git",
+		"directory": "packages/react/compose-refs"
+	},
+	"bugs": {
+		"url": "https://github.com/hicklebirry/haitchUI/issues"
+	},
+	"homepage": "https://github.com/hicklebirry/haitchUI#readme",
+	"keywords": [
+		"react",
+		"ref",
+		"refs",
+		"utilities"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"peerDependencies": {
+		"react": ">=18",
+		"react-dom": ">=18"
+	},
+	"devDependencies": {
+		"eslint": "^9.39.1",
+		"prettier": "^3.7.4",
+		"tsup": "^8.5.1",
+		"typescript": "5.9.2",
+		"vitest": "^4.0.16"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run"
+	}
 }

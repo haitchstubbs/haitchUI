@@ -1,8 +1,8 @@
-# @haitch/react-dialog
+# @haitch-ui/react-dialog
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-dialog
+pnpm add @haitch-ui/react-dialog
 ```

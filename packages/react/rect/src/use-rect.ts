@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useLayoutEffect, RefObject } from "react";
+import { useRef, useState, useLayoutEffect, type RefObject } from "react";
 
-import { DOM } from "@haitch/react-overlay";
+import { DOM } from "@haitch-ui/react-overlay";
 
 /**
  * A `Rect` is the same shape as `RectLike`.
@@ -67,7 +67,7 @@ export function useRect<T extends HTMLElement = HTMLElement>(): [Rect | undefine
 }
 
 /**
- * useVirtualElement() wraps a RectLike into a VirtualElement via @haitch/core.
+ * useVirtualElement() wraps a RectLike into a VirtualElement via @haitch-ui/core.
  * When rect is undefined it returns undefined.
  */
 export function useVirtualElement(rect: Rect | undefined, contextElement?: Element | null): VirtualElement | undefined {

@@ -1,135 +1,109 @@
-# Turborepo starter
+# Haitch UI
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Introduction
 
-## Using this example
+Modern UI kits are highly tailored toward interaction-rich SaaS applications, dashboards, and landing pages. Libraries like **shadcn**, **Radix UI**, **Base UI**, and **Floating UI** make it easy to spin up new projects, prototype quickly, and ship polished interfaces.
 
-Run the following command:
+That approach works well for demos and CRUD-style apps—but web applications are becoming increasingly **bleeding-edge** in the age of AI and data-heavy workflows. In real production systems, developers are now expected to handle:
 
-```sh
-npx create-turbo@latest
+1. **Streaming unfathomable amounts of tokens into the UI** from AI agents (LLMs, tools, traces, logs)
+2. **Rendering partial, out-of-order, and continuously updating content** without blowing up React reconciliation
+3. **Embedding web components inside Shadow DOMs** for scalable, user-facing analytics and isolation
+4. **Strong opinions about interaction models**, often enforced with hard-coded client-side logic
+5. **Strict performance budgets** where hydration cost matters more than visual polish
+6. **Long-lived screens** (hours or days open) instead of short, transactional sessions
+7. **Complex permission models** that affect rendering at runtime, not build time
+8. **Composable data density**, not just composable UI (tables, timelines, inspectors, editors)
+9. **Multi-tenant theming** without duplicating bundles or CSS
+10. **Predictable behavior under stress**, not just along ideal interaction paths
+
+This is where modern UI kits begin to break down.
+
+Most are optimized for **interactivity over throughput**—hover states, transitions, and micro-interactions—rather than streaming thousands of updates per minute. They tend to **over-index on client components**, forcing hydration even when it isn’t necessary, and often bake **implicit state** (open/close, focus, animation) directly into primitives.
+
+As data volume increases, these abstractions start to crack. Large DOM trees become expensive to render, “composable” APIs grow brittle under real data density, and accessibility layers—while essential—can hide significant runtime costs with no clear escape hatches. Streaming, partial hydration, and incremental rendering are usually second-class concerns. Shadow DOM support is frequently an afterthought. Styling systems struggle to survive multi-tenant environments. And when you finally need to bypass the abstraction, the escape hatches are either undocumented or unsafe.
+
+After spending most of 2025 experimenting with popular UI kits, I repeatedly ended up building bespoke solutions just to work around these constraints.
+
+That friction is the reason **@haitch-ui** exists.
+
+## What Is Haitch UI?
+
+**@haitch-ui is intentionally boring.**
+
+It’s a collection of **simple primitives** and **thin UI wrappers** that prioritize:
+
+* Predictable rendering
+* Explicit state
+* Minimal client-side logic
+* Performance parity with accessibility
+
+Instead of reinventing UI patterns, Haitch UI **re-composes existing, battle-tested tools** into primitives that can survive real production workloads.
+
+If something can be:
+
+* Rendered on the server → it is
+* Controlled externally → it must be
+* Disabled entirely → it should be trivial
+
+---
+
+## Getting Started
+
+First, install `pnpm` if you haven’t already:
+
+```bash
+npm install -g pnpm
 ```
 
-## What's inside?
+Then install dependencies:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@haitch/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@haitch/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@haitch/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+pnpm install
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+## Getting Around the Repo
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+* **Primitives** live in:
+  `/packages/react/*`
+* **UI wrappers and composed components** live in:
+  `/apps/web/components`
 
-### Develop
+The separation is intentional: primitives stay dumb, wrappers stay replaceable.
 
-To develop all apps and packages, run the following command:
+---
 
-```
-cd my-turborepo
+## Documentation
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+The documentation site is currently under construction.
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+In the meantime, the codebase itself is the source of truth—each primitive is designed to be readable, minimal, and unsurprising.
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+## Releases
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+Releases are currently manual, as I’m the sole maintainer.
 
-### Remote Caching
+Most of the library is still **pre-release (`v0.0.0`)**.
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+* `v0.0.1` → `v0.1.x`
+  Used to finalize APIs and prepare initial release assets
+* `v0.2.0`
+  Marks the first stable public release
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Expected timeline for initial assets: **1–2 weeks**.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+---
 
-```
-cd my-turborepo
+## Roadmap
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+* Initial documentation site
+* Discord community for early adopters
+* Performance benchmarks vs popular UI kits
+* Shadow DOM–safe component set
+* Streaming-first primitives
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+Once the Discord is live, it will be linked here.

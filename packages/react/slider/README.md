@@ -1,8 +1,8 @@
-# @haitch/react-slider
+# @haitch-ui/react-slider
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-slider
+pnpm add @haitch-ui/react-slider
 ```

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { CodeBlockProvider, useCodeBlockContext } from "../context";
 
 function cn(...classes: Array<string | undefined | false>) {

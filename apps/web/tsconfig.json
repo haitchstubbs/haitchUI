@@ -1,5 +1,5 @@
 {
-	"extends": "@haitch/typescript-config/nextjs.json",
+	"extends": "@haitch-ui/typescript-config/nextjs.json",
 	"compilerOptions": {
 		"plugins": [
 			{

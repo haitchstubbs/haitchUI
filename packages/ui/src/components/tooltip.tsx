@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import * as TooltipPrimitive from "@haitch/react-tooltip";
+import * as TooltipPrimitive from "@haitch-ui/react-tooltip";
 import { FloatingPortal, useMergeRefs, type Placement } from "@floating-ui/react";
 
 type WithDataState = { "data-state"?: "open" | "closed" };

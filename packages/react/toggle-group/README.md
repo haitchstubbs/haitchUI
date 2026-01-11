@@ -1,8 +1,8 @@
-# @haitch/react-toggle-group
+# @haitch-ui/react-toggle-group
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-toggle-group
+pnpm add @haitch-ui/react-toggle-group
 ```

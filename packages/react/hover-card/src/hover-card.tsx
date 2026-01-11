@@ -21,8 +21,8 @@ import {
 	type Side,
 	type Placement,
 } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
 
 /* -------------------------------------------------------------------------------------------------
  * Types

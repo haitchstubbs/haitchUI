@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-accordion",
+  "name": "@haitch-ui/react-accordion",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -16,10 +16,11 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch/react-slot": "workspace:*"
+    "@haitch-ui/react-slot": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

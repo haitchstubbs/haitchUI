@@ -6,7 +6,7 @@ We release security updates for the latest stable version of this project. Pleas
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please **do not open an issue**. Instead, email us at [INSERT EMAIL ADDRESS] with details and steps to reproduce. We will respond as quickly as possible and coordinate a fix.
+If you discover a security vulnerability, please **do not open an issue**. Instead, email us at haitchstubbs@gmail.com with details and steps to reproduce. We will respond as quickly as possible and coordinate a fix.
 
 ## Disclosure Policy
 

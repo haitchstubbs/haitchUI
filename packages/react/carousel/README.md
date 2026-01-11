@@ -1,8 +1,8 @@
-# @haitch/react-carousel
+# @haitch-ui/react-carousel
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-carousel
+pnpm add @haitch-ui/react-carousel
 ```

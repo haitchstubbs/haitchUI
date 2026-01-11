@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
-import { cn, ThemeRoot } from "@haitch/ui";
-import { OverlayDOMProvider, type OverlayDOM } from "@haitch/react-overlay";
+import { cn, ThemeRoot } from "@haitch-ui/ui";
+import { OverlayDOMProvider, type OverlayDOM } from "@haitch-ui/react-overlay";
 import { SidebarProvider } from "../components/ui/sidebar";
 import { fontVariables } from "../components/fonts";
 

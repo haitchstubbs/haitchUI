@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-popover",
+	"name": "@haitch-ui/react-popover",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -17,23 +17,16 @@
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
 		"react": ">=18",
-		"react-dom": ">=18",
-		"@floating-ui/react": "^0.26.0",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-rect": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-core": "workspace:*"
+		"react-dom": ">=18"
 	},
 	"dependencies": {
 		"@floating-ui/react": "^0.26.0",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-rect": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch/react-slot": "workspace:*",
-		"@haitch/react-compose-refs": "workspace:*",
-		"@haitch/react-core": "workspace:*"
+		"@haitch-ui/react-overlay": "workspace:*",
+		"@haitch-ui/react-rect": "workspace:*",
+		"@haitch-ui/react-virtual-element": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
+		"@haitch-ui/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-core": "workspace:*"
 	},
 	"scripts": {
 		"build": "tsup",

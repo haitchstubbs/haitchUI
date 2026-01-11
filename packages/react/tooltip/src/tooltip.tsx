@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { FloatingArrow, FloatingPortal, type FloatingArrowProps, type Placement } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { useTooltip as useTooltipInternal } from "./lib/useTooltip";
 
 type Side = "top" | "right" | "bottom" | "left";

@@ -12,7 +12,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@haitch/ui";
+} from "@haitch-ui/ui";
 
 import {
   runCommandDialogContract,

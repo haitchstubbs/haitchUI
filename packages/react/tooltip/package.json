@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-tooltip",
+  "name": "@haitch-ui/react-tooltip",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -20,6 +20,10 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@haitch-ui/react-compose-refs": "workspace:*",
+    "@haitch-ui/react-slot": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

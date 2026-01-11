@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as TooltipPrimitive from "@haitch/react-tooltip";
+import * as TooltipPrimitive from "@haitch-ui/react-tooltip";
 
 import { cn } from "../../lib/util";
 

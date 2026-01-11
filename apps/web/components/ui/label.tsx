@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as LabelPrimitive from "@haitch/react-label"
+import * as LabelPrimitive from "@haitch-ui/react-label"
 
 import { cn } from "../../lib/util"
 

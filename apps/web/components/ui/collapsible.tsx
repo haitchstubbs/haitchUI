@@ -1,6 +1,6 @@
 "use client"
 
-import * as CollapsiblePrimitive from "@haitch/react-collapsible"
+import * as CollapsiblePrimitive from "@haitch-ui/react-collapsible"
 import { cn } from "../../lib/util"
 
 function Collapsible({

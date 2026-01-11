@@ -17,7 +17,7 @@ import {
   ContextMenuSub,
   ContextMenuSubTrigger,
   ContextMenuSubContent,
-} from "@haitch/ui";
+} from "@haitch-ui/ui";
 
 function BasicContextMenu() {
   const [bold, setBold] = React.useState(false);

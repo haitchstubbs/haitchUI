@@ -119,5 +119,5 @@ export default withMDX({
 			}
 		],
 	},
-	transpilePackages: ["@haitch/react-toast"],
+	transpilePackages: ["@haitch-ui/react-toast"],
 });

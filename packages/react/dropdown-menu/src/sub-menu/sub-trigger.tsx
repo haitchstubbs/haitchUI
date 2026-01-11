@@ -3,7 +3,7 @@ import type { SubTriggerProps } from "../types";
 import { useCtx } from "../context/useRootContext";
 import { useSubCtx } from "./useSubContext";
 import { useListItem, useMergeRefs } from "@floating-ui/react";
-import { Slot } from "@haitch/react-slot";
+import { Slot } from "@haitch-ui/react-slot";
 import { composeEventHandlers } from "../lib/composeEventHandlers";
 
 export const SubTrigger = forwardRef<HTMLElement, SubTriggerProps>(function SubTrigger({ asChild = false, disabled, children, ...props }, ref) {

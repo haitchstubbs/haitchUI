@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import { cookies } from "next/headers";
 import { AppSidebar } from "../components/app-sidebar";
 import { SidebarInset, SidebarTrigger } from "../components/ui/sidebar";
-import { Separator } from "@haitch/ui";
+import { Separator } from "@haitch-ui/ui";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 import { data } from "../lib/navigation";
 import { Page } from "../components/page";

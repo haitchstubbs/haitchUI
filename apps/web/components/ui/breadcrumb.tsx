@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slot } from "@haitch/react-slot"
+import { Slot } from "@haitch-ui/react-slot"
 import { IconChevronRight, IconDots } from "@tabler/icons-react"
 
 import { cn } from "../../lib/util"

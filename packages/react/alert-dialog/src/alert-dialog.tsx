@@ -3,9 +3,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Slot } from "@haitch/react-slot";
-import { composeRefs } from "@haitch/react-compose-refs";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch/react-overlay";
+import { Slot } from "@haitch-ui/react-slot";
+import { composeRefs } from "@haitch-ui/react-compose-refs";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch-ui/react-overlay";
 
 type AlertDialogContextValue = {
 	open: boolean;

@@ -13,7 +13,7 @@ type Options = {
 	deps: string[]; // e.g. ["react-slot","react-compose-refs"]
 	peerReact: string; // ">=18"
 	addToDocs: boolean;
-	docsFilter: string; // pnpm filter for docs app, e.g. "@haitch/docs" or "docs"
+	docsFilter: string; // pnpm filter for docs app, e.g. "@haitch-ui/docs" or "docs"
 	dryRun: boolean;
 };
 
@@ -180,7 +180,7 @@ export default defineConfig({
 	// NOTE: This assumes you have a root tsconfig.base.json.
 	// If yours is elsewhere, pass --root and/or change this template.
 	const tsconfig = {
-		extends: "@haitch/typescript-config/base.json",
+		extends: "@haitch-ui/typescript-config/base.json",
 		compilerOptions: {
 			rootDir: "src",
 			outDir: "dist",

@@ -3,7 +3,7 @@ import { describe, beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 
-import { Checkbox, ShadowRootHost } from "@haitch/ui";
+import { Checkbox, ShadowRootHost } from "@haitch-ui/ui";
 
 import {
 	runCheckboxDomContract,

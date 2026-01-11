@@ -1,8 +1,8 @@
-# @haitch/react-tabs
+# @haitch-ui/react-tabs
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-tabs
+pnpm add @haitch-ui/react-tabs
 ```

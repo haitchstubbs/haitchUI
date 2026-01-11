@@ -1,8 +1,8 @@
-# @haitch/react-progress
+# @haitch-ui/react-progress
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-progress
+pnpm add @haitch-ui/react-progress
 ```

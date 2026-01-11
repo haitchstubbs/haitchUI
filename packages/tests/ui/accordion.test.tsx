@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@haitch/ui";
+} from "@haitch-ui/ui";
 
 import { runAccordionContract, runAccordionItemAndAsChildContract } from "../contracts/accordion";
 

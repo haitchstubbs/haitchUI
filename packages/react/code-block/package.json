@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-code-block",
+	"name": "@haitch-ui/react-code-block",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -20,10 +20,11 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"peerDependencies": {
-		"react": ">=18"
+		"react": ">=18",
+		"react-dom": ">=18"
 	},
 	"dependencies": {
-		"@haitch/react-slot": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
 		"shiki": "^3.20.0"
 	},
 	"scripts": {
