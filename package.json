@@ -52,6 +52,7 @@
 		"apps/*",
 		"packages/*",
 		"packages/primitives/*",
-		".devtools/**"
+		".devtools/**",
+		"scripts/**"
 	]
 }
