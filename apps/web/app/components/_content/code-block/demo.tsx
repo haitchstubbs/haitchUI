@@ -1,4 +1,4 @@
-import { highlight } from "@haitch/react-code-block/server";
+import { highlight } from "@haitch-ui/react-code-block/server";
 import * as Client from "./ui";
 import code from "./code";
 

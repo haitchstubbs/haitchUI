@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as PopoverPrimitive from "@haitch/react-popover"
+import * as PopoverPrimitive from "@haitch-ui/react-popover"
 
 import { cn } from "../../lib/util"
 

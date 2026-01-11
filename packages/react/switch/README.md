@@ -1,8 +1,8 @@
-# @haitch/react-switch
+# @haitch-ui/react-switch
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-switch
+pnpm add @haitch-ui/react-switch
 ```

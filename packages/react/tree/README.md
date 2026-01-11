@@ -1,8 +1,8 @@
-# @haitch/react-tree
+# @haitch-ui/react-tree
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-tree
+pnpm add @haitch-ui/react-tree
 ```

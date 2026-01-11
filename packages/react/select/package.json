@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-select",
+	"name": "@haitch-ui/react-select",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -20,11 +20,11 @@
 		"react-dom": ">=18"
 	},
 	"dependencies": {
-		"@haitch/react-core": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch-ui/react-slot": "^0.1.0",
-		"@haitch-ui/react-compose-refs": "^0.1.0",
-		"@haitch/react-overlay": "workspace:*"
+		"@haitch-ui/react-core": "workspace:*",
+		"@haitch-ui/react-virtual-element": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
+		"@haitch-ui/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-overlay": "workspace:*"
 	},
 	"scripts": {
 		"build": "tsup",

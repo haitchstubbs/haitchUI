@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as Haitch from "@haitch/react-navigation-menu"
+import * as Haitch from "@haitch-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
 import { IconChevronDown as ChevronDownIcon } from "@tabler/icons-react"
 import { cn } from "../../lib/util"

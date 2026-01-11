@@ -1,6 +1,6 @@
 {
   "name": "@haitch-ui/react-slot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A strict, compositional Slot component for React that safely forwards props, events, and refs to exactly one valid child element.",
   "license": "MIT",
   "repository": {
@@ -35,7 +35,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch-ui/react-compose-refs": "^0.1.0"
+    "@haitch-ui/react-compose-refs": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

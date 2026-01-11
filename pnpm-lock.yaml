@@ -8,40 +8,40 @@ importers:
 
   .:
     devDependencies:
-      '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.0)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@haitch/core':
+      '@haitch-ui/core':
         specifier: workspace:*
         version: link:packages/core
-      '@haitch/eslint-config':
+      '@haitch-ui/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
-      '@haitch/react-context-menu':
+      '@haitch-ui/react-compose-refs':
+        specifier: workspace:*
+        version: link:packages/react/compose-refs
+      '@haitch-ui/react-context-menu':
         specifier: workspace:*
         version: link:packages/react/context-menu
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:packages/react/overlay
-      '@haitch/react-popover':
+      '@haitch-ui/react-popover':
         specifier: workspace:*
         version: link:packages/react/popover
-      '@haitch/react-rect':
+      '@haitch-ui/react-rect':
         specifier: workspace:*
         version: link:packages/react/rect
-      '@haitch/react-tooltip':
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:packages/react/slot
+      '@haitch-ui/react-tooltip':
         specifier: workspace:*
         version: link:packages/react/tooltip
-      '@haitch/react-virtual-element':
+      '@haitch-ui/react-virtual-element':
         specifier: workspace:*
         version: link:packages/react/virtual-element
-      '@haitch/tests':
+      '@haitch-ui/tests':
         specifier: workspace:*
         version: link:packages/tests
-      '@haitch/typescript-config':
+      '@haitch-ui/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
       '@types/react':
@@ -77,13 +77,13 @@ importers:
       '@floating-ui/react':
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/core':
+      '@haitch-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../../packages/react/overlay
-      '@haitch/ui':
+      '@haitch-ui/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tabler/icons-react':
@@ -114,10 +114,10 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
     devDependencies:
-      '@haitch/eslint-config':
+      '@haitch-ui/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@haitch/typescript-config':
+      '@haitch-ui/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
@@ -198,94 +198,94 @@ importers:
       '@floating-ui/react':
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@haitch/core':
+      '@haitch-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@haitch/react-accordion':
+      '@haitch-ui/react-accordion':
         specifier: workspace:*
         version: link:../../packages/react/accordion
-      '@haitch/react-alert-dialog':
+      '@haitch-ui/react-alert-dialog':
         specifier: workspace:*
         version: link:../../packages/react/alert-dialog
-      '@haitch/react-aspect-ratio':
+      '@haitch-ui/react-aspect-ratio':
         specifier: workspace:*
         version: link:../../packages/react/aspect-ratio
-      '@haitch/react-avatar':
+      '@haitch-ui/react-avatar':
         specifier: workspace:*
         version: link:../../packages/react/avatar
-      '@haitch/react-carousel':
+      '@haitch-ui/react-carousel':
         specifier: workspace:*
         version: link:../../packages/react/carousel
-      '@haitch/react-code-block':
+      '@haitch-ui/react-code-block':
         specifier: workspace:*
         version: link:../../packages/react/code-block
-      '@haitch/react-collapsible':
+      '@haitch-ui/react-collapsible':
         specifier: workspace:*
         version: link:../../packages/react/collapsible
-      '@haitch/react-combobox':
+      '@haitch-ui/react-combobox':
         specifier: workspace:*
         version: link:../../packages/react/combobox
-      '@haitch/react-data-table':
+      '@haitch-ui/react-data-table':
         specifier: workspace:*
         version: link:../../packages/react/data-table
-      '@haitch/react-dialog':
+      '@haitch-ui/react-dialog':
         specifier: workspace:*
         version: link:../../packages/react/dialog
-      '@haitch/react-dropdown-menu':
+      '@haitch-ui/react-dropdown-menu':
         specifier: workspace:*
         version: link:../../packages/react/dropdown-menu
-      '@haitch/react-hover-card':
+      '@haitch-ui/react-hover-card':
         specifier: workspace:*
         version: link:../../packages/react/hover-card
-      '@haitch/react-label':
+      '@haitch-ui/react-label':
         specifier: workspace:*
         version: link:../../packages/react/label
-      '@haitch/react-menubar':
+      '@haitch-ui/react-menubar':
         specifier: workspace:*
         version: link:../../packages/react/menubar
-      '@haitch/react-navigation-menu':
+      '@haitch-ui/react-navigation-menu':
         specifier: workspace:*
         version: link:../../packages/react/navigation-menu
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../../packages/react/overlay
-      '@haitch/react-progress':
+      '@haitch-ui/react-progress':
         specifier: workspace:*
         version: link:../../packages/react/progress
-      '@haitch/react-radio-group':
+      '@haitch-ui/react-radio-group':
         specifier: workspace:*
         version: link:../../packages/react/radio-group
-      '@haitch/react-scroll-area':
+      '@haitch-ui/react-scroll-area':
         specifier: workspace:*
         version: link:../../packages/react/scroll-area
-      '@haitch/react-select':
+      '@haitch-ui/react-select':
         specifier: workspace:*
         version: link:../../packages/react/select
-      '@haitch/react-slider':
+      '@haitch-ui/react-slider':
         specifier: workspace:*
         version: link:../../packages/react/slider
-      '@haitch/react-switch':
+      '@haitch-ui/react-switch':
         specifier: workspace:*
         version: link:../../packages/react/switch
-      '@haitch/react-tabs':
+      '@haitch-ui/react-tabs':
         specifier: workspace:*
         version: link:../../packages/react/tabs
-      '@haitch/react-toast':
+      '@haitch-ui/react-toast':
         specifier: workspace:*
         version: link:../../packages/react/toast
-      '@haitch/react-toggle':
+      '@haitch-ui/react-toggle':
         specifier: workspace:*
         version: link:../../packages/react/toggle
-      '@haitch/react-toggle-group':
+      '@haitch-ui/react-toggle-group':
         specifier: workspace:*
         version: link:../../packages/react/toggle-group
-      '@haitch/react-tooltip':
+      '@haitch-ui/react-tooltip':
         specifier: workspace:*
         version: link:../../packages/react/tooltip
-      '@haitch/react-tree':
+      '@haitch-ui/react-tree':
         specifier: workspace:*
         version: link:../../packages/react/tree
-      '@haitch/ui':
+      '@haitch-ui/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@mdx-js/loader':
@@ -367,10 +367,10 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
-      '@haitch/eslint-config':
+      '@haitch-ui/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@haitch/typescript-config':
+      '@haitch-ui/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@tailwindcss/postcss':
@@ -452,7 +452,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
     devDependencies:
-      '@haitch/typescript-config':
+      '@haitch-ui/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@testing-library/jest-dom':
@@ -555,8 +555,8 @@ importers:
   packages/react/accordion:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -567,14 +567,14 @@ importers:
   packages/react/alert-dialog:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
-      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -597,8 +597,8 @@ importers:
   packages/react/avatar:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
+        specifier: workspace:*
+        version: link:../compose-refs
       '@haitch-ui/react-slot':
         specifier: workspace:*
         version: link:../slot
@@ -621,8 +621,8 @@ importers:
   packages/react/code-block:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -636,8 +636,8 @@ importers:
   packages/react/collapsible:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -648,14 +648,14 @@ importers:
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/react-overlay':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -694,17 +694,17 @@ importers:
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-core':
         specifier: workspace:*
         version: link:../core
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -736,15 +736,15 @@ importers:
   packages/react/dialog:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-core':
         specifier: workspace:*
         version: link:../core
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
-      '@haitch/react-rect':
+      '@haitch-ui/react-rect':
         specifier: workspace:*
         version: link:../rect
       react:
@@ -757,8 +757,8 @@ importers:
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -769,8 +769,8 @@ importers:
   packages/react/hover-card:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -781,8 +781,8 @@ importers:
   packages/react/label:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -802,8 +802,8 @@ importers:
   packages/react/navigation-menu:
     dependencies:
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -826,21 +826,21 @@ importers:
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-core':
         specifier: workspace:*
         version: link:../core
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
-      '@haitch/react-rect':
+      '@haitch-ui/react-rect':
         specifier: workspace:*
         version: link:../rect
-      '@haitch/react-virtual-element':
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      '@haitch-ui/react-virtual-element':
         specifier: workspace:*
         version: link:../virtual-element
       react:
@@ -879,7 +879,7 @@ importers:
 
   packages/react/rect:
     dependencies:
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
       react:
@@ -901,18 +901,18 @@ importers:
   packages/react/select:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)
-      '@haitch/react-core':
+        specifier: workspace:*
+        version: link:../compose-refs
+      '@haitch-ui/react-core':
         specifier: workspace:*
         version: link:../core
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
-      '@haitch/react-virtual-element':
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../slot
+      '@haitch-ui/react-virtual-element':
         specifier: workspace:*
         version: link:../virtual-element
       react:
@@ -934,8 +934,8 @@ importers:
   packages/react/slot:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.0)
+        specifier: workspace:*
+        version: link:../compose-refs
       react:
         specifier: '>=18'
         version: 19.2.0
@@ -1028,11 +1028,11 @@ importers:
   packages/react/tooltip:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
+        specifier: workspace:*
+        version: link:../compose-refs
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -1043,11 +1043,11 @@ importers:
   packages/react/tree:
     dependencies:
       '@haitch-ui/react-compose-refs':
-        specifier: ^0.1.0
-        version: 0.1.0(react@19.2.3)
+        specifier: workspace:*
+        version: link:../compose-refs
       '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: workspace:*
+        version: link:../slot
       react:
         specifier: '>=18'
         version: 19.2.3
@@ -1082,7 +1082,7 @@ importers:
 
   packages/react/virtual-element:
     dependencies:
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../overlay
       react:
@@ -1094,10 +1094,10 @@ importers:
 
   packages/tests:
     devDependencies:
-      '@haitch/core':
+      '@haitch-ui/core':
         specifier: workspace:*
         version: link:../core
-      '@haitch/ui':
+      '@haitch-ui/ui':
         specifier: workspace:*
         version: link:../ui
       '@testing-library/jest-dom':
@@ -1151,7 +1151,7 @@ importers:
       '@floating-ui/react':
         specifier: ^0.26.0
         version: 0.26.28(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/core':
+      '@haitch-ui/core':
         specifier: workspace:*
         version: link:../core
       '@tabler/icons-react':
@@ -1185,43 +1185,43 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
     devDependencies:
-      '@haitch-ui/react-slot':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@haitch/eslint-config':
+      '@haitch-ui/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@haitch/react-context-menu':
+      '@haitch-ui/react-context-menu':
         specifier: workspace:*
         version: link:../react/context-menu
-      '@haitch/react-dialog':
+      '@haitch-ui/react-dialog':
         specifier: workspace:*
         version: link:../react/dialog
-      '@haitch/react-dropdown-menu':
+      '@haitch-ui/react-dropdown-menu':
         specifier: workspace:*
         version: link:../react/dropdown-menu
-      '@haitch/react-overlay':
+      '@haitch-ui/react-overlay':
         specifier: workspace:*
         version: link:../react/overlay
-      '@haitch/react-popover':
+      '@haitch-ui/react-popover':
         specifier: workspace:*
         version: link:../react/popover
-      '@haitch/react-rect':
+      '@haitch-ui/react-rect':
         specifier: workspace:*
         version: link:../react/rect
-      '@haitch/react-select':
+      '@haitch-ui/react-select':
         specifier: workspace:*
         version: link:../react/select
-      '@haitch/react-tooltip':
+      '@haitch-ui/react-slot':
+        specifier: workspace:*
+        version: link:../react/slot
+      '@haitch-ui/react-tooltip':
         specifier: workspace:*
         version: link:../react/tooltip
-      '@haitch/react-tree':
+      '@haitch-ui/react-tree':
         specifier: workspace:*
         version: link:../react/tree
-      '@haitch/react-virtual-element':
+      '@haitch-ui/react-virtual-element':
         specifier: workspace:*
         version: link:../react/virtual-element
-      '@haitch/typescript-config':
+      '@haitch-ui/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
@@ -1700,19 +1700,6 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
-
-  '@haitch-ui/react-compose-refs@0.1.0':
-    resolution: {integrity: sha512-PTFfnQDRE6F+UfuKF2u9DZRj+kk+dM0u2dJnwtuxRbZluLvcpxIIi71G6EyLbLae77GimxgqguonvBEUmyX5Bg==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      react: '>=18'
-
-  '@haitch-ui/react-slot@0.1.0':
-    resolution: {integrity: sha512-fDIacHp1V34Fjz0Uot1IgB+UyMAhF2cbC5hTgA0t4UPOXWPFCKIxhwKhiYnNmkhuzJmpsv61LLS2fbTh46MLuQ==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -5403,32 +5390,6 @@ snapshots:
       tabbable: 6.3.0
 
   '@floating-ui/utils@0.2.10': {}
-
-  '@haitch-ui/react-compose-refs@0.1.0(react@19.2.0)':
-    dependencies:
-      react: 19.2.0
-
-  '@haitch-ui/react-compose-refs@0.1.0(react@19.2.3)':
-    dependencies:
-      react: 19.2.3
-
-  '@haitch-ui/react-slot@0.1.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
-    dependencies:
-      '@haitch-ui/react-compose-refs': 0.1.0(react@19.2.0)
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-
-  '@haitch-ui/react-slot@0.1.0(react-dom@19.2.0(react@19.2.3))(react@19.2.3)':
-    dependencies:
-      '@haitch-ui/react-compose-refs': 0.1.0(react@19.2.3)
-      react: 19.2.3
-      react-dom: 19.2.0(react@19.2.3)
-
-  '@haitch-ui/react-slot@0.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
-    dependencies:
-      '@haitch-ui/react-compose-refs': 0.1.0(react@19.2.3)
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
 
   '@humanfs/core@0.19.1': {}
 

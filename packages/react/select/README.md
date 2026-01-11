@@ -1,8 +1,8 @@
-# @haitch/react-select
+# @haitch-ui/react-select
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-select
+pnpm add @haitch-ui/react-select
 ```

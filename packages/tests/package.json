@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/tests",
+  "name": "@haitch-ui/tests",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,8 +9,8 @@
     "dev:watch": "vitest"
   },
   "devDependencies": {
-    "@haitch/core": "workspace:*",
-    "@haitch/ui": "workspace:*",
+    "@haitch-ui/core": "workspace:*",
+    "@haitch-ui/ui": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1",

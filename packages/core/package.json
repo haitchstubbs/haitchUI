@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/core",
+	"name": "@haitch-ui/core",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
@@ -41,7 +41,7 @@
 		"react-dom": "^19.2.0"
 	},
 	"devDependencies": {
-		"@haitch/typescript-config": "workspace:*",
+		"@haitch-ui/typescript-config": "workspace:*",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.1",
 		"@testing-library/user-event": "^14.6.1",

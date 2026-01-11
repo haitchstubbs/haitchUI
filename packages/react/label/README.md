@@ -1,8 +1,8 @@
-# @haitch/react-label
+# @haitch-ui/react-label
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-label
+pnpm add @haitch-ui/react-label
 ```

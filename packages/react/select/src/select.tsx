@@ -24,7 +24,7 @@ import {
 } from "@floating-ui/react";
 import { Slot } from "@haitch-ui/react-slot";
 import { composeRefs } from "@haitch-ui/react-compose-refs";
-import { useOverlayDOMManager } from "@haitch/react-overlay";
+import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
 
 /* -------------------------------------------------------------------------------------------------
  * Types

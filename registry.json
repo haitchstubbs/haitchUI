@@ -3,7 +3,7 @@
 		"accordion": {
 			"dependencies": [
 				{
-					"name": "@haitch/react-accordion",
+					"name": "@haitch-ui/react-accordion",
 					"version": "workspace:*"
 				}
 			]
@@ -11,7 +11,7 @@
 		"alert-dialog": {
 			"dependencies": [
 				{
-					"name": "@haitch/react-dialog",
+					"name": "@haitch-ui/react-dialog",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -54,7 +54,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-aspect-ratio",
+					"name": "@haitch-ui/react-aspect-ratio",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -68,7 +68,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-avatar",
+					"name": "@haitch-ui/react-avatar",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -261,7 +261,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-checkbox",
+					"name": "@haitch-ui/react-checkbox",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -285,7 +285,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-collapsible",
+					"name": "@haitch-ui/react-collapsible",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -367,7 +367,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-context-menu",
+					"name": "@haitch-ui/react-context-menu",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -415,7 +415,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-dialog",
+					"name": "@haitch-ui/react-dialog",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -458,7 +458,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-dropdown-menu",
+					"name": "@haitch-ui/react-dropdown-menu",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -525,7 +525,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-hover-card",
+					"name": "@haitch-ui/react-hover-card",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -654,7 +654,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-label",
+					"name": "@haitch-ui/react-label",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -673,7 +673,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-menu-bar",
+					"name": "@haitch-ui/react-menu-bar",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -726,7 +726,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-navigation-menu",
+					"name": "@haitch-ui/react-navigation-menu",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -789,7 +789,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-popover",
+					"name": "@haitch-ui/react-popover",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -813,7 +813,7 @@
 					"type": "util"
 				},
 				{
-					"name": "@haitch/react-progress",
+					"name": "@haitch-ui/react-progress",
 					"version": "workspace:*",
 					"type": "lib"
 				}
@@ -827,7 +827,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-radio-group",
+					"name": "@haitch-ui/react-radio-group",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -875,7 +875,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-scroll-area",
+					"name": "@haitch-ui/react-scroll-area",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -894,7 +894,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-select",
+					"name": "@haitch-ui/react-select",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -918,7 +918,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-separator",
+					"name": "@haitch-ui/react-separator",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1039,7 +1039,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-slider",
+					"name": "@haitch-ui/react-slider",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1096,7 +1096,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-switch",
+					"name": "@haitch-ui/react-switch",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1162,7 +1162,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/toggle-group",
+					"name": "@haitch-ui/toggle-group",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1181,7 +1181,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-toggle",
+					"name": "@haitch-ui/react-toggle",
 					"version": "workspace:*",
 					"type": "lib"
 				},
@@ -1200,7 +1200,7 @@
 					"type": "lib"
 				},
 				{
-					"name": "@haitch/react-tooltip",
+					"name": "@haitch-ui/react-tooltip",
 					"version": "workspace:*",
 					"type": "lib"
 				},

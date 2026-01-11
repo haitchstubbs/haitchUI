@@ -1,5 +1,5 @@
 import Image, { type ImageProps } from "next/image";
-import { Button } from "@haitch/ui";
+import { Button } from "@haitch-ui/ui";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {

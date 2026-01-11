@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { PerfTable, type ColumnDef, type Row } from "@haitch/react-data-table";
+import { PerfTable, type ColumnDef, type Row } from "@haitch-ui/react-data-table";
 
 import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from "./table";
 

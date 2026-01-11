@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-rect",
+  "name": "@haitch-ui/react-rect",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -20,7 +20,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch/react-overlay": "workspace:*"
+    "@haitch-ui/react-overlay": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

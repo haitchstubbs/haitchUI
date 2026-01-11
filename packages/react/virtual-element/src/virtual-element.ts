@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { DOM } from "@haitch/react-overlay";
+import { DOM } from "@haitch-ui/react-overlay";
 
 type Rect = {
 	x: number;

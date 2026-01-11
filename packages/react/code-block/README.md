@@ -1,8 +1,8 @@
-# @haitch/react-code-block
+# @haitch-ui/react-code-block
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-code-block
+pnpm add @haitch-ui/react-code-block
 ```

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as ProgressPrimitive from "@haitch/react-progress"
+import * as ProgressPrimitive from "@haitch-ui/react-progress"
 
 import { cn } from "../../lib/util"
 

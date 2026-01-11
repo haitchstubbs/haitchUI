@@ -3,7 +3,7 @@ import * as React from "react";
 import { describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@haitch/ui";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@haitch-ui/ui";
 import { runCollapsibleContract } from "../contracts/collapsible";
 
 function BasicCollapsible(props?: Partial<React.ComponentProps<typeof Collapsible>>) {

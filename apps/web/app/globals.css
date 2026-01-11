@@ -1,7 +1,7 @@
 
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@haitch/ui/styles/tokens.css";
+@import "@haitch-ui/ui/styles/tokens.css";
 @source "../**/*.{ts,tsx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 @source "../packages/ui/**/*.{ts,tsx}";

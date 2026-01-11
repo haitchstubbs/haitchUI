@@ -1,8 +1,8 @@
-# @haitch/react-toast
+# @haitch-ui/react-toast
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-toast
+pnpm add @haitch-ui/react-toast
 ```

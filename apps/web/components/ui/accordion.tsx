@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as AccordionPrimitive from "@haitch/react-accordion"
+import * as AccordionPrimitive from "@haitch-ui/react-accordion"
 import { IconChevronDown as ChevronDownIcon } from "@tabler/icons-react"
 
 import { cn } from "../../lib/util"

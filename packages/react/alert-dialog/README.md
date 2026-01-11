@@ -1,8 +1,8 @@
-# @haitch/react-alert-dialog
+# @haitch-ui/react-alert-dialog
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-alert-dialog
+pnpm add @haitch-ui/react-alert-dialog
 ```

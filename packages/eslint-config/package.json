@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/eslint-config",
+  "name": "@haitch-ui/eslint-config",
   "version": "0.0.0",
   "type": "module",
   "private": true,

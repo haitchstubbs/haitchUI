@@ -1,8 +1,8 @@
-# @haitch/react-collapsible
+# @haitch-ui/react-collapsible
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-collapsible
+pnpm add @haitch-ui/react-collapsible
 ```

@@ -1,8 +1,8 @@
-# @haitch/react-radio-group
+# @haitch-ui/react-radio-group
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-radio-group
+pnpm add @haitch-ui/react-radio-group
 ```

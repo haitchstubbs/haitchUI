@@ -1,8 +1,8 @@
-# @haitch/react-accordion
+# @haitch-ui/react-accordion
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-accordion
+pnpm add @haitch-ui/react-accordion
 ```

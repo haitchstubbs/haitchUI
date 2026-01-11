@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Button } from "@haitch/ui";
+import { Button } from "@haitch-ui/ui";
 import { runButtonLikeContract } from "../contracts/buttonLike";
 import { expectClassInvariants } from "../lib/classInvariants";
 import { expectNoA11yViolations } from "../lib/a11y";

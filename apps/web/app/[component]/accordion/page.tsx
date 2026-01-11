@@ -1,4 +1,4 @@
-import { highlight } from "@haitch/react-code-block/server";
+import { highlight } from "@haitch-ui/react-code-block/server";
 import { Separator } from "../../../components/ui/separator";
 import DemoCard from "../../components/_ui/demo-card";
 import { code, Component, wrapper } from "./code";
@@ -19,7 +19,7 @@ import { IconBrandTypescript, IconCopy } from "@tabler/icons-react";
 export default async function Page() {
 	const highlightedCode = await highlight(code, "tsx");
 
-	const npmScript = `npm install @haitch/react-accordion \n # or yarn add @haitch/react-accordion \n # or pnpm add @haitch/react-accordion`;
+	const npmScript = `npm install @haitch-ui/react-accordion \n # or yarn add @haitch-ui/react-accordion \n # or pnpm add @haitch-ui/react-accordion`;
 	const bash = await highlight(npmScript, "bash", false);
 
 	const highlightedWrapper = await highlight(wrapper, "tsx");

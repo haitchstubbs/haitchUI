@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-combobox",
+  "name": "@haitch-ui/react-combobox",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -20,9 +20,9 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch/react-overlay": "workspace:*",
-    "@haitch-ui/react-slot": "^0.1.0",
-    "@haitch-ui/react-compose-refs": "^0.1.0",
+    "@haitch-ui/react-overlay": "workspace:*",
+    "@haitch-ui/react-slot": "workspace:*",
+    "@haitch-ui/react-compose-refs": "workspace:*",
     "@floating-ui/react": "^0.26.0"
   },
   "scripts": {

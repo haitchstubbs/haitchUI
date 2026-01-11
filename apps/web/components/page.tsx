@@ -1,6 +1,6 @@
 "use client";
 import { useIsMobile } from "../hooks/use-mobile";
-import { Separator } from "@haitch/ui";
+import { Separator } from "@haitch-ui/ui";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 import { usePathname } from "next/navigation";
@@ -22,7 +22,7 @@ function getBreadcrumbData(pathname: string) {
 	const subsection = pathSegments[1];
 
 	const pageTitle = isHomePage
-		? "@haitch/ui"
+		? "@haitch-ui/ui"
 		: // Capitalize
 			section && section.charAt(0).toUpperCase() + section.slice(1);
 	const pageSubtitle = isHomePage
@@ -57,7 +57,7 @@ export function Page({ children }: { children: React.ReactNode }) {
 						<>
 							<SidebarTrigger />
 							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch/</span>
+								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
 								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
 							</h1>
 						</>
@@ -69,7 +69,7 @@ export function Page({ children }: { children: React.ReactNode }) {
 							</div>
 
 							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch/</span>
+								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
 								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
 							</h1>
 							<Separator orientation="vertical" className="block shrink-0 mr-2 data-[orientation=vertical]:h-4" />

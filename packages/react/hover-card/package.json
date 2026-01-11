@@ -1,5 +1,5 @@
 {
-  "name": "@haitch/react-hover-card",
+  "name": "@haitch-ui/react-hover-card",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -20,7 +20,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@haitch-ui/react-slot": "^0.1.0"
+    "@haitch-ui/react-slot": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

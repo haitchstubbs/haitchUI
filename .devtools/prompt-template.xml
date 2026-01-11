@@ -539,8 +539,8 @@
                 type Middleware,
             } from "@floating-ui/react";
 
-            import type { RectLike, VirtualElement } from "@haitch/core";
-            import { useOverlayDOMManager, type OverlayDOM } from "@haitch/core/client";
+            import type { RectLike, VirtualElement } from "@haitch-ui/core";
+            import { useOverlayDOMManager, type OverlayDOM } from "@haitch-ui/core/client";
             import { Slot } from "../lib/slot";
             import { composeRefs } from "../lib/compose-refs";
             import { cn } from "../lib/cn";

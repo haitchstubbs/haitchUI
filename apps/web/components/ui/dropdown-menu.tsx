@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as DropdownMenuPrimitive from "@haitch/react-dropdown-menu"
+import * as DropdownMenuPrimitive from "@haitch-ui/react-dropdown-menu"
 import { IconCheck, IconChevronRight, IconCircle } from "@tabler/icons-react"
 
 import { cn } from "../../lib/util"

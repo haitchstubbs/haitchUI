@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-popover",
+	"name": "@haitch-ui/react-popover",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
@@ -21,12 +21,12 @@
 	},
 	"dependencies": {
 		"@floating-ui/react": "^0.26.0",
-		"@haitch/react-overlay": "workspace:*",
-		"@haitch/react-rect": "workspace:*",
-		"@haitch/react-virtual-element": "workspace:*",
-		"@haitch-ui/react-slot": "^0.1.0",
-		"@haitch-ui/react-compose-refs": "^0.1.0",
-		"@haitch/react-core": "workspace:*"
+		"@haitch-ui/react-overlay": "workspace:*",
+		"@haitch-ui/react-rect": "workspace:*",
+		"@haitch-ui/react-virtual-element": "workspace:*",
+		"@haitch-ui/react-slot": "workspace:*",
+		"@haitch-ui/react-compose-refs": "workspace:*",
+		"@haitch-ui/react-core": "workspace:*"
 	},
 	"scripts": {
 		"build": "tsup",

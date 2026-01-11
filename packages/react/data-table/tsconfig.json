@@ -1,5 +1,5 @@
 {
-  "extends": "@haitch/typescript-config/base.json",
+  "extends": "@haitch-ui/typescript-config/base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",

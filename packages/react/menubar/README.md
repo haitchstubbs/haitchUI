@@ -1,8 +1,8 @@
-# @haitch/react-menubar
+# @haitch-ui/react-menubar
 
 Scaffolded primitive package.
 
 ## Install
 ```sh
-pnpm add @haitch/react-menubar
+pnpm add @haitch-ui/react-menubar
 ```

@@ -1,5 +1,5 @@
 {
-	"name": "@haitch/react-aspect-ratio",
+	"name": "@haitch-ui/react-aspect-ratio",
 	"version": "0.0.0",
 	"private": false,
 	"type": "module",
