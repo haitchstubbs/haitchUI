@@ -9,6 +9,9 @@ export type RegistryModule = {
 	Docs: React.ComponentType<any>;
 	Demo?: DemoComponent | DemoNamespace; // allow either
 	code?: string;
+	loadDocs: () => Promise<React.ComponentType<any>>;
+	loadDemo?: () => Promise<DemoComponent | DemoNamespace>;
+	loadCode?: () => Promise<string>;
 };
 
 export type ComponentEntry = {
@@ -28,7 +31,7 @@ function normalizeTitle(slug: string): string {
 function createLoader(slug: string) {
 	return async () => {
 		const mod = await import(`../_content/${slug}/entry`);
-		return mod.default;
+		return mod as RegistryModule;
 	};
 }
 

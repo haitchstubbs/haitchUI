@@ -10,11 +10,12 @@
     "dev:watch": "node -e \"console.log('noop dev:watch')\""
   },
   "devDependencies": {
-    "prettier": "^3.7.4"
+    "prettier": "^3.7.4",
+    "@haitch-ui/configs": "workspace:*"
   },
   "files": [
     "base.json",
     "nextjs.json",
-    "react-libary.json"
+    "react-library.json"
   ]
 }

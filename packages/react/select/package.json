@@ -20,7 +20,6 @@
 		"react-dom": ">=18"
 	},
 	"dependencies": {
-		"@haitch-ui/react-core": "workspace:*",
 		"@haitch-ui/react-virtual-element": "workspace:*",
 		"@haitch-ui/react-slot": "workspace:*",
 		"@haitch-ui/react-compose-refs": "workspace:*",

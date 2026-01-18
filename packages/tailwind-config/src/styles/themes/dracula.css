@@ -1,0 +1,41 @@
+:host[data-theme="dracula"],
+.ui-root[data-theme="dracula"] {
+	--font-base: var(--font-geist-sans);
+	--radius-xs: 0.25rem; /* 4px */
+	--radius-sm: 0.5rem; /* 8px */
+	--radius-md: 0.75rem; /* 12px */
+	--radius-lg: 1.125rem; /* 18px */
+	--radius-xl: 1.5rem; /* 24px */
+	--background: oklch(0.22 0.09 282.5); /* Dracula background (#282a36) */
+	--foreground: oklch(0.97 0.02 282.5); /* Dracula foreground (#f8f8f2) */
+	--card: oklch(0.22 0.09 282.5);
+	--card-foreground: oklch(0.97 0.02 282.5);
+	--popover: oklch(0.22 0.09 282.5);
+	--popover-foreground: oklch(0.97 0.02 282.5);
+	--primary: oklch(0.72 0.18 306.5); /* Dracula purple (#bd93f9) */
+	--primary-foreground: oklch(0.22 0.09 282.5);
+	--secondary: oklch(0.85 0.18 136.5); /* Dracula green (#50fa7b) */
+	--secondary-foreground: oklch(0.22 0.09 282.5);
+	--muted: oklch(0.55 0.09 282.5); /* Muted: Dracula comment (#6272a4) */
+	--muted-foreground: oklch(0.97 0.02 282.5);
+	--accent: oklch(0.92 0.19 24.5); /* Dracula orange (#ffb86c) */
+	--accent-foreground: oklch(0.22 0.09 282.5);
+	--destructive: oklch(0.65 0.22 22.5); /* Dracula red (#ff5555) */
+	--border: oklch(0.32 0.09 282.5); /* Slightly lighter than background */
+	--input: oklch(0.32 0.09 282.5);
+	--ring: oklch(0.72 0.18 306.5);
+	--chart-1: oklch(0.72 0.18 306.5); /* purple */
+	--chart-2: oklch(0.85 0.18 136.5); /* green */
+	--chart-3: oklch(0.92 0.19 24.5); /* orange */
+	--chart-4: oklch(0.65 0.22 22.5); /* red */
+	--chart-5: oklch(0.92 0.19 338.5); /* Dracula pink (#ff79c6) */
+	--sidebar: oklch(0.22 0.09 282.5);
+	--sidebar-foreground: oklch(0.97 0.02 282.5);
+	--sidebar-primary: oklch(0.72 0.18 306.5);
+	--sidebar-primary-foreground: oklch(0.22 0.09 282.5);
+	--sidebar-accent: oklch(0.92 0.19 24.5);
+	--sidebar-accent-foreground: oklch(0.22 0.09 282.5);
+	--sidebar-border: oklch(0.32 0.09 282.5);
+	--sidebar-ring: oklch(0.72 0.18 306.5);
+	color-scheme: dark;
+}

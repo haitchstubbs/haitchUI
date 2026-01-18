@@ -51,13 +51,15 @@ export function Providers({
 				//"dracula"
 				//"nord"
 				//"one-dark-pro"
-				"gruvbox-material-dark"
+				//"gruvbox-material-dark"
 				//"tokyo-night-storm"
 				//"brutalist-black"
 				//"duckdb-brutalist-dark"
 				//"motherduck-brutalist-dark"
 				//"cyberpunk-light"
 				//"cyberpunk-dark"
+				// "lantern-light"
+				 "lantern-dark"
 			}
 			className={cn(" ui-root root h-screen w-screen text-foreground bg-background antialiased", fontVariables)}
 		>

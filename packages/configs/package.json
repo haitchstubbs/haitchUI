@@ -1,0 +1,24 @@
+{
+  "name": "@haitch-ui/configs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./eslint": "./src/eslint.js",
+    "./tailwind": "./src/tailwind.js",
+    "./tsconfig": "./src/tsconfig.js",
+    "./globals.css": "./src/globals.css",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/nextjs.json": "./tsconfig/nextjs.json",
+    "./tsconfig/react-library.json": "./tsconfig/react-library.json"
+  },
+  "files": [
+    "src",
+    "tsconfig"
+  ],
+  "dependencies": {
+    "@haitch-ui/eslint-config": "workspace:*",
+    "@haitch-ui/tailwind-config": "workspace:*"
+  }
+}

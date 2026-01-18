@@ -180,7 +180,7 @@ export default defineConfig({
     // NOTE: This assumes you have a root tsconfig.base.json.
     // If yours is elsewhere, pass --root and/or change this template.
     const tsconfig = {
-        extends: "@haitch-ui/typescript-config/base.json",
+        extends: "@haitch-ui/configs/tsconfig/base.json",
         compilerOptions: {
             rootDir: "src",
             outDir: "dist",

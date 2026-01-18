@@ -24,7 +24,6 @@
 		"@babel/traverse": "^7.28.5",
 		"@babel/types": "^7.28.5",
 		"@floating-ui/react": "^0.26.0",
-		"@haitch-ui/core": "workspace:*",
 		"@haitch-ui/react-accordion": "workspace:*",
 		"@haitch-ui/react-alert-dialog": "workspace:*",
 		"@haitch-ui/react-aspect-ratio": "workspace:*",
@@ -67,7 +66,9 @@
 		"input-otp": "^1.4.2",
 		"next": "16.0.10",
 		"next-themes": "^0.4.6",
+		"react": "^19.2.0",
 		"react-day-picker": "^9.13.0",
+		"react-dom": "^19.2.0",
 		"react-resizable-panels": "^4.3.0",
 		"recharts": "^3.6.0",
 		"rehype-autolink-headings": "^7.1.0",
@@ -80,8 +81,7 @@
 		"vaul": "^1.1.2"
 	},
 	"devDependencies": {
-		"@haitch-ui/eslint-config": "workspace:*",
-		"@haitch-ui/typescript-config": "workspace:*",
+		"@haitch-ui/configs": "workspace:*",
 		"@tailwindcss/postcss": "^4.1.0",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.1",
@@ -99,9 +99,5 @@
 		"tailwindcss": "^4.1.0",
 		"typescript": "5.9.2",
 		"vitest": "^4.0.16"
-	},
-	"peerDependencies": {
-		"react": ">=18",
-		"react-dom": ">=18"
 	}
 }

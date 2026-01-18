@@ -1,7 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./base.json",
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  }
+  "extends": "@haitch-ui/configs/tsconfig/react-library.json"
 }

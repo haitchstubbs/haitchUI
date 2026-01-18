@@ -15,15 +15,14 @@
 	},
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"peerDependencies": {
-		"@haitch-ui/react-core": "workspace:*",
-		"react": ">=18",
-		"@haitch-ui/react-overlay": "workspace:*",
-		"@haitch-ui/react-slot": "workspace:*",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "@haitch-ui/react-overlay": "workspace:*",
+    "@haitch-ui/react-slot": "workspace:*",
 		"@floating-ui/react": "^0.26.0"
 	},
 	"dependencies": {
-		"@haitch-ui/react-core": "workspace:*",
 		"@haitch-ui/react-overlay": "workspace:*",
 		"@haitch-ui/react-compose-refs": "workspace:*",
 		"@haitch-ui/react-slot": "workspace:*",
