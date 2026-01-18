@@ -1,6 +1,6 @@
 {
 	"name": "@haitch-ui/react-compose-refs",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Compose multiple React refs into a single ref callback.",
 	"license": "MIT",
 	"repository": {
