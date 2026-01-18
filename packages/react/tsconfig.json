@@ -1,0 +1,16 @@
+{
+  "extends": "@haitch-ui/configs/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+  },
+  "files": [],
+  "include": [
+    "src"
+  ]
+}

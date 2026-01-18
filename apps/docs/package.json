@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.0",
-    "@haitch-ui/react-overlay": "workspace:*",
+    "@haitch-ui/react": "workspace:*",
     "@haitch-ui/ui": "workspace:*",
     "@tabler/icons-react": "^3.36.0",
     "class-variance-authority": "^0.7.1",

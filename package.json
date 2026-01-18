@@ -26,14 +26,7 @@
 		"vitest": "^4.0.16",
 		"@haitch-ui/configs": "workspace:*",
 		"@haitch-ui/tests": "workspace:*",
-		"@haitch-ui/react-compose-refs": "workspace:*",
-		"@haitch-ui/react-slot": "workspace:*",
-		"@haitch-ui/react-popover": "workspace:*",
-		"@haitch-ui/react-rect": "workspace:*",
-		"@haitch-ui/react-virtual-element": "workspace:*",
-		"@haitch-ui/react-overlay": "workspace:*",
-		"@haitch-ui/react-context-menu": "workspace:*",
-		"@haitch-ui/react-tooltip": "workspace:*"
+		"@haitch-ui/react": "workspace:*"
 	},
 	"overrides": {
 		"next": "16.0.10",
