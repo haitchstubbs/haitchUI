@@ -10,6 +10,7 @@
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types",
+		"ct": "turbo run check-types",
 		"test": "turbo run test",
 		"test:watch": "turbo run test:watch",
 		"sync:licenses": "node scripts/sync-licenses.mjs"

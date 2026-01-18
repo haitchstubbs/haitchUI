@@ -2,7 +2,7 @@
 
 import { useRef, useState, useLayoutEffect, type RefObject } from "react";
 
-import { DOM } from "@haitch-ui/react-overlay";
+import { DOM } from "@/primitives/overlay/src";
 
 /**
  * A `Rect` is the same shape as `RectLike`.

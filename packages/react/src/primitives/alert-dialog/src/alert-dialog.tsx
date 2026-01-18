@@ -5,7 +5,7 @@ import * as ReactDOM from "react-dom";
 
 import { Slot } from "@/primitives/slot/src";
 import { composeRefs } from "@/primitives/compose-refs/src";
-import { useOverlayDOMManager, type OverlayDOM } from "@haitch-ui/react-overlay";
+import { useOverlayDOMManager, type OverlayDOM } from "@/primitives/overlay/src";
 
 type AlertDialogContextValue = {
 	open: boolean;

@@ -1,5 +1,5 @@
 import { type Middleware, type Placement, type Strategy, useFloating, useInteractions } from "@floating-ui/react";
-import { type OverlayDOM } from "@haitch-ui/react-overlay";
+import { type OverlayDOM } from "@/primitives/overlay/src";
 import { type Rect } from "@floating-ui/react";
 import { type HTMLAttributes, type PropsWithChildren } from "react";
 export type Side = "top" | "right" | "bottom" | "left";

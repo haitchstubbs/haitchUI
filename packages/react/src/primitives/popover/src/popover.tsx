@@ -22,7 +22,7 @@ import {
 } from "@floating-ui/react";
 
 /** Primitive Imports */
-import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
+import { useOverlayDOMManager } from "@/primitives/overlay/src";
 import { Slot } from "@/primitives/slot/src";
 import { composeRefs } from "@/primitives/compose-refs/src";
 import type { VirtualElement } from "@haitch-ui/react-virtual-element";

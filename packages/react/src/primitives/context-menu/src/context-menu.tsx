@@ -19,7 +19,7 @@ import {
 } from "@floating-ui/react";
 import { Slot } from "@/primitives/slot/src";
 import { composeRefs } from "@/primitives/compose-refs/src";
-import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
+import { useOverlayDOMManager } from "@/primitives/overlay/src";
 
 export type Side = "top" | "right" | "bottom" | "left";
 export type Align = "start" | "center" | "end";
