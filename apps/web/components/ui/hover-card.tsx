@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as HoverCardPrimitive from "@haitch-ui/react-hover-card";
+import * as HoverCardPrimitive from "@haitch-ui/react/hover-card";
 
 import { cn } from "../../lib/util";
 

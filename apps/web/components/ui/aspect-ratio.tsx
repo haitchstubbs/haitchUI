@@ -1,6 +1,6 @@
 "use client"
 
-import * as AspectRatioPrimitive from "@haitch-ui/react-aspect-ratio"
+import * as AspectRatioPrimitive from "@haitch-ui/react/aspect-ratio"
 
 function AspectRatio({
   ...props

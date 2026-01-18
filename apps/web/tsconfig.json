@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@components/*": ["../../packages/components/src/*"]
+			"@components/*": ["../../packages/components/src/*"],
+			"@/*": ["./*"]
 		},
 		"plugins": [
 			{
@@ -11,6 +12,6 @@
 			}
 		]
 	},
-	"include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.mjss", ".next/types/**/*.ts"],
+	"include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.mjss", ".next/types/**/*.ts", "**/*.mdx"],
 	"exclude": ["node_modules"]
 }

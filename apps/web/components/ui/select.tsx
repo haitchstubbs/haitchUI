@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as SelectPrimitive from "@haitch-ui/react-select";
+import * as SelectPrimitive from "@haitch-ui/react/select";
 import { IconCheck, IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 import { cn } from "../../lib/util";

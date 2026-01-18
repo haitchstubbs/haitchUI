@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
-import { highlight } from "@haitch-ui/react-code-block/server";
+import { highlight } from "@haitch-ui/react/code-block/server";
 
 function isAllowedUiFile(filePath: string) {
 	if (filePath.includes("..")) return false;

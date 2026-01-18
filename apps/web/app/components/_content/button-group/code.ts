@@ -114,7 +114,7 @@ function Component() {
 
 export { Component, code }`;
 
-const bash = `npm install @haitch-ui/react-slot`;
+const bash = `npm install @haitch-ui/react`;
 
 const example1 = `import { MinusIcon, PlusIcon } from "lucide-react"
 

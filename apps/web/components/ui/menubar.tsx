@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as MenubarPrimitive from "@haitch-ui/react-menubar";
+import * as MenubarPrimitive from "@haitch-ui/react/menubar";
 import {
   IconCheck,
   IconChevronRight,
@@ -10,7 +10,7 @@ import {
 
 import { cn } from "../../lib/util";
 /**
- * Shadcn-style layer for @haitch-ui/react-menubar primitives.
+ * Shadcn-style layer for @haitch-ui/react/menubar primitives.
  * Mirrors shadcn/radix anatomy + data-slot attributes.
  *
  * Notes:
@@ -80,7 +80,7 @@ function MenubarTrigger({
 }
 
 /**
- * In @haitch-ui/react-menubar the "content" is composed as:
+ * In @haitch-ui/react/menubar the "content" is composed as:
  * Portal -> (optional Backdrop) -> Positioner -> Popup
  *
  * This wrapper keeps the shadcn name "MenubarContent" but renders the proper stack.

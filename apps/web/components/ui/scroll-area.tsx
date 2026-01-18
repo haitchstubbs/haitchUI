@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as ScrollAreaPrimitive from "@haitch-ui/react-scroll-area";
+import * as ScrollAreaPrimitive from "@haitch-ui/react/scroll-area";
 
 import { cn } from "../../lib/util";
 

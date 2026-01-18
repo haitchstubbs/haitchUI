@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as TreePrimitive from "@haitch-ui/react-tree";
+import * as TreePrimitive from "@haitch-ui/react/tree";
 import { IconChevronRight } from "@tabler/icons-react";
 
 import { cn } from "../../lib/util";

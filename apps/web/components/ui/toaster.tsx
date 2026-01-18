@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react";
 
 import { useTheme } from "next-themes";
-import { Toaster as HotToast, type ToasterProps } from "@haitch-ui/react-toast";
+import { Toaster as HotToast, type ToasterProps } from "@haitch-ui/react/toast";
 
 const Toaster = ({ ...props }: ToasterProps) => {
 	const { theme = "system" } = useTheme();

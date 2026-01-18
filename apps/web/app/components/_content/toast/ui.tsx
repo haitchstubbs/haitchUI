@@ -1,6 +1,6 @@
 "use client";
 
-import { toast } from "@haitch-ui/react-toast";
+import { toast } from "@haitch-ui/react/toast";
 
 import { Button } from "../../../../components/ui/button";
 import { useState } from "react";

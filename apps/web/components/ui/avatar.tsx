@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as AvatarPrimitive from "@haitch-ui/react-avatar"
+import * as AvatarPrimitive from "@haitch-ui/react/avatar"
 
 import { cn } from "../../lib/util"
 

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as TogglePrimitive from "@haitch-ui/react-toggle";
+import * as TogglePrimitive from "@haitch-ui/react/toggle";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "../../lib/util";

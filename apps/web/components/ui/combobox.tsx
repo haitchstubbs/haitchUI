@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { cn } from '../../lib/util';
-import * as ComboboxPrimitive from '@haitch-ui/react-combobox';
+import * as ComboboxPrimitive from '@haitch-ui/react/combobox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { IconCheck as Check, IconChevronDown as ChevronDown, IconX as X } from '@tabler/icons-react';
 

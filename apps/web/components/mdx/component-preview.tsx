@@ -1,5 +1,5 @@
 import * as React from "react";
-import { highlight } from "@haitch-ui/react-code-block/server";
+import { highlight } from "@haitch-ui/react/code-block/server";
 import CodeBlockDemoCard from "./markdown-component-preview";
 
 type MdxCodeDemoCardProps = {

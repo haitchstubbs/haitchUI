@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as SwitchPrimitive from "@haitch-ui/react-switch"
+import * as SwitchPrimitive from "@haitch-ui/react/switch"
 
 import { cn } from "../../lib/util"
 

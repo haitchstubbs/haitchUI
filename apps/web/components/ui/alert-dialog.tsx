@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as AlertDialogPrimitive from "@haitch-ui/react-alert-dialog"
+import * as AlertDialogPrimitive from "@haitch-ui/react/alert-dialog"
 
 import { cn } from "../../lib/util"
 import { buttonVariants } from "./button"

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as SheetPrimitive from "@haitch-ui/react-dialog"
+import * as SheetPrimitive from "@haitch-ui/react/dialog"
 import { IconX } from "@tabler/icons-react"
 
 import { cn } from "../../lib/util"

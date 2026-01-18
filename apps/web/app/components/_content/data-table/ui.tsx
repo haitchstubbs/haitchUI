@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { type ColumnDef } from "@haitch-ui/react-data-table";
+import { type ColumnDef } from "@haitch-ui/react/data-table";
 
 import { DataTable } from "../../../../components/ui/data-table";
 import { Badge } from "../../../../components/ui/badge";

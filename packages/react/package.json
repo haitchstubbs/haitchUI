@@ -11,6 +11,14 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
+		},
+		"./code-block/server": {
+			"types": "./dist/code-block/server.d.ts",
+			"default": "./dist/code-block/server.js"
+		},
+		"./*": {
+			"types": "./dist/*.d.ts",
+			"default": "./dist/*.js"
 		}
 	},
 	"main": "./dist/index.js",
