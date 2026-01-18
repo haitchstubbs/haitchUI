@@ -1,4 +1,4 @@
-import { nextJsConfig } from "@haitch-ui/eslint-config/next-js";
+import { eslintConfig } from "@haitch-ui/configs";
 
 /** @type {import("eslint").Linter.Config[]} */
-export default nextJsConfig;
+export default eslintConfig;

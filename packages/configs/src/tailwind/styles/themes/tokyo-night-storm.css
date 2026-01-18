@@ -1,0 +1,57 @@
+:host[data-theme="tokyo-night-storm"],
+.ui-root[data-theme="tokyo-night-storm"] {
+	--font-base: var(--font-geist-sans);
+
+	/* Radius: crisp, modern */
+	--radius-xs: 0.125rem; /* 2px */
+	--radius-sm: 0.3125rem; /* 5px */
+	--radius-md: 0.5625rem; /* 9px */
+	--radius-lg: 0.8125rem; /* 13px */
+	--radius-xl: 1.125rem; /* 18px */
+
+	/* Core */
+	--background: oklch(0.22 0.03 265); /* #1a1b26 */
+	--foreground: oklch(0.92 0.02 260); /* #c0caf5 */
+
+	--card: oklch(0.25 0.03 265); /* #24283b */
+	--card-foreground: oklch(0.92 0.02 260);
+
+	--popover: oklch(0.25 0.03 265);
+	--popover-foreground: oklch(0.92 0.02 260);
+
+	--primary: oklch(0.7 0.17 275); /* blue */
+	--primary-foreground: oklch(0.22 0.03 265);
+
+	--secondary: oklch(0.35 0.05 265);
+	--secondary-foreground: oklch(0.92 0.02 260);
+
+	--muted: oklch(0.32 0.04 265);
+	--muted-foreground: oklch(0.65 0.04 260);
+
+	--accent: oklch(0.75 0.18 305); /* purple */
+	--accent-foreground: oklch(0.22 0.03 265);
+
+	--destructive: oklch(0.62 0.2 25); /* red */
+
+	--border: oklch(0.32 0.04 265);
+	--input: oklch(0.32 0.04 265);
+	--ring: oklch(0.7 0.17 275);
+
+	/* Charts */
+	--chart-1: oklch(0.7 0.17 275); /* blue */
+	--chart-2: oklch(0.72 0.16 150); /* green */
+	--chart-3: oklch(0.78 0.14 80); /* yellow */
+	--chart-4: oklch(0.62 0.2 25); /* red */
+	--chart-5: oklch(0.75 0.18 305); /* purple */
+
+	/* Sidebar */
+	--sidebar: oklch(0.2 0.03 265);
+	--sidebar-foreground: oklch(0.92 0.02 260);
+	--sidebar-primary: oklch(0.7 0.17 275);
+	--sidebar-primary-foreground: oklch(0.22 0.03 265);
+	--sidebar-accent: oklch(0.35 0.05 265);
+	--sidebar-accent-foreground: oklch(0.92 0.02 260);
+	--sidebar-border: oklch(0.32 0.04 265);
+	--sidebar-ring: oklch(0.7 0.17 275);
+	color-scheme: dark;
+}

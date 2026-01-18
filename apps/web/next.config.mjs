@@ -103,6 +103,9 @@ const withMDX = createMDX({
 
 export default withMDX({
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+	experimental: {
+		externalDir: true,
+	},
 	images: {
 		remotePatterns: [
 			{

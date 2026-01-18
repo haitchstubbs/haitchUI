@@ -1,5 +1,7 @@
 # Slot
 
+Note - this package is now deprecated. Future releases will be included in @haitch-ui/react
+
 A **strict, compositional slot component** for React that safely forwards props, events, and refs to **exactly one valid child element**.
 
 Designed for design systems and headless UI components where you want to enhance or wrap a child element **without adding extra DOM nodes**, while keeping behavior predictable and explicit.

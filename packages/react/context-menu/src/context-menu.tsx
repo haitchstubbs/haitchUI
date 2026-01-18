@@ -14,16 +14,190 @@ import {
 	useTransitionStyles,
 	safePolygon,
 	useHover,
-	Placement,
-	MenuFocus,
-	type FloatingPlacement,
-	type Align,
-	type Side,
-	type SelectedState
-} from "@haitch-ui/react-core";
+	type Placement,
+	type VirtualElement
+} from "@floating-ui/react";
 import { Slot } from "@haitch-ui/react-slot";
 import { composeRefs } from "@haitch-ui/react-compose-refs";
 import { useOverlayDOMManager } from "@haitch-ui/react-overlay";
+
+export type Side = "top" | "right" | "bottom" | "left";
+export type Align = "start" | "center" | "end";
+
+export type SelectedState = boolean | "indeterminate";
+
+export class MenuFocus {
+	static isPrintableKey(e: React.KeyboardEvent): boolean {
+		return e.key.length === 1 && !e.altKey && !e.ctrlKey && !e.metaKey;
+	}
+	static items(root: HTMLElement | null): HTMLElement[] {
+		if (!root) return [];
+		const all = Array.from(root.querySelectorAll<HTMLElement>('[role="menuitem"],[role="menuitemcheckbox"],[role="menuitemradio"]'));
+
+		return all.filter((el) => {
+			const ariaDisabled = el.getAttribute("aria-disabled") === "true";
+			const dataDisabled = el.hasAttribute("data-disabled");
+			return !(ariaDisabled || dataDisabled);
+		});
+	}
+	static first(root: HTMLElement | null) {
+		const items = MenuFocus.items(root);
+		items[0]?.focus();
+	}
+	static next(root: HTMLElement | null, dir: 1 | -1) {
+		const items = MenuFocus.items(root);
+		if (items.length === 0) return;
+
+		const active = document.activeElement as HTMLElement | null;
+		const idx = active ? items.indexOf(active) : -1;
+
+		let nextIdx = idx;
+		for (let i = 0; i < items.length; i++) {
+			nextIdx = (nextIdx + dir + items.length) % items.length;
+			const next = items[nextIdx];
+			if (next) {
+				next.focus();
+				return;
+			}
+		}
+
+		items[0]?.focus();
+	}
+	static home(root: HTMLElement | null) {
+		const items = MenuFocus.items(root);
+		items[0]?.focus();
+	}
+	static end(root: HTMLElement | null) {
+		const items = MenuFocus.items(root);
+		items[items.length - 1]?.focus();
+	}
+	static typeahead(el: HTMLElement): string {
+		return (el.textContent ?? "").trim().toLowerCase();
+	}
+	static focusTypeAhead(root: HTMLElement | null, query: string) {
+		const items = MenuFocus.items(root);
+		if (items.length === 0) return;
+
+		const q = query.trim().toLowerCase();
+		if (!q) return;
+
+		const active = document.activeElement as HTMLElement | null;
+		const startIdx = active ? items.indexOf(active) : -1;
+
+		const ordered = startIdx >= 0 ? [...items.slice(startIdx + 1), ...items.slice(0, startIdx + 1)] : items;
+
+		for (const el of ordered) {
+			const txt = MenuFocus.typeahead(el);
+			if (txt.startsWith(q)) {
+				el.focus();
+				return;
+			}
+		}
+	}
+
+	static listboxItems(root: HTMLElement | null): HTMLElement[] {
+		if (!root) return [];
+		const all = Array.from(root.querySelectorAll<HTMLElement>('[role="option"]'));
+
+		return all.filter((el) => {
+			const ariaDisabled = el.getAttribute("aria-disabled") === "true";
+			const dataDisabled = el.hasAttribute("data-disabled");
+			return !(ariaDisabled || dataDisabled);
+		});
+	}
+
+	static listboxFirst(root: HTMLElement | null) {
+		const items = MenuFocus.listboxItems(root);
+		items[0]?.focus();
+	}
+
+	static listboxNext(root: HTMLElement | null, dir: 1 | -1) {
+		const items = MenuFocus.listboxItems(root);
+		if (items.length === 0) return;
+
+		const active = document.activeElement as HTMLElement | null;
+		const idx = active ? items.indexOf(active) : -1;
+
+		let nextIdx = idx;
+		for (let i = 0; i < items.length; i++) {
+			nextIdx = (nextIdx + dir + items.length) % items.length;
+			const next = items[nextIdx];
+			if (next) {
+				next.focus();
+				return;
+			}
+		}
+
+		items[0]?.focus();
+	}
+
+	static listboxHome(root: HTMLElement | null) {
+		const items = MenuFocus.listboxItems(root);
+		items[0]?.focus();
+	}
+
+	static listboxEnd(root: HTMLElement | null) {
+		const items = MenuFocus.listboxItems(root);
+		items[items.length - 1]?.focus();
+	}
+
+	static listboxTypeahead(el: HTMLElement): string {
+		// Prefer explicit data-text-value (Select.Item sets this), fallback to textContent
+		return (el.getAttribute("data-text-value") ?? el.textContent ?? "").trim().toLowerCase();
+	}
+
+	static listboxFocusTypeAhead(root: HTMLElement | null, query: string) {
+		const items = MenuFocus.listboxItems(root);
+		if (items.length === 0) return;
+
+		const q = query.trim().toLowerCase();
+		if (!q) return;
+
+		const active = document.activeElement as HTMLElement | null;
+		const startIdx = active ? items.indexOf(active) : -1;
+
+		const ordered = startIdx >= 0 ? [...items.slice(startIdx + 1), ...items.slice(0, startIdx + 1)] : items;
+
+		for (const el of ordered) {
+			const txt = MenuFocus.listboxTypeahead(el);
+			if (txt.startsWith(q)) {
+				el.focus();
+				return;
+			}
+		}
+	}
+}
+
+export class PlacementManager {
+	static fromSideAlign(side: Side, align: Align): Placement {
+		if (align === "center") return side;
+		return `${side}-${align}` as Placement;
+	}
+	static side(p: Placement): Side {
+		return p.split("-")[0] as Side;
+	}
+	static align(p: Placement): Align {
+		const parts = p.split("-");
+		return (parts[1] as Align) ?? "center";
+	}
+	static virtualPoint(x: number, y: number): VirtualElement {
+		return {
+			getBoundingClientRect() {
+				return {
+					x,
+					y,
+					width: 0,
+					height: 0,
+					top: y,
+					left: x,
+					right: x,
+					bottom: y,
+				} as DOMRect;
+			},
+		};
+	}
+}
+
 
 /* -------------------------------------------------------------------------------------------------
  * Root context
@@ -33,7 +207,7 @@ type RootCtx = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
 
-	placement: FloatingPlacement;
+	placement: Placement;
 	refs: ReturnType<typeof useFloating>["refs"];
 	floatingStyles: React.CSSProperties;
 	getReferenceProps: ReturnType<typeof useInteractions>["getReferenceProps"];
@@ -99,10 +273,10 @@ function Root(props: ContextMenuRootProps) {
 	const [radioValue, setRadioValue] = React.useState<string | null>(null);
 	const triggerElRef = React.useRef<HTMLElement | null>(null);
 
-	const placement = React.useMemo<FloatingPlacement>(() => {
+	const placement = React.useMemo<Placement>(() => {
 		const side = props.side ?? "right";
 		const align = props.align ?? "start";
-		return Placement.fromSideAlign(side, align);
+		return PlacementManager.fromSideAlign(side, align);
 	}, [props.side, props.align]);
 
 	const middleware = React.useMemo(() => {
@@ -215,7 +389,7 @@ const Trigger = React.forwardRef<HTMLElement, ContextMenuTriggerProps>(function 
 	const openAtPoint = (triggerEl: HTMLElement, x: number, y: number) => {
 		ctx.triggerElRef.current = triggerEl;
 		ctx.refs.setReference(triggerEl as unknown as Element);
-		ctx.refs.setPositionReference(Placement.virtualPoint(x, y));
+		ctx.refs.setPositionReference(PlacementManager.virtualPoint(x, y));
 		ctx.setOpen(true);
 	};
 
@@ -274,8 +448,8 @@ export type ContextMenuContentProps = React.HTMLAttributes<HTMLDivElement> & {
 const Content = React.forwardRef<HTMLDivElement, ContextMenuContentProps>(function Content({ style, children, onKeyDown, ...props }, forwardedRef) {
 	const ctx = useRoot();
 
-	const placementSide = Placement.side(ctx.placement);
-	const placementAlign = Placement.align(ctx.placement);
+	const placementSide = PlacementManager.side(ctx.placement);
+	const placementAlign = PlacementManager.align(ctx.placement);
 
 	const localRef = React.useRef<HTMLDivElement | null>(null);
 	const typeaheadRef = React.useRef<{ buffer: string; timer: number | null }>({

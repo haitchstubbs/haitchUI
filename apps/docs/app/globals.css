@@ -1,5 +1,4 @@
-@import "@haitch-ui/ui/styles/tokens.css";
-@import "tailwindcss";
+@import "@haitch-ui/configs/globals.css";
 @source "./**/*.{ts,tsx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 

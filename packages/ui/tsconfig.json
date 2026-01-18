@@ -1,5 +1,5 @@
 {
-  "extends": "@haitch-ui/typescript-config/react-library.json",
+  "extends": "@haitch-ui/configs/tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
         "module": "ESNext",

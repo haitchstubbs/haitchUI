@@ -44,12 +44,6 @@ export type {
  * ------------------------------------------------------------------------------------------------- */
 
 function Root(props: RootProps) {
-	if (process.env.NODE_ENV !== "production") {
-		if ("sideOffset" in props) {
-			// eslint-disable-next-line no-console
-			console.warn("Tree Root received sideOffset:", (props as any).sideOffset);
-		}
-	}
 	const {
 		// tree-only props (DO NOT forward to DOM)
 		selectionMode,

@@ -10,7 +10,7 @@ export default async function ComponentDocPage({ params }: { params: Promise<{ s
 	if (!entry) return notFound();
 
 	const mod = await entry.load();
-	const Docs = mod.Docs;
+	const Docs = await mod.loadDocs(); 
 
 	const basePath = `/components/${slug}`;
 

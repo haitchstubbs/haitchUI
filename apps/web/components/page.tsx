@@ -9,6 +9,8 @@ import { cn } from "../lib/util";
 import { IconLayoutSidebar } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import { AppCommandMenu } from "./app-command";
+import Image from "next/image";
+import { Logo } from "./logo/haitch-ui-logo";
 
 function getBreadcrumbData(pathname: string) {
 	const { isMobile, open } = useSidebar();
@@ -46,32 +48,20 @@ export function Page({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const { isMobile, open, section, pageTitle, pageSubtitle, useBreadcrumb } = getBreadcrumbData(pathname);
 	return (
-		<div className="flex h-full flex-col overflow-auto">
+		<div className="flex h-full flex-col overflow-auto min-w-0">
 			<header
 				className={cn(
-					"bg-sidebar flex h-16 shrink-0 items-center justify-between gap-2 antialiased sticky top-0 z-10 border-b border-border backdrop-blur-md"
+					"bg-sidebar flex h-16 shrink-0 items-center justify-between gap-2 antialiased sticky top-0 z-10 border-b border-border backdrop-blur-md",
 				)}
 			>
-				<div className="flex items-center gap-2 px-4">
-					{isMobile && (
-						<>
-							<SidebarTrigger />
-							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
-								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
-							</h1>
-						</>
-					)}
+				<div className="flex items-center gap-2 pr-4">
+					<div className="flex items-center justify-center w-(--sidebar-width) h-14 ">
+						<div className="rounded-full w-full p-1">
+							<Logo />
+						</div>
+					</div>
 					{useBreadcrumb && (
 						<>
-							<div className="block">
-								<Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
-							</div>
-
-							<h1>
-								<span className="font-mono text-2xl font-bold tracking-tight text-balance">@haitch-ui/</span>
-								<span className="font-mono text-2xl font-bold text-foreground/85 tracking-tight text-balance">ui</span>
-							</h1>
 							<Separator orientation="vertical" className="block shrink-0 mr-2 data-[orientation=vertical]:h-4" />
 							<Breadcrumb>
 								<BreadcrumbList>
@@ -95,18 +85,6 @@ export function Page({ children }: { children: React.ReactNode }) {
 			</header>
 
 			<div className="relative h-full w-full">
-				{!isMobile && (
-					<div
-						className={cn(
-							"fixed top-18 left-0 z-10 flex items-start overflow-visible",
-							"transition-transform duration-300 ease-[cubic-bezier(.2,.8,.2,1)]",
-							open ? "translate-x-[calc(var(--sidebar-width)+8px)]" : "translate-x-2"
-						)}
-					>
-						<SidebarTrigger />
-					</div>
-				)}
-				{/* Page content */}
 				{children}
 			</div>
 		</div>

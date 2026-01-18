@@ -17,12 +17,11 @@
   "types": "./dist/index.d.ts",
   "peerDependencies": {
     "react": ">=18",
-    "@haitch-ui/react-core": "workspace:*",
+    "react-dom": ">=18",
     "@haitch-ui/react-overlay": "workspace:*",
     "@haitch-ui/react-rect": "workspace:*"
   },
   "dependencies": {
-    "@haitch-ui/react-core": "workspace:*",
     "@haitch-ui/react-compose-refs": "workspace:*",
     "@haitch-ui/react-overlay": "workspace:*",
     "@haitch-ui/react-rect": "workspace:*"

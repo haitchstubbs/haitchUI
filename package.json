@@ -1,6 +1,7 @@
 {
 	"name": "@haitch-ui/monorepo",
-	"private": false,
+	"private": true,
+	"type": "module",
 	"license": "MIT",
 	"scripts": {
 		"build": "turbo run build",
@@ -9,10 +10,8 @@
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types",
-		"test": "turbo run test --filter=@haitch-ui/tests",
-		"test:watch": "turbo run test:watch --filter=@haitch-ui/tests",
-		"test:ui": "turbo run test --filter=@haitch-ui/tests",
-		"test:tests": "npm run -w @haitch-ui/tests test",
+		"test": "turbo run test",
+		"test:watch": "turbo run test:watch",
 		"sync:licenses": "node scripts/sync-licenses.mjs"
 	},
 	"devDependencies": {
@@ -23,9 +22,9 @@
 		"react-dom": "19.2.0",
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
-		"@haitch-ui/eslint-config": "workspace:*",
-		"@haitch-ui/typescript-config": "workspace:*",
-		"@haitch-ui/core": "workspace:*",
+		"@testing-library/jest-dom": "^6.9.1",
+		"vitest": "^4.0.16",
+		"@haitch-ui/configs": "workspace:*",
 		"@haitch-ui/tests": "workspace:*",
 		"@haitch-ui/react-compose-refs": "workspace:*",
 		"@haitch-ui/react-slot": "workspace:*",

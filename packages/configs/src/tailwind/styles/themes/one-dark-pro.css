@@ -1,0 +1,57 @@
+:host[data-theme="one-dark-pro"],
+.ui-root[data-theme="one-dark-pro"] {
+	--font-base: var(--font-geist-sans);
+
+	/* Radius: slightly crisper (One Dark suits tighter corners) */
+	--radius-xs: 0.125rem; /* 2px */
+	--radius-sm: 0.3125rem; /* 5px */
+	--radius-md: 0.5625rem; /* 9px */
+	--radius-lg: 0.8125rem; /* 13px */
+	--radius-xl: 1.125rem; /* 18px */
+
+	/* One Dark palette mapped to UI tokens */
+	--background: oklch(0.293 0.016 264.3); /* #282C34 */
+	--foreground: oklch(0.762 0.02 263); /* #ABB2BF */
+
+	--card: oklch(0.313 0.021 265.9); /* #2C313C */
+	--card-foreground: oklch(0.762 0.02 263);
+
+	--popover: oklch(0.313 0.021 265.9);
+	--popover-foreground: oklch(0.762 0.02 263);
+
+	--primary: oklch(0.73 0.121 245.3); /* blue #61AFEF */
+	--primary-foreground: oklch(0.293 0.016 264.3);
+
+	--secondary: oklch(0.386 0.024 265.7); /* #3E4451 */
+	--secondary-foreground: oklch(0.762 0.02 263);
+
+	--muted: oklch(0.386 0.024 265.7);
+	--muted-foreground: oklch(0.498 0.022 262.9); /* comment #5C6370 */
+
+	--accent: oklch(0.694 0.164 318.2); /* magenta #C678DD */
+	--accent-foreground: oklch(0.293 0.016 264.3);
+
+	--destructive: oklch(0.671 0.145 17); /* red #E06C75 */
+
+	--border: oklch(0.386 0.024 265.7 / 0.65);
+	--input: oklch(0.386 0.024 265.7 / 0.85);
+	--ring: oklch(0.656 0.183 262.7); /* accent #528BFF */
+
+	/* Charts: classic One Dark accents */
+	--chart-1: oklch(0.73 0.121 245.3); /* blue */
+	--chart-2: oklch(0.768 0.11 133); /* green */
+	--chart-3: oklch(0.825 0.097 82.3); /* yellow */
+	--chart-4: oklch(0.671 0.145 17); /* red */
+	--chart-5: oklch(0.694 0.164 318.2); /* magenta */
+
+	/* Sidebar */
+	--sidebar: oklch(0.263 0.013 258.4); /* #21252B */
+	--sidebar-foreground: oklch(0.762 0.02 263);
+	--sidebar-primary: oklch(0.656 0.183 262.7); /* #528BFF */
+	--sidebar-primary-foreground: oklch(0.293 0.016 264.3);
+	--sidebar-accent: oklch(0.386 0.024 265.7);
+	--sidebar-accent-foreground: oklch(0.762 0.02 263);
+	--sidebar-border: oklch(0.386 0.024 265.7 / 0.55);
+	--sidebar-ring: oklch(0.656 0.183 262.7);
+	color-scheme: dark;
+}

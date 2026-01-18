@@ -44,10 +44,10 @@ export function Providers({
 				//"dark"
 				//"dark"
 				//"stone-light"
-				"stone-dark"
+				//"stone-dark"
 				//"neutral-light"
 				//"neutral-dark"
-				//"synthwave74"
+				//"synthwave84"
 				//"dracula"
 				//"nord"
 				//"one-dark-pro"
@@ -58,6 +58,8 @@ export function Providers({
 				//"motherduck-brutalist-dark"
 				//"cyberpunk-light"
 				//"cyberpunk-dark"
+				// "lantern-light"
+				 "lantern-dark"
 			}
 			className={cn(" ui-root root h-screen w-screen text-foreground bg-background antialiased", fontVariables)}
 		>

@@ -1,4 +1,4 @@
-import { config } from "@haitch-ui/eslint-config/react-internal";
+import { eslintConfig } from "@haitch-ui/configs";
 
 /** @type {import("eslint").Linter.Config} */
-export default config;
+export default eslintConfig;

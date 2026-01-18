@@ -2,14 +2,11 @@
 
 /** React Imports */
 import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
-
-/** @haitch-ui/react-core Imports */
 import {
 	// Types
 	type Alignment as Align,
 	type Side,
 	type Middleware as FloatingMiddleware,
-	type ReferenceElement as FloatingReference,
 	type ReferenceType,
 	// Hooks
 	autoUpdate,

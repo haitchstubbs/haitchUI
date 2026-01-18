@@ -1,0 +1,63 @@
+:host[data-theme="brutalist-black"],
+.ui-root[data-theme="brutalist-black"] {
+	--font-base: var(--font-geist-mono);
+
+	/* Radius: brutalist, angular, capped */
+	--radius-xs: 0; /* checkboxes, indicators */
+	--radius-sm: 0.125rem; /* 2px – inputs, buttons */
+	--radius-md: 0.1875rem; /* 3px – menus */
+	--radius-lg: 0.25rem; /* 4px – cards */
+	--radius-xl: 0.25rem; /* 4px – modals (no extra softness) */
+
+	/* Core surfaces */
+	--background: oklch(0.12 0 0); /* near-black */
+	--foreground: oklch(0.96 0 0); /* near-white */
+
+	--card: oklch(0.16 0 0);
+	--card-foreground: oklch(0.96 0 0);
+
+	--popover: oklch(0.16 0 0);
+	--popover-foreground: oklch(0.96 0 0);
+
+	/* Functional colors (high contrast, minimal hue) */
+	--primary: oklch(0.92 0 0); /* white actions */
+	--primary-foreground: oklch(0.12 0 0);
+
+	--secondary: oklch(0.22 0 0);
+	--secondary-foreground: oklch(0.96 0 0);
+
+	--muted: oklch(0.2 0 0);
+	--muted-foreground: oklch(0.65 0 0);
+
+	/* Accent: single industrial warning tone */
+	--accent: oklch(0.7 0.18 40); /* construction orange */
+	--accent-foreground: oklch(0.12 0 0);
+
+	--destructive: oklch(0.62 0.22 25); /* hazard red */
+
+	/* Lines are bold in brutalism */
+	--border: oklch(0.35 0 0);
+	--input: oklch(0.35 0 0);
+	--ring: oklch(0.92 0 0);
+
+	/* Charts: stark, utilitarian */
+	--chart-1: oklch(0.92 0 0); /* white */
+	--chart-2: oklch(0.7 0.18 40); /* orange */
+	--chart-3: oklch(0.65 0 0); /* gray */
+	--chart-4: oklch(0.62 0.22 25); /* red */
+	--chart-5: oklch(0.55 0 0); /* darker gray */
+
+	/* Sidebar: deeper void */
+	--sidebar: oklch(0.1 0 0);
+	--sidebar-foreground: oklch(0.96 0 0);
+
+	--sidebar-primary: oklch(0.92 0 0);
+	--sidebar-primary-foreground: oklch(0.1 0 0);
+
+	--sidebar-accent: oklch(0.7 0.18 40);
+	--sidebar-accent-foreground: oklch(0.1 0 0);
+
+	--sidebar-border: oklch(0.35 0 0);
+	--sidebar-ring: oklch(0.92 0 0);
+	color-scheme: dark;
+}

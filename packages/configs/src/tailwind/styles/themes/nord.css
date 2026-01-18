@@ -1,0 +1,57 @@
+:host[data-theme="nord"],
+.ui-root[data-theme="nord"] {
+	--font-base: var(--font-geist-sans);
+
+	/* Radius: calm + modern (Nord suits soft surfaces) */
+	--radius-xs: 0.125rem; /* 2px */
+	--radius-sm: 0.375rem; /* 6px */
+	--radius-md: 0.625rem; /* 10px */
+	--radius-lg: 0.875rem; /* 14px */
+	--radius-xl: 1.25rem; /* 20px */
+
+	/* Nord palette mapped to UI tokens */
+	--background: oklch(0.324 0.023 264.2); /* nord0 #2E3440 */
+	--foreground: oklch(0.948 0.011 263); /* nord6 #ECEFF4 */
+
+	--card: oklch(0.379 0.029 266.5); /* nord1 #3B4252 */
+	--card-foreground: oklch(0.948 0.011 263);
+
+	--popover: oklch(0.379 0.029 266.5);
+	--popover-foreground: oklch(0.948 0.011 263);
+
+	--primary: oklch(0.781 0.067 206.6); /* nord8 #88C0D0 */
+	--primary-foreground: oklch(0.324 0.023 264.2);
+
+	--secondary: oklch(0.416 0.032 264.1); /* nord2 #434C5E */
+	--secondary-foreground: oklch(0.948 0.011 263);
+
+	--muted: oklch(0.416 0.032 264.1);
+	--muted-foreground: oklch(0.874 0.013 264); /* nord4 #D8DEE9 */
+
+	--accent: oklch(0.719 0.061 248.8); /* nord9 #81A1C1 */
+	--accent-foreground: oklch(0.324 0.023 264.2);
+
+	--destructive: oklch(0.592 0.101 15.5); /* nord11 #BF616A */
+
+	--border: oklch(0.416 0.032 264.1 / 0.55);
+	--input: oklch(52.45% 0.04185 266.359 / 0.75);
+	--ring: oklch(0.781 0.067 206.6);
+
+	/* Charts: frost + aurora */
+	--chart-1: oklch(0.781 0.067 206.6); /* nord8 */
+	--chart-2: oklch(0.784 0.073 132); /* nord14 #A3BE8C */
+	--chart-3: oklch(0.865 0.083 83); /* nord13 #EBCB8B */
+	--chart-4: oklch(0.592 0.101 15.5); /* nord11 #BF616A */
+	--chart-5: oklch(0.69 0.08 319); /* nord15 #B48EAD */
+
+	/* Sidebar */
+	--sidebar: oklch(0.293 0.016 258.4); /* slightly darker: #21252B-ish vibe */
+	--sidebar-foreground: oklch(0.948 0.011 263);
+	--sidebar-primary: oklch(0.781 0.067 206.6);
+	--sidebar-primary-foreground: oklch(0.324 0.023 264.2);
+	--sidebar-accent: oklch(0.416 0.032 264.1);
+	--sidebar-accent-foreground: oklch(0.948 0.011 263);
+	--sidebar-border: oklch(0.416 0.032 264.1 / 0.45);
+	--sidebar-ring: oklch(0.781 0.067 206.6);
+	color-scheme: dark;
+}
