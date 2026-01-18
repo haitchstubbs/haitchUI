@@ -7,10 +7,8 @@
 // - Slot is exported from "./Slot" (adjust import as needed)
 
 import React from "react";
-import { describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom"; // Add this import for jest-dom matchers
 import { Slot } from "./slot";
 
 describe("Slot", () => {
@@ -168,8 +166,6 @@ describe("Slot", () => {
 
 		fireEvent.click(getA("button"));
 		expect(onChildClick).toHaveBeenCalledTimes(1);
-
-		cleanup(); // ✅ remove previous render from the DOM
 
 		const { getByRole: getB } = render(
 			<Slot onClick={onSlotClick}>

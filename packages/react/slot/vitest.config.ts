@@ -1,21 +1,12 @@
-import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import path from "node:path";
+import { defineConfig, mergeConfig } from "vitest/config";
+import { vitestBaseConfig } from "@haitch-ui/tests/vitest-config";
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@ui": path.resolve(__dirname, "../packages/ui"),
-      "@haitch-ui/ui": path.resolve(__dirname, "../ui/src/index.ts"),
+export default mergeConfig(
+  vitestBaseConfig,
+  defineConfig({
+    // package-specific config here (if any)
+    test: {
+      include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     },
-  },
-  test: {
-    environment: "jsdom",
-    setupFiles: ["./vitest.setup.ts"],
-    globals: true,
-    restoreMocks: true,
-    clearMocks: true,
-    mockReset: true,
-  },
-});
+  })
+);

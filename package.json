@@ -1,6 +1,6 @@
 {
 	"name": "@haitch-ui/monorepo",
-	"private": false,
+	"private": true,
 	"license": "MIT",
 	"scripts": {
 		"build": "turbo run build",
@@ -9,10 +9,8 @@
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types",
-		"test": "turbo run test --filter=@haitch-ui/tests",
-		"test:watch": "turbo run test:watch --filter=@haitch-ui/tests",
-		"test:ui": "turbo run test --filter=@haitch-ui/tests",
-		"test:tests": "npm run -w @haitch-ui/tests test",
+		"test": "turbo run test",
+		"test:watch": "turbo run test:watch",
 		"sync:licenses": "node scripts/sync-licenses.mjs"
 	},
 	"devDependencies": {

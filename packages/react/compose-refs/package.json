@@ -47,6 +47,7 @@
 		"@testing-library/react": "^16.3.1",
 		"@testing-library/user-event": "^14.6.1",
 		"@vitejs/plugin-react": "^5.1.2",
+		"@haitch-ui/tests/vitest-config": "workspace:*",
 		"axe-core": "^4.11.0",
 		"eslint": "^9.39.1",
 		"jsdom": "^27.3.0",
