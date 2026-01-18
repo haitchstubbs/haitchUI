@@ -5,13 +5,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hicklebirry/haitchUI.git",
+    "url": "git+https://github.com/haitchstubbs/haitchUI.git",
     "directory": "packages/react/slot"
   },
   "bugs": {
-    "url": "https://github.com/hicklebirry/haitchUI/issues"
+    "url": "https://github.com/haitchstubbs/haitchUI/issues"
   },
-  "homepage": "https://github.com/hicklebirry/haitchUI#readme",
+  "homepage": "https://github.com/haitchstubbs/haitchUI#readme",
   "keywords": ["react", "slot", "headless-ui", "design-system", "compound-components", "ref"],
   "type": "module",
   "sideEffects": false,
