@@ -1,3 +1,5 @@
-import tsConfig from "../tsconfig/base.json" assert { type: "json" };
+import { createRequire } from "node:module";
 
-export { tsConfig };
+const require = createRequire(import.meta.url);
+
+export const tsConfig = require("../tsconfig/base.json");

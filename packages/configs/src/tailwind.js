@@ -1,1 +1,1 @@
-export { uiTailwindPreset as tailwindConfig } from "@haitch-ui/tailwind-config/preset";
+export { tailwindConfig } from "./tailwind/preset.js";

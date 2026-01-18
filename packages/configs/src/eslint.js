@@ -1,6 +1,6 @@
-import { config as baseConfig } from "@haitch-ui/eslint-config/base";
-import { nextJsConfig } from "@haitch-ui/eslint-config/next-js";
-import { config as reactInternalConfig } from "@haitch-ui/eslint-config/react-internal";
+import { config as baseConfig } from "./eslint/base.js";
+import { nextJsConfig } from "./eslint/next.js";
+import { config as reactInternalConfig } from "./eslint/react-internal.js";
 
 const applyFiles = (configs, files) =>
   configs.map((config) => (config.ignores ? config : { ...config, files }));
