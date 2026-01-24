@@ -1,0 +1,11 @@
+{
+    "extends": "@haitch-ui/configs/tsconfig/react-library.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@haitch-ui/keybinder": ["src/index.ts"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "exclude": ["node_modules", "dist", "example"]
+}

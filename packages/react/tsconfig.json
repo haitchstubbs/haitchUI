@@ -4,9 +4,15 @@
     "rootDir": "src",
     "outDir": "dist",
     "jsx": "react-jsx",
-    		"baseUrl": ".",
+		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@haitch-ui/react/*": [
+				"./src/*/src/index.ts",
+				"./src/*/src/index.tsx",
+				"./src/*/src/server.ts",
+				"./src/*/src/server.tsx"
+			]
 		},
   },
   "files": [],

@@ -32,7 +32,7 @@ export function Toc({
 	containerId?: string;
 	selector?: string;
 }) {
-	const { items, activeId, linkFor } = useToc({
+	const { items, activeId, linkFor, isHidden } = useToc({
 		basePath,
 		containerId,
 		selector,
@@ -69,8 +69,8 @@ export function Toc({
 	if (!items.length) return null;
 
 	return (
-		<aside className="hidden lg:block fixed top-24 right-9">
-			<nav aria-label="On this page" className="text-sm w-(--sidebar-width) mr-1">
+		<aside className="fixed right-0 flex w-(--sidebar-width) flex-col items-end">
+			<nav aria-label="On this page" className="text-sm w-(--sidebar-width) mr-1 sticky top-24 right-9">
 				<div className="font-medium text-muted-foreground p-3">On this page:</div>
 
 				<ul className="space-y-1 p-3">

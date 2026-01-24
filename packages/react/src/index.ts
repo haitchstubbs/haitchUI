@@ -1,7 +1,7 @@
-export * as Accordion from "./accordion/src";
-export * as AlertDialog from "./alert-dialog/src";
-export * as AspectRatio from "./aspect-ratio/src";
-export * as Avatar from "./avatar/src";
+export * as Accordion from "./primitives/accordion";
+export * as AlertDialog from "./primitives/alert-dialog";
+export * as AspectRatio from "./primitives/aspect-ratio";
+export * as Avatar from "./primitives/avatar";
 export * as Carousel from "./carousel/src";
 export * as CodeBlock from "./code-block/src";
 export * as Collapsible from "./collapsible/src";

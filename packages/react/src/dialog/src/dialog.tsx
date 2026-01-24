@@ -18,7 +18,7 @@ import {
 
 import { Slot } from "@/slot/src";
 import { composeRefs } from "@/compose-refs/src";
-import { useOverlayDOMManager, type OverlayDOM } from "@/overlay/src";
+import { useOverlayDOMManager, type OverlayDOM } from "@haitch-ui/react/overlay";
 
 type DialogContextValue = {
 	open: boolean;

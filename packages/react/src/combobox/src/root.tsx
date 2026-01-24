@@ -16,7 +16,7 @@ import {
 	type Placement as FloatingPlacement,
 	type Side,
 } from "@floating-ui/react";
-import { useOverlayDOMManager } from "@/overlay/src";
+import { useOverlayDOMManager } from "@haitch-ui/react/overlay";
 
 import { useControllableBoolean, useControllableString, useControllableValue } from "./controllable";
 import { clampIndex, findNextEnabledIndex, normalizeTextValue } from "./events";
