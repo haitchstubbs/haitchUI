@@ -36,7 +36,11 @@ Designed for design systems and headless UI components where you want to enhance
 ## Installation
 
 ```bash
-npm i @haitch-ui/react-slot
+npm i @haitch-ui/react
+```
+
+```tsx
+import { Slot } from "@haitch-ui/react/slot
 ```
 
 ---
@@ -233,7 +237,7 @@ Supported events are **composed**, not overridden:
 
 Output:
 
-```
+```txt
 child
 slot
 ```
@@ -366,7 +370,7 @@ Becomes:
 <button disabled aria-label="Save" />
 ```
 
-**Prop precedence**
+#### Prop precedence
 
 * Slot props override child props by default
 * Exceptions: `className`, `style`, event handlers
