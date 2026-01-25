@@ -1,10 +1,5 @@
 {
-  "entryPoints": [
-    "src/**/index.ts",
-    "src/**/index.tsx",
-    "src/types/index.ts"
-  ],
-  "entryPointStrategy": "expand",
+  "entryPoints": ["src/index.ts"],
   "tsconfig": "tsconfig.json",
   "out": "docs"
 }
