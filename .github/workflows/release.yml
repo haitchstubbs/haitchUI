@@ -11,44 +11,70 @@ permissions:
   id-token: write
 
 jobs:
-  release:
+  changesets:
     runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.changesets.outputs.hasChangesets == 'false' && steps.changesets.outputs.published == 'false' }}
+      # NOTE: outputs from changesets/action are a bit quirky; we won't rely on this for correctness.
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      # Changesets either:
-      # - opens/updates a Release PR (runs `version`)
-      # - or publishes (runs `publish`) after the Release PR is merged
-      - name: Create Release PR or Publish
+      - name: Create Release PR (or noop)
         id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
-          publish: pnpm changeset publish --provenance
+          # IMPORTANT: do NOT publish in this job
+          publish: echo "Publishing happens in the publish job"
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
+          createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Only run the heavy stuff when we are actually publishing
-      - name: Validate + Build + Docs (turbo)
-        if: steps.changesets.outputs.published == 'true'
+  publish:
+    # Only run on main when there are NO pending changesets
+    # i.e. this is the “post-merge of Release PR” state.
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: changesets
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build + Test + Docs (turbo)
         run: pnpm turbo run test test:coverage build typedoc --filter=@haitch-ui/react...
+
+      - name: Publish to npm (changesets)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm changeset publish --provenance
