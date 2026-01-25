@@ -63,3 +63,5 @@ export function CollapsibleAlt() {
     </Collapsible>
   )
 }
+
+export const Primary = CollapsibleAlt;

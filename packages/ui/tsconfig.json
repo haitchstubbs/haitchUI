@@ -2,8 +2,20 @@
   "extends": "@haitch-ui/configs/tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
-        "module": "ESNext",
-    "moduleResolution": "Bundler"
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@haitch-ui/react": ["../react/src/index.ts"],
+      "@haitch-ui/react/*": [
+        "../react/src/primitives/*/index.ts",
+        "../react/src/primitives/*/index.tsx",
+        "../react/src/primitives/*/src/index.ts",
+        "../react/src/primitives/*/src/index.tsx",
+        "../react/src/*/index.ts",
+        "../react/src/*/index.tsx"
+      ]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
