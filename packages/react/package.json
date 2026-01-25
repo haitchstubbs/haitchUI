@@ -31,6 +31,7 @@
 		"react-dom": ">=18"
 	},
 	"dependencies": {
+		"@floating-ui/react": "^0.26.0",
 		"@tanstack/react-table": "^8.21.3",
 		"@tanstack/react-virtual": "^3.13.18",
 		"shiki": "^3.20.0"
