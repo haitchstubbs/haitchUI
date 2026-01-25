@@ -156,7 +156,7 @@ describe("Slot", () => {
 		const onChildClick = vi.fn();
 		const onSlotClick = vi.fn();
 
-		const { getByRole: getA } = render(
+		const { getByRole: getA, unmount } = render(
 			<Slot>
 				<button onClick={onChildClick} type="button">
 					ok
@@ -166,6 +166,8 @@ describe("Slot", () => {
 
 		fireEvent.click(getA("button"));
 		expect(onChildClick).toHaveBeenCalledTimes(1);
+
+		unmount();
 
 		const { getByRole: getB } = render(
 			<Slot onClick={onSlotClick}>

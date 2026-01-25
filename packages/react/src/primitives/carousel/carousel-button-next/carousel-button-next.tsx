@@ -13,6 +13,7 @@ const Next = forwardRef<HTMLButtonElement, ButtonProps>(function CarouselNext(
     return (
         <Comp
             ref={forwardedRef}
+            {...props}
             type="button"
             aria-label={props["aria-label"] ?? "Next slide"}
             disabled={disabled ?? !engine.canScrollNext}
@@ -21,7 +22,6 @@ const Next = forwardRef<HTMLButtonElement, ButtonProps>(function CarouselNext(
                 if (e.defaultPrevented) return;
                 engine.api.scrollNext();
             }}
-            {...props}
         />
     );
 });

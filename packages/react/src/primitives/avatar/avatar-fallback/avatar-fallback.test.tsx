@@ -18,16 +18,6 @@ vi.mock("../hooks/useAvatarFallback", () => ({
     useAvatarFallbackVisibleMock(status, delayMs),
 }));
 
-// Mock Slot so we can assert asChild rendering deterministically
-vi.mock("@/slot/src/slot", () => ({
-  Slot: React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
-    function MockSlot(props, ref) {
-      // behave like a simple element that forwards props/ref
-      return <span data-slot="true" ref={ref as any} {...props} />;
-    },
-  ),
-}));
-
 // Import AFTER mocks
 import { Fallback } from "./avatar-fallback"; // <-- adjust path to where Fallback is exported
 
@@ -90,11 +80,13 @@ describe("Avatar.Fallback primitive", () => {
   it("renders Slot when asChild is true (and is visible)", () => {
     useAvatarFallbackVisibleMock.mockReturnValue(true);
 
-    render(<Fallback asChild data-testid="fb" />);
+    render(
+      <Fallback asChild data-testid="fb">
+        <span />
+      </Fallback>,
+    );
 
     const el = screen.getByTestId("fb");
-    // Our Slot mock renders as a span with data-slot="true"
-    expect(el).toHaveAttribute("data-slot", "true");
     expect(el.tagName.toLowerCase()).toBe("span");
   });
 
@@ -102,11 +94,14 @@ describe("Avatar.Fallback primitive", () => {
     useAvatarFallbackVisibleMock.mockReturnValue(true);
 
     const ref = React.createRef<HTMLSpanElement>();
-    render(<Fallback asChild ref={ref} data-testid="fb" />);
+    render(
+      <Fallback asChild ref={ref} data-testid="fb">
+        <span />
+      </Fallback>,
+    );
 
     expect(ref.current).not.toBeNull();
     expect(ref.current).toBe(screen.getByTestId("fb"));
-    expect(ref.current).toHaveAttribute("data-slot", "true");
   });
 
   it("uses the engine loadingStatus returned from useAvatarContext", () => {

@@ -14,15 +14,6 @@ vi.mock("../hooks/useAvatar", () => ({
     useAvatarMock(opts),
 }));
 
-// Mock Slot to make asChild deterministic
-vi.mock("@/slot/src/slot", () => ({
-  Slot: React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
-    function MockSlot(props, ref) {
-      return <span data-slot="true" ref={ref as any} {...props} />;
-    },
-  ),
-}));
-
 // Import AFTER mocks
 import { Root } from "./avatar-root"; // <-- adjust path
 import { AvatarContext, useAvatarContext } from "../avatar-context"; // if useAvatarContext exists
@@ -75,12 +66,14 @@ describe("Avatar.Root primitive", () => {
 
     useAvatarMock.mockReturnValue(avatar);
 
-    render(<Root asChild data-testid="root" />);
+    render(
+      <Root asChild data-testid="root">
+        <div />
+      </Root>,
+    );
 
     const el = screen.getByTestId("root");
-    // Slot mock renders <span data-slot="true" />
-    expect(el.tagName.toLowerCase()).toBe("span");
-    expect(el).toHaveAttribute("data-slot", "true");
+    expect(el.tagName.toLowerCase()).toBe("div");
   });
 
   it("provides the avatar engine via AvatarContext.Provider", () => {

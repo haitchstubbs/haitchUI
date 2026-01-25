@@ -83,7 +83,7 @@ const useCarouselSpy = vi.fn(() => engineMock);
 
 vi.mock("../hooks/useCarousel", () => {
   return {
-    useCarousel: () => useCarouselSpy(),
+    useCarousel: (options: any) => useCarouselSpy(options),
   };
 });
 

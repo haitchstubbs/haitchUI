@@ -2,16 +2,10 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Providers } from "./providers";
-
-import { cookies } from "next/headers";
 import { AppSidebar } from "../components/app-sidebar";
-import { SidebarInset, SidebarTrigger } from "../components/ui/sidebar";
-import { Separator } from "@haitch-ui/ui";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../components/ui/breadcrumb";
+import { SidebarInset } from "../components/ui/sidebar";
 import { data } from "../lib/navigation";
 import { Page } from "../components/page";
-import { ObservabilityRoot, ObsProfiler } from "../components/observability";
-import { Toaster } from "../components/ui/toaster";
 
 export const metadata: Metadata = {
 	title: "Create Next App",

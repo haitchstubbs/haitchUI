@@ -217,9 +217,9 @@ describe("<Content />", () => {
     expect(clones.length).toBe(4); // 2 before + 2 after
 
     // sanity: originals still exist once each by testid
-    expect(screen.getByTestId("item-0")).toBeInTheDocument();
-    expect(screen.getByTestId("item-1")).toBeInTheDocument();
-    expect(screen.getByTestId("item-2")).toBeInTheDocument();
+    expect(host.querySelector('[data-testid="item-0"]:not([data-carousel-clone])')).toBeTruthy();
+    expect(host.querySelector('[data-testid="item-1"]:not([data-carousel-clone])')).toBeTruthy();
+    expect(host.querySelector('[data-testid="item-2"]:not([data-carousel-clone])')).toBeTruthy();
   });
 
   it("caps clones at realCount (n = min(loopClones, realCount))", () => {

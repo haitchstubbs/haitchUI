@@ -12,12 +12,6 @@ vi.mock("../avatar-context", () => ({
 	useAvatarContext: (component: string) => useAvatarContextMock(component),
 }));
 
-vi.mock("@/slot/src/slot", () => ({
-	Slot: React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(function MockSlot(props, ref) {
-		return <span data-slot="true" ref={ref as any} {...props} />;
-	}),
-}));
-
 import { Image } from "./avatar-image"; // adjust if needed
 
 describe("Avatar.Image primitive", () => {
@@ -100,11 +94,14 @@ describe("Avatar.Image primitive", () => {
 
 		useAvatarContextMock.mockReturnValue(engine);
 
-		render(<Image asChild data-testid="img" />);
+		render(
+			<Image asChild data-testid="img" alt="x">
+				<img />
+			</Image>
+		);
 
 		const el = screen.getByTestId("img");
-		expect(el.tagName.toLowerCase()).toBe("span");
-		expect(el).toHaveAttribute("data-slot", "true");
+		expect(el.tagName.toLowerCase()).toBe("img");
 	});
 
 	it("uses the ref callback returned by engine.getImageProps (and receives the DOM node)", () => {

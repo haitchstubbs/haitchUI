@@ -37,6 +37,10 @@
 		"dev": "tsup --watch",
 		"check-types": "tsc -p tsconfig.json --noEmit",
 		"lint": "eslint .",
-		"test": "vitest run"
+		"test": "vitest run",
+		"test:coverage": "vitest run --coverage"
+	},
+	"devDependencies": {
+		"@vitest/coverage-v8": "4.0.16"
 	}
 }

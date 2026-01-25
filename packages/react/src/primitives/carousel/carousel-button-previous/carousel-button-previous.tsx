@@ -13,6 +13,7 @@ const Previous = forwardRef<HTMLButtonElement, ButtonProps>(function CarouselPre
     return (
         <Comp
             ref={forwardedRef}
+            {...props}
             type="button"
             aria-label={props["aria-label"] ?? "Previous slide"}
             disabled={disabled ?? !engine.canScrollPrev}
@@ -21,7 +22,6 @@ const Previous = forwardRef<HTMLButtonElement, ButtonProps>(function CarouselPre
                 if (e.defaultPrevented) return;
                 engine.api.scrollPrev();
             }}
-            {...props}
         />
     );
 });
