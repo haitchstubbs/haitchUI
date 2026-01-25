@@ -11,70 +11,51 @@ permissions:
   id-token: write
 
 jobs:
-  changesets:
+  release:
     runs-on: ubuntu-latest
-    outputs:
-      should_publish: ${{ steps.changesets.outputs.hasChangesets == 'false' && steps.changesets.outputs.published == 'false' }}
-      # NOTE: outputs from changesets/action are a bit quirky; we won't rely on this for correctness.
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      # ✅ Do NOT specify pnpm version here; rely on package.json packageManager
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
           registry-url: "https://registry.npmjs.org"
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
-      - name: Create Release PR (or noop)
+      # ✅ Always safe to run. If there are changesets, this creates/updates the Release PR and exits without publishing.
+      # ✅ If there are NO changesets (post-merge of Release PR), we proceed to build + publish.
+      - name: Create Release PR or decide publish
         id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
-          # IMPORTANT: do NOT publish in this job
-          publish: echo "Publishing happens in the publish job"
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
-          createGithubReleases: false
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish:
-    # Only run on main when there are NO pending changesets
-    # i.e. this is the “post-merge of Release PR” state.
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    needs: changesets
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-          registry-url: "https://registry.npmjs.org"
-
-      - run: pnpm install --frozen-lockfile
-
+      # Only do heavy work when we're in the "publish" state:
+      # changesets/action sets `hasChangesets` true when it found changesets (i.e. it will create/update the PR)
+      # When there are NO changesets, that's the post-merge state → publish.
       - name: Build + Test + Docs (turbo)
+        if: steps.changesets.outputs.hasChangesets == 'false'
         run: pnpm turbo run test test:coverage build typedoc --filter=@haitch-ui/react...
 
       - name: Publish to npm (changesets)
+        if: steps.changesets.outputs.hasChangesets == 'false'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm changeset publish --provenance
