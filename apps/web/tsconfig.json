@@ -4,7 +4,16 @@
 		"baseUrl": ".",
 		"paths": {
 			"@components/*": ["../../packages/components/src/*"],
-			"@/*": ["./*"]
+			"@/*": ["./*"],
+			"@haitch-ui/react": ["../../packages/react/src/index.ts"],
+			"@haitch-ui/react/*": [
+				"../../packages/react/src/primitives/*/index.ts",
+				"../../packages/react/src/primitives/*/index.tsx",
+				"../../packages/react/src/primitives/*/src/index.ts",
+				"../../packages/react/src/primitives/*/src/index.tsx",
+				"../../packages/react/src/*/index.ts",
+				"../../packages/react/src/*/index.tsx"
+			]
 		},
 		"plugins": [
 			{
