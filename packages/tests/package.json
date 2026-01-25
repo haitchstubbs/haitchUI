@@ -5,12 +5,13 @@
 	"type": "module",
 	"sideEffects": false,
 	"exports": {
-		"./vitest-config": "./vitest.config.ts",
+		"./vitest-config": "./vitest.config.js",
 		"./vitest-setup": "./vitest.setup.ts",
 		"./vitest-axe": "./vitest-axe.d.ts"
 	},
 	"files": [
 		"vitest.config.ts",
+		"vitest.config.js",
 		"vitest.setup.ts",
 		"vitest-axe.d.ts"
 	],
