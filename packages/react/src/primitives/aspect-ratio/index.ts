@@ -1,3 +1,4 @@
 "use client";
 
-export * from "./aspect-ratio.js";
+export { Root as AspectRatio } from "./aspect-ratio-root";
+export type { AspectRatioElement, PrimitiveDivProps as AspectRatioElementProps, AspectRatioProps } from "./types";

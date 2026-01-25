@@ -1,8 +1,8 @@
 import React from "react";
 import { AlertDialogContext } from "../alert-dialog-context";
 import type { AlertDialogRootProps, AlertDialogContextValue } from "../types";
-import { useOverlayDOMManager } from "@/overlay/src";
-import {useControllableState} from "@/hooks/useControllableState";
+import { useOverlayDOMManager } from "@/primitives/overlay";
+import {useControllableState} from "@/primitives/hooks/useControllableState";
 import { usePresence } from "../hooks/usePresence";
 import { getFocusableWithin } from "../lib/getFocusableWithin"
 
@@ -19,7 +19,7 @@ export function Root({
 	const dom = manager.dom;
 
 	const [open, setOpen] = useControllableState({
-		value: controlledOpen ?? false,
+		value: controlledOpen,
 		defaultValue: defaultOpen ?? false,
 		...(onOpenChange ? { onChange: onOpenChange } : {}),
 	});

@@ -1,1 +1,1 @@
-export * from "./alert-dialog-context";
+export {AlertDialogContext, useAlertDialogContext} from "./alert-dialog-context";

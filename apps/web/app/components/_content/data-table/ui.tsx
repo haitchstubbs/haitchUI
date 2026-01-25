@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { type ColumnDef } from "@haitch-ui/react/data-table";
+import { type DataTableColumn } from "@haitch-ui/react/data-table";
 
 import { DataTable } from "../../../../components/ui/data-table";
 import { Badge } from "../../../../components/ui/badge";
@@ -115,7 +115,7 @@ const initialData: User[] = Array.from({ length: 500 }, () => {
 export function Primary() {
 	const [data, setData] = React.useState<User[]>(initialData);
 
-	const columns = React.useMemo<ColumnDef<User>[]>(
+	const columns = React.useMemo<DataTableColumn<User>[]>(
 		() => [
 			{
 				accessorKey: "avatar",

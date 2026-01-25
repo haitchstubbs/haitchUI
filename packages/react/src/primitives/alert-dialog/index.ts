@@ -1,34 +1,29 @@
 "use client";
 
-import * as AlertDialogAction from "./alert-dialog-action"
-import * as AlertDialogCancel from "./alert-dialog-cancel"
-import * as AlertDialogContent from "./alert-dialog-content"
-import * as AlertDialogDescription from "./alert-dialog-description"
-import * as AlertDialogTitle from "./alert-dialog-title"
-import * as AlertDialogRoot from "./alert-dialog-root"
-import * as AlertDialogTrigger from "./alert-dialog-trigger"
-import * as AlertDialogContext from "./alert-dialog-context"
-import * as AlertDialogHeader from "./alert-dialog-header"
-import * as AlertDialogFooter from "./alert-dialog-footer"
-import * as AlertDialogOverlay from "./alert-dialog-overlay"
-import * as AlertDialogPortal from "./alert-dialog-portal"
+export { Root as AlertDialogRoot } from "./alert-dialog-root";
+export { Trigger as AlertDialogTrigger } from "./alert-dialog-trigger";
+export { Portal as AlertDialogPortal } from "./alert-dialog-portal";
+export { Overlay as AlertDialogOverlay } from "./alert-dialog-overlay";
+export { Content as AlertDialogContent } from "./alert-dialog-content";
+export { Header as AlertDialogHeader } from "./alert-dialog-header";
+export { Footer as AlertDialogFooter } from "./alert-dialog-footer";
+export { Title as AlertDialogTitle } from "./alert-dialog-title";
+export { Description as AlertDialogDescription } from "./alert-dialog-description";
+export { Action as AlertDialogAction } from "./alert-dialog-action";
+export { Cancel as AlertDialogCancel } from "./alert-dialog-cancel";
 
-import * as AlertDialogTypes from "./types"
+export type {
+	AlertDialogContextValue,
+	AlertDialogRootProps,
+	AlertDialogTriggerProps,
+	AlertDialogPortalProps,
+	AlertDialogContentProps,
+	AlertDialogHeaderProps,
+	AlertDialogFooterProps,
+	AlertDialogTitleProps,
+	AlertDialogDescriptionProps,
+	AlertDialogActionProps,
+	AlertDialogCancelProps,
+} from "./types";
 
-
-
-export {
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogTitle,
-    AlertDialogRoot,
-    AlertDialogTrigger,
-    AlertDialogTypes,
-    AlertDialogContext,
-    AlertDialogHeader,
-    AlertDialogFooter,
-    AlertDialogOverlay,
-    AlertDialogPortal,
-}
+export { AlertDialogContext, useAlertDialogContext } from "./alert-dialog-context";

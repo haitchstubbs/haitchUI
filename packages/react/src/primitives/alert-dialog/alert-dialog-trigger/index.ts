@@ -1,1 +1,1 @@
-export * from "./alert-dialog-trigger"
+export { Trigger } from "./alert-dialog-trigger";

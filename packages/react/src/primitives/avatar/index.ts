@@ -1,10 +1,18 @@
-// packages/react/avatar/index.ts
-export { Avatar, Root, Image, Fallback } from "./avatar";
-export type { RootProps, ImageProps, FallbackProps } from "./avatar";
+export { AvatarContext, useAvatarContext } from "./avatar-context";
+export { AvatarFallback } from "./avatar-fallback";
+export { AvatarImage } from "./avatar-image";
+export { AvatarRoot } from "./avatar-root";
+export { useAvatarFallbackVisible } from "./hooks/useAvatarFallback";
+export { useAvatar } from "./hooks/useAvatar";
 
-export {
-	useAvatarEngine,
-	useAvatarFallbackVisible,
-	type AvatarEngine,
-	type AvatarLoadingStatus,
-} from "./engine";
+export type {
+	AvatarLoadingStatus,
+	UseAvatarOptions,
+	AvatarContextProps,
+	RootElement as AvatarRootElement,
+	RootProps as AvatarRootProps,
+	ImageElement as AvatarImageElement,
+	ImageProps as AvatarImageProps,
+	FallbackElement as AvatarFallbackElement,
+	FallbackProps as AvatarFallbackProps,
+} from "./types";

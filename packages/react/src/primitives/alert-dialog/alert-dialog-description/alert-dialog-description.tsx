@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { useAlertDialogContext } from "../alert-dialog-context";
-import { Slot } from "@/slot/src/slot";
+import { Slot } from "@/primitives/slot/slot";
 import type { AlertDialogDescriptionProps } from "../types";
 
 export const Description = forwardRef<HTMLParagraphElement, AlertDialogDescriptionProps>(function Description({ asChild, ...props }, forwardedRef) {

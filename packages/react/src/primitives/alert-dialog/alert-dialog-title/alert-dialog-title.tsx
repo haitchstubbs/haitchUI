@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { AlertDialogTitleProps } from "../types";
 import { useAlertDialogContext } from "../alert-dialog-context";
-import { Slot } from "@/slot/src/slot";
+import { Slot } from "@/primitives/slot/slot";
 
 
 export const Title = forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(function Title(

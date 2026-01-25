@@ -1,1 +1,1 @@
-export * from "./alert-dialog-content"
+export { Content } from "./alert-dialog-content";

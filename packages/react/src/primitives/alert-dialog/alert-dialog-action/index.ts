@@ -1,1 +1,1 @@
-export * from "./alert-dialog-action"
+export { Action } from "./alert-dialog-action";

@@ -24,7 +24,7 @@ function getBreadcrumbData(pathname: string) {
 	const subsection = pathSegments[1];
 
 	const pageTitle = isHomePage
-		? "@haitch-ui/ui"
+		? "@haitch-ui"
 		: // Capitalize
 			section && section.charAt(0).toUpperCase() + section.slice(1);
 	const pageSubtitle = isHomePage

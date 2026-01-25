@@ -1,1 +1,1 @@
-export * from './alert-dialog-portal'
+export { Portal } from "./alert-dialog-portal";

@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import type { KeyboardEvent } from "react";
 import { Portal } from "../alert-dialog-portal";
-import { composeRefs } from "@/compose-refs/src";
+import { composeRefs } from "@/utils/compose-refs";
 import { useAlertDialogContext } from "../alert-dialog-context";
-import type { AlertDialogContentProps } from "../types/types";
+import type { AlertDialogContentProps } from "../types";
 import { getFocusableWithin } from "../lib/getFocusableWithin";
 import { Overlay } from "../alert-dialog-overlay";
 

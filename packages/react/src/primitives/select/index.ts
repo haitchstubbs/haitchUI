@@ -1,0 +1,38 @@
+"use client";
+
+export {
+	Root as SelectRoot,
+	Trigger as SelectTrigger,
+	Icon as SelectIcon,
+	Value as SelectValue,
+	Portal as SelectPortal,
+	Content as SelectContent,
+	Viewport as SelectViewport,
+	Group as SelectGroup,
+	Label as SelectLabel,
+	Item as SelectItem,
+	ItemText as SelectItemText,
+	ItemIndicator as SelectItemIndicator,
+	Separator as SelectSeparator,
+	ScrollUpButton as SelectScrollUpButton,
+	ScrollDownButton as SelectScrollDownButton,
+} from "./select";
+export type {
+	SelectValue as SelectValueType,
+	SelectPosition,
+	Align as SelectAlign,
+	RootProps as SelectRootProps,
+	TriggerProps as SelectTriggerProps,
+	ValueProps as SelectValueProps,
+	PortalProps as SelectPortalProps,
+	ContentProps as SelectContentProps,
+	ViewportProps as SelectViewportProps,
+	GroupProps as SelectGroupProps,
+	LabelProps as SelectLabelProps,
+	ItemProps as SelectItemProps,
+	ItemTextProps as SelectItemTextProps,
+	ItemIndicatorProps as SelectItemIndicatorProps,
+	SeparatorProps as SelectSeparatorProps,
+	ScrollButtonProps as SelectScrollButtonProps,
+	IconProps as SelectIconProps,
+} from "./select";

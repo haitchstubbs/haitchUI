@@ -1,4 +1,4 @@
-import type { OverlayDOM } from "@/overlay/src";
+import type { OverlayDOM } from "@/primitives/overlay";
 
 type AlertContainer = Element | null;
 type AsChild = { asChild?: boolean };

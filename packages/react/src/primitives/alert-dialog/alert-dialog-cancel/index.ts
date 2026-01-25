@@ -1,1 +1,1 @@
-export * from "./alert-dialog-cancel";
+export { Cancel } from "./alert-dialog-cancel";

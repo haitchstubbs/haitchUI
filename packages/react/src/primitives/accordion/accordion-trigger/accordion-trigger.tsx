@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@/slot/src";
+import { Slot } from "@/primitives/slot";
 import { useAccordionItemCtx, useAccordionRootCtx } from "../accordion-context";
 import type { TriggerProps } from "../accordion-types";
 
@@ -16,8 +16,8 @@ export const Trigger = React.forwardRef<HTMLButtonElement, TriggerProps>(functio
 	{ asChild = false, onClick, ...props },
 	ref
 ) {
-	const root = useAccordionRootCtx();
-	const item = useAccordionItemCtx();
+	const root = useAccordionRootCtx("Accordion.Trigger");
+	const item = useAccordionItemCtx("Accordion.Trigger");
 
 	const Comp: any = asChild ? Slot : "button";
 

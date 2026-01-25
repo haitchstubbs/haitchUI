@@ -1,1 +1,1 @@
-export * from "./accordion-root"
+export { Root } from "./accordion-root";

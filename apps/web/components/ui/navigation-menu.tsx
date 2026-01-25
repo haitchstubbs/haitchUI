@@ -15,12 +15,12 @@ function NavigationMenu({
   children,
   viewport = true, // keep for API parity with shadcn; we only use it for data attributes/styles
   ...props
-}: Omit<React.ComponentProps<typeof Haitch.Navbar>, "className"> & {
+}: Omit<React.ComponentProps<typeof Haitch.NavigationBar>, "className"> & {
   viewport?: boolean
   className?: Haitch.NavbarProps["className"]
 }) {
   return (
-    <Haitch.Navbar
+    <Haitch.NavigationBar
       data-slot="navigation-menu"
       data-viewport={viewport}
       className={(state) =>
@@ -32,7 +32,7 @@ function NavigationMenu({
       {...props}
     >
       {children}
-    </Haitch.Navbar>
+    </Haitch.NavigationBar>
   )
 }
 
@@ -72,11 +72,11 @@ function NavigationMenuItem({
 function NavigationMenuDropdown({
   className,
   ...props
-}: Omit<React.ComponentProps<typeof Haitch.NavMenu.Root>, "className"> & {
+}: Omit<React.ComponentProps<typeof Haitch.NavigationMenu.Root>, "className"> & {
   className?: Haitch.NavMenuRootProps["className"]
 }) {
   return (
-    <Haitch.NavMenu.Root
+    <Haitch.NavigationMenu.Root
       data-slot="navigation-menu-dropdown"
       className={(state) =>
         cn("relative", typeof className === "function" ? className(state) : className)
@@ -102,7 +102,7 @@ function NavigationMenuTrigger({
   className?: Haitch.NavTriggerProps["className"]
 }) {
   return (
-    <Haitch.NavMenu.Trigger
+    <Haitch.NavigationMenu.Trigger
       data-slot="navigation-menu-trigger"
       className={(state) =>
         cn(
@@ -118,7 +118,7 @@ function NavigationMenuTrigger({
         className="relative top-px ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
-    </Haitch.NavMenu.Trigger>
+    </Haitch.NavigationMenu.Trigger>
   )
 }
 
@@ -138,8 +138,8 @@ function NavigationMenuContent({
   className?: Haitch.NavContentProps["className"]
 }) {
   return (
-    <Haitch.NavMenu.Portal>
-      <Haitch.NavMenu.Positioner
+    <Haitch.NavigationMenu.Portal>
+      <Haitch.NavigationMenu.Positioner
         className={(state) =>
           cn(
             // make sure it’s above headers etc.
@@ -148,7 +148,7 @@ function NavigationMenuContent({
           )
         }
       >
-        <Haitch.NavMenu.Content
+        <Haitch.NavigationMenu.Content
           data-slot="navigation-menu-content"
           className={(state) =>
             cn(
@@ -166,8 +166,8 @@ function NavigationMenuContent({
           }
           {...props}
         />
-      </Haitch.NavMenu.Positioner>
-    </Haitch.NavMenu.Portal>
+      </Haitch.NavigationMenu.Positioner>
+    </Haitch.NavigationMenu.Portal>
   )
 }
 
@@ -188,7 +188,7 @@ function NavigationMenuLink({
   className?: Haitch.NavLinkProps["className"]
 }) {
   return (
-    <Haitch.NavMenu.Link
+    <Haitch.NavigationMenu.Link
       data-slot="navigation-menu-link"
       className={(state) =>
         cn(

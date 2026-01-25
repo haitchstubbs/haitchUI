@@ -1,1 +1,1 @@
-export * from "./accordion-trigger";
+export { Trigger } from "./accordion-trigger";

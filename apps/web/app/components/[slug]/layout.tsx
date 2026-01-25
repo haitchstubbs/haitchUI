@@ -1,12 +1,14 @@
 'use client';
-import { useSidebar } from "@/components/ui/sidebar";
+import { OverlayDOMProvider } from "@haitch-ui/react/overlay";
 import { cn } from "@/lib/util";
 import { DocsProvider } from "./docs-context";
 
 export default function ComponentPageLayout({ children }: { children: React.ReactNode }) {
 	return (
-        <DocsProvider>
-            <div className={cn('w-full')}>{children}</div>
-        </DocsProvider>
-    );
+		<OverlayDOMProvider>
+			<DocsProvider>
+				<div className={cn("w-full")}>{children}</div>
+			</DocsProvider>
+		</OverlayDOMProvider>
+	);
 }

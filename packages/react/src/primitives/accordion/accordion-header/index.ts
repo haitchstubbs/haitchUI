@@ -1,1 +1,1 @@
-export * from "./accordion-header"
+export { Header } from "./accordion-header";

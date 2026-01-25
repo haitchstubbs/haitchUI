@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import { useAlertDialogContext } from "../alert-dialog-context";
 import type { AlertDialogActionProps } from "../types";
-import { Slot } from "@/slot/src";
+import { Slot } from "@/primitives/slot";
 
-const Action = forwardRef<HTMLElement, AlertDialogActionProps>(function Action({ asChild, onClick, children, ...props }, forwardedRef) {
+export const Action = forwardRef<HTMLElement, AlertDialogActionProps>(function Action({ asChild, onClick, children, ...props }, forwardedRef) {
 	const { setOpen, disabled } = useAlertDialogContext("AlertDialog.Action");
 
 	const handleClick = (e: React.MouseEvent<HTMLElement>) => {

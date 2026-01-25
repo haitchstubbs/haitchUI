@@ -1,1 +1,1 @@
-export * from "./alert-dialog-root"
+export { Root } from "./alert-dialog-root";

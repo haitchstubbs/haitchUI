@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@/slot/src/slot";
-import { useAccordionItemCtx, useAccordionRootCtx } from "../accordion-context";
+import { Slot } from "@/primitives/slot/slot";
+import { useAccordionItemContext, useAccordionRootContext } from "../accordion-context";
 import type { ContentProps } from "../accordion-types";
+import { useAccordionRootCtx } from "../accordion-context/accordion-context";
 
 function dataState(open: boolean) {
 	return open ? "open" : "closed";
@@ -16,8 +17,8 @@ export const Content = React.forwardRef<HTMLDivElement, ContentProps>(function C
 	{ asChild = false, forceMount = false, style, hidden, ...props },
 	ref
 ) {
-	const root = useAccordionRootCtx();
-	const item = useAccordionItemCtx();
+	const root = useAccordionRootContext('Accordion.Content');
+	const item = useAccordionItemContext('Accordion.Content');
 
 	const Comp: any = asChild ? Slot : "div";
 

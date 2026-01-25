@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import type { AlertDialogCancelProps } from "../types";
 import { useAlertDialogContext } from "../alert-dialog-context";
-import { composeRefs } from "@/compose-refs/src";
-import { Slot } from "@/slot/src";
+import { composeRefs } from "@/utils/compose-refs";
+import { Slot } from "@/primitives/slot";
 
 export const Cancel = forwardRef<HTMLElement, AlertDialogCancelProps>(function Cancel(
 	{ asChild, onClick, children, ...props },

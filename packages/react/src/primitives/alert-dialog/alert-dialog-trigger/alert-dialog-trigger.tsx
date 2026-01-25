@@ -1,9 +1,9 @@
 import type { AlertDialogTriggerProps } from "../types";
 import { forwardRef } from "react";
 import type {MouseEvent, HTMLAttributes, ButtonHTMLAttributes, Ref} from "react";
-import { Slot } from "@/slot/src";
+import { Slot } from "@/primitives/slot";
 import { useAlertDialogContext } from "../alert-dialog-context";
-import { composeRefs } from "@/compose-refs/src";
+import { composeRefs } from "@/utils/compose-refs";
 export const Trigger = forwardRef<HTMLElement, AlertDialogTriggerProps>(function Trigger(
 	{ asChild, onClick, children, ...props },
 	forwardedRef

@@ -1,1 +1,1 @@
-export * from "./alert-dialog-footer"
+export { Footer } from "./alert-dialog-footer";

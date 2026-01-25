@@ -1,1 +1,1 @@
-export * from "./accordion-content"
+export { Content } from "./accordion-content";

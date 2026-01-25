@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@/slot/src";
-import { useAccordionItemCtx, useAccordionRootCtx } from "../accordion-context";
+import { Slot } from "@/primitives/slot";
+import { useAccordionItemContext, useAccordionRootContext } from "../accordion-context";
 import type { HeaderProps } from "../accordion-types";
 
 function dataState(open: boolean) {
@@ -12,12 +12,12 @@ function dataAttrDisabled(disabled: boolean) {
 	return disabled ? "" : undefined;
 }
 
-export const Header = React.forwardRef<HTMLElement, HeaderProps>(function Header(
+const Header = React.forwardRef<HTMLElement, HeaderProps>(function Header(
 	{ asChild = false, ...props },
 	ref
 ) {
-	const root = useAccordionRootCtx();
-	const item = useAccordionItemCtx();
+	const root = useAccordionRootContext('Accordion.Header');
+	const item = useAccordionItemContext('Accordion.Header');
 
 	const Comp: any = asChild ? Slot : "h3";
 
@@ -32,3 +32,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(function Header
 		/>
 	);
 });
+
+Header.displayName = "Accordion.Header";
+
+export { Header };

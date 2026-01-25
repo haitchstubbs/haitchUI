@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { PerfTable, type ColumnDef, type Row } from "@haitch-ui/react/data-table";
+import { DataTable as DataTablePrimitive, type DataTableColumn, type DataTableRow } from "@haitch-ui/react/data-table";
 
 import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from "./table";
 
@@ -11,7 +11,7 @@ import { Checkbox } from "./checkbox";
 
 export type DataTableProps<TData> = {
 	data: TData[];
-	columns: ColumnDef<TData, any>[];
+	columns: DataTableColumn<TData, any>[];
 
 	className?: string;
 	containerClassName?: string;
@@ -22,10 +22,10 @@ export type DataTableProps<TData> = {
 	empty?: React.ReactNode;
 	caption?: React.ReactNode;
 
-	onRowClick?: (row: Row<TData>) => void;
+	onRowClick?: (row: DataTableRow<TData>) => void;
 
-	rowClassName?: (row: Row<TData>) => string | undefined;
-	cellClassName?: (opts: { row: Row<TData>; columnId: string }) => string | undefined;
+	rowClassName?: (row: DataTableRow<TData>) => string | undefined;
+	cellClassName?: (opts: { row: DataTableRow<TData>; columnId: string }) => string | undefined;
 
 	virtualize?: "on" | "off" | "auto";
 	virtualizeThreshold?: number;
@@ -33,7 +33,7 @@ export type DataTableProps<TData> = {
 	overscan?: number;
 	measureElement?: boolean;
 
-	getRowId?: (originalRow: TData, index: number, parent?: Row<TData>) => string;
+	getRowId?: (originalRow: TData, index: number, parent?: DataTableRow<TData>) => string;
 	rowSelectable?: boolean;
 
 	/** Controlled selection (optional) */
@@ -92,7 +92,7 @@ export function DataTable<TData>({
 	);
 
 	return (
-		<PerfTable.Root
+		<DataTablePrimitive.Root
 			data={data}
 			columns={columns}
 			getRowId={getRowId}
@@ -118,7 +118,7 @@ export function DataTable<TData>({
 				empty={empty}
 				caption={caption}
 			/>
-		</PerfTable.Root>
+		</DataTablePrimitive.Root>
 	);
 }
 
@@ -130,7 +130,7 @@ function PerfTableUI<TData>(props: {
 	empty: React.ReactNode;
 	caption?: React.ReactNode;
 }) {
-	const { table, rows, virtualEnabled, virtualItems, totalSize } = PerfTable.useContext<TData>();
+	const { table, rows, virtualEnabled, virtualItems, totalSize } = DataTablePrimitive.useContext<TData>();
 
 	const colSpan = table.getAllLeafColumns().length + (props.enableRowSelection ? 1 : 0);
 
@@ -170,7 +170,7 @@ function PerfTableUI<TData>(props: {
 							) : null}
 
 							{hg.headers.map((header) => (
-								<TableHead key={header.id}>{header.isPlaceholder ? null : PerfTable.renderHeader(header)}</TableHead>
+								<TableHead key={header.id}>{header.isPlaceholder ? null : DataTablePrimitive.renderHeader(header)}</TableHead>
 							))}
 						</TableRow>
 					))}
@@ -205,7 +205,7 @@ function PerfTableUI<TData>(props: {
 									) : null}
 
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>{PerfTable.renderCell(cell)}</TableCell>
+										<TableCell key={cell.id}>{DataTablePrimitive.renderCell(cell)}</TableCell>
 									))}
 								</TableRow>
 							))}
@@ -225,7 +225,7 @@ function PerfTableUI<TData>(props: {
 							<TableRow key={fg.id}>
 								{fg.headers.map((header) => (
 									<TableCell key={header.id} className="font-medium">
-										{header.isPlaceholder ? null : PerfTable.renderFooter(header)}
+										{header.isPlaceholder ? null : DataTablePrimitive.renderFooter(header)}
 									</TableCell>
 								))}
 							</TableRow>

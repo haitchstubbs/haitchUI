@@ -1,1 +1,1 @@
-export * from "./alert-dialog-header"
+export { Header } from "./alert-dialog-header";

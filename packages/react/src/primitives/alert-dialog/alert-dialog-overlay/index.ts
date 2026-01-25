@@ -1,1 +1,1 @@
-export * from "./alert-dialog-overlay"
+export { Overlay } from "./alert-dialog-overlay";

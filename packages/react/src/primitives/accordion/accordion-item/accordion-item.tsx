@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@/slot/src";
-import { AccordionItemContext, useAccordionRootCtx } from "../accordion-context";
+import { Slot } from "@/primitives/slot";
+import { AccordionItemContext, useAccordionItemContext, useAccordionRootContext, type AccordionItemCtx } from "../accordion-context";
 import type { ItemProps } from "../accordion-types";
 
 function dataState(open: boolean) {
@@ -12,11 +12,11 @@ function dataAttrDisabled(disabled: boolean) {
 	return disabled ? "" : undefined;
 }
 
-export const Item = React.forwardRef<HTMLElement, ItemProps>(function Item(
+const Item = React.forwardRef<HTMLElement, ItemProps>(function Item(
 	{ asChild = false, value, disabled: disabledProp = false, ...props },
 	ref
 ) {
-	const root = useAccordionRootCtx();
+	const root = useAccordionRootContext('Accordion.Item');
 
 	const disabled = root.disabled || disabledProp;
 	const open = root.isItemOpen(value);
@@ -24,7 +24,7 @@ export const Item = React.forwardRef<HTMLElement, ItemProps>(function Item(
 	const triggerId = root.getTriggerId(value);
 	const contentId = root.getContentId(value);
 
-	const ctx = React.useMemo(
+	const ctx: AccordionItemCtx = React.useMemo(
 		() => ({ value, open, disabled, triggerId, contentId }),
 		[value, open, disabled, triggerId, contentId]
 	);
@@ -44,3 +44,7 @@ export const Item = React.forwardRef<HTMLElement, ItemProps>(function Item(
 		</AccordionItemContext.Provider>
 	);
 });
+
+Item.displayName = "Accordion.Item";
+
+export { Item };

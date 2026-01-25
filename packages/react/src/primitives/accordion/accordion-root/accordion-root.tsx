@@ -1,17 +1,16 @@
 "use client";
-
-import * as React from "react";
-import { Slot } from "@/slot/src";
+import { useId, forwardRef, useCallback, useMemo } from "react";
+import { Slot } from "@/primitives/slot";
 import { FloatingTree, useFloatingNodeId, useFloatingTree, type FloatingTreeType } from "@floating-ui/react";
-import { useControllableState } from "@/hooks/useControllableState";
-import { AccordionRootContext, type AccordionType } from "../accordion-context";
-import type { RootProps } from "../accordion-types";
+import { useControllableState } from "@/primitives/hooks/useControllableState";
+import { AccordionRootContext } from "../accordion-context";
+import type { RootProps, } from "../accordion-types";
 
 function dataAttrDisabled(disabled: boolean) {
 	return disabled ? "" : undefined;
 }
 
-const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(props, ref) {
+const RootImpl = forwardRef<HTMLElement, RootProps>(function RootImpl(props, ref) {
 	const {
 		asChild = false,
 		disabled = false,
@@ -26,7 +25,7 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 	} = props;
 
 	const tree = useFloatingTree();
-	const nodeId = useFloatingNodeId() ?? React.useId();
+	const nodeId = useFloatingNodeId() ?? useId();
 
 	// normalize
 	const collapsible = type === "single" ? !!collapsibleProp : true;
@@ -50,14 +49,14 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 	}
 	const [multiValue, setMultiValue] = useControllableState<string[]>(multiStateProps);
 
-	const isItemOpen = React.useCallback(
+	const isItemOpen = useCallback(
 		(v: string) => {
 			return type === "single" ? singleValue === v : multiValue.includes(v);
 		},
 		[type, singleValue, multiValue]
 	);
 
-	const openItem = React.useCallback(
+	const openItem = useCallback(
 		(v: string) => {
 			if (disabled) return;
 
@@ -73,7 +72,7 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 		[disabled, type, setSingleValue, setMultiValue, tree, nodeId]
 	);
 
-	const closeItem = React.useCallback(
+	const closeItem = useCallback(
 		(v: string) => {
 			if (disabled) return;
 
@@ -91,7 +90,7 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 		[disabled, type, singleValue, collapsible, setSingleValue, setMultiValue, tree, nodeId]
 	);
 
-	const toggleItem = React.useCallback(
+	const toggleItem = useCallback(
 		(v: string) => {
 			if (isItemOpen(v)) closeItem(v);
 			else openItem(v);
@@ -100,15 +99,15 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 	);
 
 	// ids per item value
-	const idBase = React.useId();
-	const getTriggerId = React.useCallback((v: string) => `${idBase}-trigger-${v}`, [idBase]);
-	const getContentId = React.useCallback((v: string) => `${idBase}-content-${v}`, [idBase]);
+	const idBase = useId();
+	const getTriggerId = useCallback((v: string) => `${idBase}-trigger-${v}`, [idBase]);
+	const getContentId = useCallback((v: string) => `${idBase}-content-${v}`, [idBase]);
 
 	// Optional: Tree listener (kept conservative)
 	// We do NOT auto-close siblings here because Root state already governs it.
 	// This is mainly to satisfy "FloatingTree usage" and enable future cross-root behaviors.
 
-	const ctx = React.useMemo(
+	const ctx = useMemo(
 		() => ({
 			type,
 			orientation,
@@ -143,7 +142,7 @@ const RootImpl = React.forwardRef<HTMLElement, RootProps>(function RootImpl(prop
 	);
 });
 
-export const Root = React.forwardRef<HTMLElement, RootProps>(function Root(props, ref) {
+export const Root = forwardRef<HTMLElement, RootProps>(function Root(props, ref) {
 	// ✅ ensure tree exists for all descendants
 	return (
 		<FloatingTree>
