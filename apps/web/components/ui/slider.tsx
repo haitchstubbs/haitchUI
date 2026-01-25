@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import * as SliderPrimitive from "@haitch-ui/react-slider"
+import * as SliderPrimitive from "@haitch-ui/react/slider"
 
 import { cn } from "../../lib/util"
 
@@ -12,7 +12,7 @@ function Slider({
   min = 0,
   max = 100,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.SliderRoot>) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -24,7 +24,7 @@ function Slider({
   )
 
   return (
-    <SliderPrimitive.Root
+    <SliderPrimitive.SliderRoot
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
@@ -36,27 +36,27 @@ function Slider({
       )}
       {...props}
     >
-      <SliderPrimitive.Track
+      <SliderPrimitive.SliderTrack
         data-slot="slider-track"
         className={cn(
           "bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
         )}
       >
-        <SliderPrimitive.Range
+        <SliderPrimitive.SliderRange
           data-slot="slider-range"
           className={cn(
             "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
           )}
         />
-      </SliderPrimitive.Track>
+      </SliderPrimitive.SliderTrack>
       {Array.from({ length: _values.length }, (_, index) => (
-        <SliderPrimitive.Thumb
+        <SliderPrimitive.SliderThumb
           data-slot="slider-thumb"
           key={index}
           className="border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 data-dragging:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
         />
       ))}
-    </SliderPrimitive.Root>
+    </SliderPrimitive.SliderRoot>
   )
 }
 

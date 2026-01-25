@@ -1,0 +1,51 @@
+{
+	"name": "@haitch-ui/react",
+	"version": "0.0.1",
+	"private": false,
+	"type": "module",
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./code-block/server": {
+			"types": "./dist/code-block/server.d.ts",
+			"default": "./dist/code-block/server.js"
+		},
+		"./*": {
+			"types": "./dist/*.d.ts",
+			"default": "./dist/*.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"peerDependencies": {
+		"react": ">=18",
+		"react-dom": ">=18"
+	},
+	"dependencies": {
+		"@tanstack/react-table": "^8.21.3",
+		"@tanstack/react-virtual": "^3.13.18",
+		"shiki": "^3.20.0"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check-types": "tsc -p tsconfig.json --noEmit",
+		"lint": "eslint .",
+		"test": "vitest run",
+		"test:coverage": "vitest run --coverage",
+		"typedoc": "typedoc --options ./typedoc.json"
+	},
+	"devDependencies": {
+		"@vitest/coverage-v8": "^4.0.18",
+		"typedoc": "^0.28.16"
+	}
+}

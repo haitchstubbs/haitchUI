@@ -1,20 +1,20 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch-ui/react-slot";
+import { Slot } from "@haitch-ui/react/slot";
 import { cn } from "../../lib/util";
 
-import * as Primitive from "@haitch-ui/react-code-block"; // <-- adjust path
+import * as Primitive from "@haitch-ui/react/code-block"; // <-- adjust path
 
 type DivProps = React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean };
 type PProps = React.HTMLAttributes<HTMLParagraphElement> & { asChild?: boolean };
 
-export function CodeBlock({ asChild, className, ...props }: React.ComponentProps<typeof Primitive.Root> & { asChild?: boolean; className?: string }) {
+export function CodeBlock({ asChild, className, ...props }: React.ComponentProps<typeof Primitive.CodeBlockRoot> & { asChild?: boolean; className?: string }) {
 	const Comp: any = asChild ? Slot : "div";
 
 	return (
 		<Comp data-slot="code-block" className={cn("relative rounded-sm bg-sidebar", className)}>
-			<Primitive.Root {...props} />
+			<Primitive.CodeBlockRoot {...props} />
 		</Comp>
 	);
 }
@@ -58,7 +58,7 @@ export function CodeBlockCode({
   maxCollapsedHeightClassName = "max-h-72",
   scrollable = false,
   ...props
-}: React.ComponentProps<typeof Primitive.Code> & {
+}: React.ComponentProps<typeof Primitive.CodeBlockCode> & {
   className?: string;
   maxCollapsedHeightClassName?: string;
   scrollable?: boolean;
@@ -69,7 +69,7 @@ export function CodeBlockCode({
 		scrollable ? "overflow-auto" : "overflow-x-auto overflow-y-hidden",
 		scrollable && maxCollapsedHeightClassName
 	)}>
-      <Primitive.Code
+      <Primitive.CodeBlockCode
         {...props}
 		maxCollapsedHeightClassName={!scrollable ? maxCollapsedHeightClassName : undefined}
         className={cn(
@@ -109,9 +109,9 @@ export function CodeBlockActions({
   className,
   framed = true,
   ...props
-}: React.ComponentProps<typeof Primitive.CodeActions> & { framed?: boolean }) {
+}: React.ComponentProps<typeof Primitive.CodeBlockActions> & { framed?: boolean }) {
   return (
-    <Primitive.CodeActions
+    <Primitive.CodeBlockActions
       {...props}
       className={cn(
         framed &&
@@ -153,11 +153,11 @@ export function CodeBlockActions({
 
 /* ---------- Styled action triggers ---------- */
 
-export function CodeBlockCopy({ asChild, className, children, ...props }: React.ComponentProps<typeof Primitive.CodeCopy> & { className?: string }) {
+export function CodeBlockCopy({ asChild, className, children, ...props }: React.ComponentProps<typeof Primitive.CodeBlockCopy> & { className?: string }) {
 	// If caller uses `asChild`, they MUST provide exactly one element child
 	// (e.g. <Button asChild><CodeBlockCopy /></Button> happens outside)
 	return (
-		<Primitive.CodeCopy
+		<Primitive.CodeBlockCopy
 			{...props}
 			asChild={asChild}
 			className={cn(
@@ -169,7 +169,7 @@ export function CodeBlockCopy({ asChild, className, children, ...props }: React.
 			)}
 		>
 			{children}
-		</Primitive.CodeCopy>
+		</Primitive.CodeBlockCopy>
 	);
 }
 
@@ -178,9 +178,9 @@ export function CodeBlockExpand({
 	className,
 	children,
 	...props
-}: React.ComponentProps<typeof Primitive.CodeExpand> & { className?: string }) {
+}: React.ComponentProps<typeof Primitive.CodeBlockExpand> & { className?: string }) {
 	return (
-		<Primitive.CodeExpand
+		<Primitive.CodeBlockExpand
 			{...props}
 			asChild={asChild}
 			className={cn(
@@ -192,6 +192,6 @@ export function CodeBlockExpand({
 			)}
 		>
 			{children}
-		</Primitive.CodeExpand>
+		</Primitive.CodeBlockExpand>
 	);
 }

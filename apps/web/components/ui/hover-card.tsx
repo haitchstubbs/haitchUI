@@ -1,21 +1,21 @@
 "use client";
 
 import * as React from "react";
-import * as HoverCardPrimitive from "@haitch-ui/react-hover-card";
+import * as HoverCardPrimitive from "@haitch-ui/react/hover-card";
 
 import { cn } from "../../lib/util";
 
-function HoverCard({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Root>) {
-	return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
+function HoverCard({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.HoverCardRoot>) {
+	return <HoverCardPrimitive.HoverCardRoot data-slot="hover-card" {...props} />;
 }
 
-function HoverCardTrigger({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.Trigger>) {
-	return <HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />;
+function HoverCardTrigger({ ...props }: React.ComponentProps<typeof HoverCardPrimitive.HoverCardTrigger>) {
+	return <HoverCardPrimitive.HoverCardTrigger data-slot="hover-card-trigger" {...props} />;
 }
 
-function HoverCardContent({ className, align = "start", ...props }: React.ComponentProps<typeof HoverCardPrimitive.Content>) {
+function HoverCardContent({ className, align = "start", ...props }: React.ComponentProps<typeof HoverCardPrimitive.HoverCardContent>) {
 	return (
-		<HoverCardPrimitive.Content
+		<HoverCardPrimitive.HoverCardContent
 			data-slot="hover-card-content"
 			align={align}
 			className={cn(

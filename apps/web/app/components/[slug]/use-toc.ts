@@ -95,6 +95,11 @@ function sameToc(a: TocItem[], b: TocItem[]) {
 	return true;
 }
 
+function shouldHideForScreenWidth() {
+	if (typeof window === "undefined") return false;
+	return window.innerWidth < 1024; // example: hide on screens smaller than 1024px
+}
+
 export function useToc({
 	basePath,
 	containerId = "docs-content",
@@ -105,12 +110,13 @@ export function useToc({
 }: UseRightTocOptions) {
 	const [items, setItems] = React.useState<TocItem[]>([]);
 	const [activeId, setActiveId] = React.useState<string | null>(null);
-
+	const [isHidden, setIsHidden] = React.useState<boolean>(shouldHideForScreenWidth());
 	// We keep a stable ref to the latest items for observers without re-subscribing too often.
 	const itemsRef = React.useRef<TocItem[]>([]);
 	React.useEffect(() => {
 		itemsRef.current = items;
 	}, [items]);
+
 
 	const rebuild = React.useCallback(() => {
 		const container = document.getElementById(containerId);
@@ -198,7 +204,7 @@ export function useToc({
 					text: item.text.slice(0, 80),
 					ignored: ignoreParents.some((sel) => !!item.el.closest(sel)),
 					path: item.el.closest("main")?.id,
-				}))
+				})),
 			);
 			console.groupEnd();
 		}
@@ -300,7 +306,7 @@ export function useToc({
 					// Activate once it passes below sticky header.
 					rootMargin: `-${topOffsetPx}px 0px -70% 0px`,
 					threshold: [0, 1],
-				}
+				},
 			);
 
 			for (const it of observed) {
@@ -358,6 +364,7 @@ export function useToc({
 	const linkFor = React.useCallback((id: string) => `${basePath}#${encodeURIComponent(id)}`, [basePath]);
 
 	return {
+		isHidden,
 		items,
 		activeId,
 		setActiveId, // exposed for click handlers if you ever want to set it eagerly

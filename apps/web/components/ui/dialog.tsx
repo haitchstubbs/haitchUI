@@ -4,7 +4,7 @@
 import * as React from "react";
 import { cn } from "../../lib/util";
 
-import { Dialog as DialogPrimitive } from "@haitch-ui/react-dialog";
+import { Dialog as DialogPrimitive } from "@haitch-ui/react/dialog";
 import type {
   DialogRootProps,
   DialogTriggerProps,
@@ -16,7 +16,7 @@ import type {
   DialogFooterProps,
   DialogTitleProps,
   DialogDescriptionProps,
-} from "@haitch-ui/react-dialog";
+} from "@haitch-ui/react/dialog";
 
 import { IconX } from "@tabler/icons-react";
 

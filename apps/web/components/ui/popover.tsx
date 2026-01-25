@@ -1,20 +1,20 @@
 "use client"
 
 import * as React from "react"
-import * as PopoverPrimitive from "@haitch-ui/react-popover"
+import * as PopoverPrimitive from "@haitch-ui/react/popover"
 
 import { cn } from "../../lib/util"
 
 function Popover({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props} />
+}: React.ComponentProps<typeof PopoverPrimitive.PopoverRoot>) {
+  return <PopoverPrimitive.PopoverRoot data-slot="popover" {...props} />
 }
 
 function PopoverTrigger({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
-  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
+}: React.ComponentProps<typeof PopoverPrimitive.PopoverTrigger>) {
+  return <PopoverPrimitive.PopoverTrigger data-slot="popover-trigger" {...props} />
 }
 
 function PopoverContent({
@@ -22,10 +22,10 @@ function PopoverContent({
   align = "center",
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+}: React.ComponentProps<typeof PopoverPrimitive.PopoverContent>) {
   return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content
+    <PopoverPrimitive.PopoverPortal>
+      <PopoverPrimitive.PopoverContent
         data-slot="popover-content"
         align={align}
         sideOffset={sideOffset}
@@ -35,14 +35,14 @@ function PopoverContent({
         )}
         {...props}
       />
-    </PopoverPrimitive.Portal>
+    </PopoverPrimitive.PopoverPortal>
   )
 }
 
 function PopoverAnchor({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
-  return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />
+}: React.ComponentProps<typeof PopoverPrimitive.PopoverAnchor>) {
+  return <PopoverPrimitive.PopoverAnchor data-slot="popover-anchor" {...props} />
 }
 
 export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }

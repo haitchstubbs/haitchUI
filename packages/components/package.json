@@ -17,7 +17,8 @@
   "types": "./dist/index.d.ts",
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "@haitch-ui/react": "workspace:*"
   },
   "scripts": {
     "build": "tsup",

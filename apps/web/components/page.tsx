@@ -1,6 +1,6 @@
 "use client";
 import { useIsMobile } from "../hooks/use-mobile";
-import { Separator } from "@haitch-ui/ui";
+import { Separator } from "@/components/ui/separator";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 import { usePathname } from "next/navigation";
@@ -24,7 +24,7 @@ function getBreadcrumbData(pathname: string) {
 	const subsection = pathSegments[1];
 
 	const pageTitle = isHomePage
-		? "@haitch-ui/ui"
+		? "@haitch-ui"
 		: // Capitalize
 			section && section.charAt(0).toUpperCase() + section.slice(1);
 	const pageSubtitle = isHomePage

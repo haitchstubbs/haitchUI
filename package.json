@@ -10,30 +10,28 @@
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types",
+		"ct": "turbo run check-types",
 		"test": "turbo run test",
 		"test:watch": "turbo run test:watch",
-		"sync:licenses": "node scripts/sync-licenses.mjs"
+		"sync:licenses": "node scripts/sync-licenses.mjs",
+		"changeset": "changeset",
+		"changeset:version": "changeset version",
+		"changeset:publish": "changeset publish"
 	},
 	"devDependencies": {
-		"prettier": "^3.7.4",
-		"turbo": "^2.7.0",
-		"typescript": "5.9.2",
-		"react": "19.2.0",
-		"react-dom": "19.2.0",
+		"@changesets/cli": "^2.29.8",
+		"@haitch-ui/configs": "workspace:*",
+		"@haitch-ui/react": "workspace:*",
+		"@haitch-ui/tests": "workspace:*",
+		"@testing-library/jest-dom": "^6.9.1",
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
-		"@testing-library/jest-dom": "^6.9.1",
-		"vitest": "^4.0.16",
-		"@haitch-ui/configs": "workspace:*",
-		"@haitch-ui/tests": "workspace:*",
-		"@haitch-ui/react-compose-refs": "workspace:*",
-		"@haitch-ui/react-slot": "workspace:*",
-		"@haitch-ui/react-popover": "workspace:*",
-		"@haitch-ui/react-rect": "workspace:*",
-		"@haitch-ui/react-virtual-element": "workspace:*",
-		"@haitch-ui/react-overlay": "workspace:*",
-		"@haitch-ui/react-context-menu": "workspace:*",
-		"@haitch-ui/react-tooltip": "workspace:*"
+		"prettier": "^3.7.4",
+		"react": "19.2.0",
+		"react-dom": "19.2.0",
+		"turbo": "^2.7.0",
+		"typescript": "5.9.2",
+		"vitest": "^4.0.18"
 	},
 	"overrides": {
 		"next": "16.0.10",
@@ -41,7 +39,9 @@
 		"react-dom": "^19.2.0",
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
-		"@floating-ui/react": "^0.26.0"
+		"@floating-ui/react": "^0.26.0",
+		"vitest": "4.0.18",
+		"@vitest/ui": "4.0.18"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"engines": {

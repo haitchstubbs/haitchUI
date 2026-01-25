@@ -1,22 +1,22 @@
 "use client";
 
 import * as React from "react";
-import * as ScrollAreaPrimitive from "@haitch-ui/react-scroll-area";
+import * as ScrollAreaPrimitive from "@haitch-ui/react/scroll-area";
 
 import { cn } from "../../lib/util";
 
-function ScrollArea({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+function ScrollArea({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaRoot>) {
 	return (
-		<ScrollAreaPrimitive.Root data-slot="scroll-area" className={cn("relative", className)} {...props}>
-			<ScrollAreaPrimitive.Viewport
+		<ScrollAreaPrimitive.ScrollAreaRoot data-slot="scroll-area" className={cn("relative", className)} {...props}>
+			<ScrollAreaPrimitive.ScrollAreaViewport
 				data-slot="scroll-area-viewport"
 				className="focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1"
 			>
 				{children}
-			</ScrollAreaPrimitive.Viewport>
+			</ScrollAreaPrimitive.ScrollAreaViewport>
 			<ScrollBar />
-			<ScrollAreaPrimitive.Corner />
-		</ScrollAreaPrimitive.Root>
+			<ScrollAreaPrimitive.ScrollAreaCorner />
+		</ScrollAreaPrimitive.ScrollAreaRoot>
 	);
 }
 function ScrollBar({ className, orientation = "vertical", ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {

@@ -1,29 +1,29 @@
 "use client";
 
 import * as React from "react";
-import * as TooltipPrimitive from "@haitch-ui/react-tooltip";
+import * as TooltipPrimitive from "@haitch-ui/react/tooltip";
 
 import { cn } from "../../lib/util";
 
-function TooltipProvider({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
-	return <TooltipPrimitive.Provider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
+function TooltipProvider({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.TooltipProvider>) {
+	return <TooltipPrimitive.TooltipProvider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
 }
 
-function Tooltip({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+function Tooltip({ ...props }: React.ComponentProps<typeof TooltipPrimitive.TooltipRoot>) {
 	return (
 		<TooltipProvider>
-			<TooltipPrimitive.Root data-slot="tooltip" {...props} />
+			<TooltipPrimitive.TooltipRoot data-slot="tooltip" {...props} />
 		</TooltipProvider>
 	);
 }
 
-function TooltipTrigger({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-	return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+function TooltipTrigger({ ...props }: React.ComponentProps<typeof TooltipPrimitive.TooltipTrigger>) {
+	return <TooltipPrimitive.TooltipTrigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipContent({ className, sideOffset = 10, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+function TooltipContent({ className, sideOffset = 10, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.TooltipContent>) {
 	return (
-		<TooltipPrimitive.Content
+		<TooltipPrimitive.TooltipContent
 			data-slot="tooltip-content"
 			sideOffset={sideOffset}
 			className={cn(
@@ -33,12 +33,12 @@ function TooltipContent({ className, sideOffset = 10, children, ...props }: Reac
 			{...props}
 		>
 			{children}
-		</TooltipPrimitive.Content>
+		</TooltipPrimitive.TooltipContent>
 	);
 }
 
 function TooltipArrow() {
-  return <TooltipPrimitive.Arrow data-slot="tooltip-arrow" className="fill-popover" />;
+  return <TooltipPrimitive.TooltipArrow data-slot="tooltip-arrow" className="fill-popover" />;
 }
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipArrow };

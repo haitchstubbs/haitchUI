@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@haitch-ui/react-slot";
+import { Slot } from "@haitch-ui/react/slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/util";
 

@@ -1,0 +1,35 @@
+{
+  "extends": "@haitch-ui/configs/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@haitch-ui/react": ["./src/index.ts"],
+			"@haitch-ui/react/*": [
+				"./src/primitives/*/index.ts",
+				"./src/primitives/*/index.tsx",
+				"./src/primitives/*/src/index.ts",
+				"./src/primitives/*/src/index.tsx",
+				"./src/primitives/*/server.ts",
+				"./src/primitives/*/server.tsx",
+				"./src/primitives/*/src/server.ts",
+				"./src/primitives/*/src/server.tsx",
+				"./src/*/index.ts",
+				"./src/*/index.tsx",
+				"./src/*/src/index.ts",
+				"./src/*/src/index.tsx",
+				"./src/*/server.ts",
+				"./src/*/server.tsx",
+				"./src/*/src/server.ts",
+				"./src/*/src/server.tsx"
+			]
+		},
+  },
+  "files": [],
+  "include": [
+    "src"
+  ]
+}

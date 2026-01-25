@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Typedocs
+packages/react/docs
+
+# Vitest Coverage
+coverage/

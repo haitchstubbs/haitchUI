@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { registry } from "../_registry/index";
 import { Toc } from "./toc";
+import { DocsWrapper } from "./docs-wrapper";
 
 export default async function ComponentDocPage({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params;
@@ -10,17 +11,15 @@ export default async function ComponentDocPage({ params }: { params: Promise<{ s
 	if (!entry) return notFound();
 
 	const mod = await entry.load();
-	const Docs = await mod.loadDocs(); 
+	const Docs = await mod.loadDocs();
 
 	const basePath = `/components/${slug}`;
 
 	return (
-		<div id={rootId} className="w-full flex justify-center py-10 relative">
-			<main id="docs-content" className="w-3xl relative">
+		<div id={rootId}>
+			<DocsWrapper basePath={basePath}>
 				<Docs />
-			</main>
-
-			<Toc basePath={basePath} />
+			</DocsWrapper>
 		</div>
 	);
 }

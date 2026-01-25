@@ -1,4 +1,4 @@
-import { highlight } from "@haitch-ui/react-code-block/server";
+import { highlight } from "@haitch-ui/react/code-block/server";
 import { promises as fs } from "fs";
 import path from "path";
 

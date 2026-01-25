@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as ToggleGroupPrimitive from "@haitch-ui/react-toggle-group";
+import * as ToggleGroupPrimitive from "@haitch-ui/react/toggle-group";
 import { type VariantProps } from "class-variance-authority";
 
 import { cn } from "../../lib/util";
@@ -17,7 +17,7 @@ const ToggleGroupContext = React.createContext<
 	spacing: 0,
 });
 
-type ToggleRootProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>;
+type ToggleRootProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.ToggleGroupRoot>;
 type ToggleType = ToggleRootProps["type"]; // "single" | "multiple"
 
 type ToggleGroupProps<T extends ToggleType> = Extract<ToggleRootProps, { type: T }> &
@@ -27,7 +27,7 @@ type ToggleGroupProps<T extends ToggleType> = Extract<ToggleRootProps, { type: T
 
 function ToggleGroup<T extends ToggleType>({ className, variant, size, spacing = 0, children, ...props }: ToggleGroupProps<T>) {
 	return (
-		<ToggleGroupPrimitive.Root
+		<ToggleGroupPrimitive.ToggleGroupRoot
 			{...props}
 			data-type={props.type}
 			data-slot="toggle-group"
@@ -41,7 +41,7 @@ function ToggleGroup<T extends ToggleType>({ className, variant, size, spacing =
 			)}
 		>
 			<ToggleGroupContext.Provider value={{ variant, size, spacing }}>{children}</ToggleGroupContext.Provider>
-		</ToggleGroupPrimitive.Root>
+		</ToggleGroupPrimitive.ToggleGroupRoot>
 	);
 }
 
@@ -51,11 +51,11 @@ function ToggleGroupItem({
 	variant,
 	size,
 	...props
-}: React.ComponentProps<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>) {
+}: React.ComponentProps<typeof ToggleGroupPrimitive.ToggleGroupItem> & VariantProps<typeof toggleVariants>) {
 	const context = React.useContext(ToggleGroupContext);
 
 	return (
-		<ToggleGroupPrimitive.Item
+		<ToggleGroupPrimitive.ToggleGroupItem
 			data-slot="toggle-group-item"
 			data-variant={context.variant || variant}
 			data-size={context.size || size}
@@ -72,7 +72,7 @@ function ToggleGroupItem({
 			{...props}
 		>
 			{children}
-		</ToggleGroupPrimitive.Item>
+		</ToggleGroupPrimitive.ToggleGroupItem>
 	);
 }
 

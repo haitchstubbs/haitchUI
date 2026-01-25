@@ -39,13 +39,9 @@ export * from "./components/tree.js";
 export * from "./components/sidebar.js" */
 
 // DOM exports
-export * from "./doms/ShadowDomRoot.js";
-export * from "./components/separator.js";
-export * from "./components/tooltip.js";
-export * from "./components/item.js";
+
 // Lib exports
 export * from "./lib/cn.js";
-export * from "./lib/compose-refs.js";
 export * from "./lib/slot.js";
 
 // Theme exports
