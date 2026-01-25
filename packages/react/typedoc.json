@@ -6,5 +6,12 @@
   ],
   "entryPointStrategy": "expand",
   "tsconfig": "tsconfig.json",
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/__tests__/**"
+  ],
   "out": "docs"
 }

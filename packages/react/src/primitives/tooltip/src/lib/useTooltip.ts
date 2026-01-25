@@ -1,5 +1,5 @@
 import { autoUpdate, useFloating, type Placement } from "@floating-ui/react";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 
 import type { TooltipOptions } from "./types";
 import { normalizeTooltipOptions } from "./defaults";
@@ -8,7 +8,34 @@ import { useRuntimeOptions } from "./useRuntimeOptions";
 import { buildTooltipMiddleware } from "./middleware";
 import { useTooltipInteractions } from "./interactions";
 
-export function useTooltip(options?: TooltipOptions) {
+// Explicit return type to avoid TypeDoc / TS inferring types that reference
+// non-portable types from @floating-ui packages (TS2742). We declare the
+// commonly-used fields concretely and keep the rest loose.
+export type UseTooltipReturn = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  arrowRef: RefObject<SVGSVGElement | null>;
+  setOptions: (opts: Record<string, unknown>) => void;
+
+  // Floating-ui helpers used by components
+  getReferenceProps: (props?: Record<string, unknown>) => Record<string, unknown>;
+  getFloatingProps: (props?: Record<string, unknown>) => Record<string, unknown>;
+  refs: {
+    reference: { current: unknown | null };
+    setReference: (node: unknown) => void;
+    setFloating: (node: unknown) => void;
+  };
+
+  // layout / position
+  placement?: string;
+  isPositioned?: boolean;
+  floatingStyles?: any;
+
+  // internal floating context (kept as any for portability)
+  context?: any;
+} & Record<string, unknown>;
+
+export function useTooltip(options?: TooltipOptions): UseTooltipReturn {
   const o = normalizeTooltipOptions(options);
 
   const { open, setOpen, isControlled } = useControllableOpen({
@@ -63,5 +90,5 @@ export function useTooltip(options?: TooltipOptions) {
       ...data, // includes isPositioned
     }),
     [open, setOpen, interactions, data, setOptions]
-  );
+  ) as UseTooltipReturn;
 }
