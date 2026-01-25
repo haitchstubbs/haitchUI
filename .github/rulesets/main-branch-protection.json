@@ -1,5 +1,5 @@
 {
-  "name": "PRs & conventional commits",
+  "name": "Main Branch - Release Only",
   "target": "branch",
   "source_type": "Repository",
   "enforcement": "active",
@@ -24,16 +24,22 @@
         "require_code_owner_review": false,
         "require_last_push_approval": true,
         "dismiss_stale_reviews_on_push": true,
-        "required_approving_review_count": 1,
-        "required_review_thread_resolution": false
+        "required_approving_review_count": 2,
+        "required_review_thread_resolution": true
+      }
+    },
+    {
+      "type": "required_deployments",
+      "parameters": {
+        "required_deployment_environments": []
       }
     },
     {
       "type": "commit_message_pattern",
       "parameters": {
-        "name": "",
+        "name": "Release Commits Only",
         "negate": false,
-        "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(!)?: ([\\w ])+([\\s\\S]*)",
+        "pattern": "^chore\\(release\\):",
         "operator": "regex"
       }
     }

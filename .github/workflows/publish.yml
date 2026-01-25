@@ -1,0 +1,95 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Build documentation
+        run: pnpm turbo run typedoc --filter=@haitch-ui/react...
+
+      - name: Publish to npm with provenance
+        run: pnpm changeset publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Create GitHub releases
+        uses: changesets/action@v1
+        with:
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  merge-to-main:
+    name: Merge to main
+    runs-on: ubuntu-latest
+    needs: publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: dev
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch main branch
+        run: git fetch origin main:main
+
+      - name: Create PR to main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get the tag name
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          
+          # Create a temporary branch for the PR
+          BRANCH_NAME="release/${TAG_NAME}"
+          git checkout -b "${BRANCH_NAME}"
+          git push origin "${BRANCH_NAME}"
+          
+          # Create PR from release branch to main
+          gh pr create \
+            --title "chore(release): merge ${TAG_NAME} to main" \
+            --body "Automated PR to merge release ${TAG_NAME} from dev to main after successful npm publish." \
+            --base main \
+            --head "${BRANCH_NAME}" \
+            --label release

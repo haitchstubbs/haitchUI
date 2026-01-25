@@ -1,14 +1,13 @@
-name: Release
+name: Release PR
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 permissions:
   contents: write
   pull-requests: write
-  id-token: write
 
 jobs:
   release:
@@ -34,28 +33,15 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      # ✅ Always safe to run. If there are changesets, this creates/updates the Release PR and exits without publishing.
-      # ✅ If there are NO changesets (post-merge of Release PR), we proceed to build + publish.
-      - name: Create Release PR or decide publish
+      # Create or update release PR with version bumps
+      # This workflow does NOT publish to npm - that happens via publish.yml after tagging
+      - name: Create Release PR
         id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
-          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Only do heavy work when we're in the "publish" state:
-      # changesets/action sets `hasChangesets` true when it found changesets (i.e. it will create/update the PR)
-      # When there are NO changesets, that's the post-merge state → publish.
-      - name: Build + Test + Docs (turbo)
-        if: steps.changesets.outputs.hasChangesets == 'false'
-        run: pnpm turbo run test test:coverage build typedoc --filter=@haitch-ui/react...
-
-      - name: Publish to npm (changesets)
-        if: steps.changesets.outputs.hasChangesets == 'false'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm changeset publish --provenance
