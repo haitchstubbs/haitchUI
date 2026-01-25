@@ -43,7 +43,7 @@ function Example() {
 - **Hooks**: Utilities for state management and accessibility.
 - **Utils**: Helpers for event handling, refs, context, and more.
 
-See the [virtual-element documentation](./virtual-element/README.md) for advanced usage.
+See the [virtual-element documentation](./src/virtual-element/README.md) for advanced usage.
 
 ## Documentation
 
@@ -54,7 +54,7 @@ See the [virtual-element documentation](./virtual-element/README.md) for advance
 
 ## Contributing
 
-Contributions are welcome! Please see the [contributing guidelines](../CONTRIBUTING.md) for details.
+Contributions are welcome! Please see the [contributing guidelines](../../CONTRIBUTING.md) for details.
 
 ## License
 

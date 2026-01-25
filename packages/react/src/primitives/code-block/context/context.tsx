@@ -3,7 +3,7 @@
 import { createTypedContext } from "@/utils/createTypedContext";
 import * as React from "react";
 
-type CodeBlockCtx = {
+export type CodeBlockCtx = {
 	code: string;
 	lang: string;
 	highlightedHtml: string;

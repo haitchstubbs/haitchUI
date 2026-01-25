@@ -38,7 +38,8 @@
 		"check-types": "tsc -p tsconfig.json --noEmit",
 		"lint": "eslint .",
 		"test": "vitest run",
-		"test:coverage": "vitest run --coverage"
+		"test:coverage": "vitest run --coverage",
+		"typedoc": "typedoc --options ./typedoc.json"
 	},
 	"devDependencies": {
 		"@vitest/coverage-v8": "^4.0.18",

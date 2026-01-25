@@ -30,8 +30,8 @@ import { Slot } from "@/primitives/slot/index"
  * - Panels are conditionally hidden (not unmounted by default).
  */
 
-type Orientation = "horizontal" | "vertical"
-type ActivationMode = "automatic" | "manual"
+export type Orientation = "horizontal" | "vertical"
+export type ActivationMode = "automatic" | "manual"
 
 type DataAttrs = {
   "data-slot"?: string

@@ -102,7 +102,7 @@ function useSliderContext(name: string) {
 
 /** ---------- Root ---------- */
 
-type RootOwnProps = {
+export type RootOwnProps = {
   value?: number
   defaultValue?: number
   onValueChange?: (value: number) => void

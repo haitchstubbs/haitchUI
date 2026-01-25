@@ -5,8 +5,8 @@ import { FloatingArrow, FloatingPortal, type FloatingArrowProps, type Placement 
 import { Slot } from "@/primitives/slot";
 import { useTooltip as useTooltipInternal } from "./lib/useTooltip";
 
-type Side = "top" | "right" | "bottom" | "left";
-type Align = "start" | "center" | "end";
+export type Side = "top" | "right" | "bottom" | "left";
+export type Align = "start" | "center" | "end";
 
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
@@ -38,7 +38,7 @@ function useTooltipProvider() {
 	return React.useContext(TooltipProviderContext);
 }
 
-type TooltipContextValue = ReturnType<typeof useTooltipInternal> & {
+export type TooltipContextValue = ReturnType<typeof useTooltipInternal> & {
 	__portalRoot: HTMLElement | null;
 };
 

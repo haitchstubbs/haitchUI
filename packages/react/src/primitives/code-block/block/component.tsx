@@ -8,7 +8,7 @@ function cn(...classes: Array<string | undefined | false>) {
 	return classes.filter(Boolean).join(" ");
 }
 
-type RootProps = {
+export type RootProps = {
 	code: string;
 	lang?: string;
 	highlightedHtml: string;
@@ -92,7 +92,7 @@ export function Root({
 	);
 }
 
-type CodeProps = {
+export type CodeProps = {
 	asChild?: boolean;
 	className?: string;
 	maxCollapsedHeightClassName?: string; // e.g. "max-h-64"
@@ -112,7 +112,7 @@ export function Code({ asChild, className, maxCollapsedHeightClassName = "max-h-
 	);
 }
 
-type CodeActionsProps = {
+export type CodeActionsProps = {
 	asChild?: boolean;
 	className?: string;
 	children?: React.ReactNode;
@@ -132,7 +132,7 @@ export function CodeActions({ asChild, className, children, ...props }: CodeActi
 	);
 }
 
-type CodeExpandProps = {
+export type CodeExpandProps = {
 	asChild?: boolean;
 	className?: string;
 	children?: React.ReactNode;
@@ -167,7 +167,7 @@ export function CodeExpand({
 	);
 }
 
-type CodeCopyProps = {
+export type CodeCopyProps = {
 	asChild?: boolean;
 	className?: string;
 	children?: React.ReactNode;

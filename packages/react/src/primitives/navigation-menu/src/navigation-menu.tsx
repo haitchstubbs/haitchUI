@@ -23,16 +23,16 @@ import { Slot } from "@/primitives/slot";
  * Types + utils (kept intentionally similar to your menubar file)
  * ------------------------------------------------------------------------------------------------- */
 
-type CSSProperties = React.CSSProperties;
+export type CSSProperties = React.CSSProperties;
 
-type NavProps = React.ComponentPropsWithRef<"nav">;
-type DivProps = React.ComponentPropsWithRef<"div">;
-type ButtonProps = React.ComponentPropsWithRef<"button">;
-type AnchorProps = React.ComponentPropsWithRef<"a">;
+export type NavProps = React.ComponentPropsWithRef<"nav">;
+export type DivProps = React.ComponentPropsWithRef<"div">;
+export type ButtonProps = React.ComponentPropsWithRef<"button">;
+export type AnchorProps = React.ComponentPropsWithRef<"a">;
 
-type ClassNameProp<S> = string | ((state: S) => string | undefined);
-type StyleProp<S> = CSSProperties | ((state: S) => CSSProperties | undefined);
-type RenderProp<HP, S> = React.ReactElement | ((props: HP, state: S) => React.ReactElement);
+export type ClassNameProp<S> = string | ((state: S) => string | undefined);
+export type StyleProp<S> = CSSProperties | ((state: S) => CSSProperties | undefined);
+export type RenderProp<HP, S> = React.ReactElement | ((props: HP, state: S) => React.ReactElement);
 
 function composeEventHandlers<E>(theirs: ((event: E) => void) | undefined, ours: (event: E) => void) {
 	return (event: E) => {
@@ -119,7 +119,7 @@ export function getUIPortalRoot(): HTMLElement {
  * Public API types
  * ------------------------------------------------------------------------------------------------- */
 
-type NavbarState = {
+export type NavbarState = {
 	disabled: boolean;
 	orientation: "horizontal" | "vertical";
 	modal: boolean;
@@ -140,7 +140,7 @@ export type NavbarProps = Omit<NavProps, "className" | "style" | "children"> & {
 	children?: React.ReactNode;
 };
 
-type MenuState = { open: boolean; disabled: boolean; active: boolean };
+export type MenuState = { open: boolean; disabled: boolean; active: boolean };
 
 export type NavMenuRootProps = Omit<DivProps, "className" | "style" | "children"> & {
 	disabled?: boolean;
@@ -186,7 +186,7 @@ export type NavContentProps = Omit<DivProps, "className" | "style" | "children">
 	children?: React.ReactNode;
 };
 
-type DropdownItemState = { disabled: boolean; highlighted: boolean };
+export type DropdownItemState = { disabled: boolean; highlighted: boolean };
 
 export type NavLinkProps = Omit<AnchorProps, "className" | "style"> & {
 	asChild?: boolean;

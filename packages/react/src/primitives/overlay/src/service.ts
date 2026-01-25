@@ -1,11 +1,11 @@
 import type { OverlayDOM, ResolvedDOM } from "./types.js";
 
-type VirtualElement = {
+export type VirtualElement = {
 	getBoundingClientRect: () => DOMRect;
 	contextElement?: Element | null;
 };
 
-type Rect = {
+export type Rect = {
 	x: number;
 	y: number;
 	width: number;

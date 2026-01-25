@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-type FilterOptions = Intl.CollatorOptions & {
+export type FilterOptions = Intl.CollatorOptions & {
 	locale?: Intl.LocalesArgument;
 	multiple?: boolean;
 	value?: any;

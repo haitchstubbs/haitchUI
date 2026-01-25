@@ -137,7 +137,7 @@ function useToggleGroupContext(componentName: string) {
   return ctx
 }
 
-type ToggleGroupBaseProps = Omit<React.HTMLAttributes<HTMLDivElement>, "defaultValue"> & {
+export type ToggleGroupBaseProps = Omit<React.HTMLAttributes<HTMLDivElement>, "defaultValue"> & {
   asChild?: boolean
   disabled?: boolean
   orientation?: Orientation
@@ -148,7 +148,7 @@ type ToggleGroupBaseProps = Omit<React.HTMLAttributes<HTMLDivElement>, "defaultV
   form?: string
 }
 
-type ToggleGroupSingleProps = ToggleGroupBaseProps & {
+export type ToggleGroupSingleProps = ToggleGroupBaseProps & {
   type: "single"
   value?: string | null
   defaultValue?: string
@@ -158,7 +158,7 @@ type ToggleGroupSingleProps = ToggleGroupBaseProps & {
   requiredSelection?: boolean
 }
 
-type ToggleGroupMultipleProps = ToggleGroupBaseProps & {
+export type ToggleGroupMultipleProps = ToggleGroupBaseProps & {
   type: "multiple"
   value?: string[]
   defaultValue?: string[]

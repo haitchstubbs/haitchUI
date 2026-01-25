@@ -15,7 +15,7 @@ export type Rect = {
 	height: number;
 };
 
-type VirtualElement = {
+export type VirtualElement = {
 	getBoundingClientRect: () => DOMRect;
 	contextElement?: Element | null;
 };

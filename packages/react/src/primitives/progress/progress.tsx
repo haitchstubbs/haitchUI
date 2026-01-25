@@ -58,7 +58,7 @@ function useProgressContext(componentName: string) {
   return ctx
 }
 
-type RootOwnProps = {
+export type RootOwnProps = {
   /**
    * Controlled determinate value. Use `null` for indeterminate.
    */
@@ -190,7 +190,7 @@ const Root = React.forwardRef<HTMLDivElement, ProgressRootProps>(function Progre
   )
 })
 
-type IndicatorOwnProps = {
+export type IndicatorOwnProps = {
   /**
    * Override how the indicator computes inline style.
    * - "transform" (default): uses translateX/translateY trick

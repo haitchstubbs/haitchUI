@@ -26,14 +26,14 @@ import {
  * Types + utils
  * ------------------------------------------------------------------------------------------------- */
 
-type CSSProperties = React.CSSProperties;
+export type CSSProperties = React.CSSProperties;
 
-type DivProps = React.ComponentPropsWithRef<"div">;
-type ButtonProps = React.ComponentPropsWithRef<"button">;
+export type DivProps = React.ComponentPropsWithRef<"div">;
+export type ButtonProps = React.ComponentPropsWithRef<"button">;
 
-type ClassNameProp<S> = string | ((state: S) => string | undefined);
-type StyleProp<S> = CSSProperties | ((state: S) => CSSProperties | undefined);
-type RenderProp<HP, S> = React.ReactElement | ((props: HP, state: S) => React.ReactElement);
+export type ClassNameProp<S> = string | ((state: S) => string | undefined);
+export type StyleProp<S> = CSSProperties | ((state: S) => CSSProperties | undefined);
+export type RenderProp<HP, S> = React.ReactElement | ((props: HP, state: S) => React.ReactElement);
 
 function composeEventHandlers<E>(theirs: ((event: E) => void) | undefined, ours: (event: E) => void) {
 	return (event: E) => {
@@ -116,7 +116,7 @@ export function getUIPortalRoot(): HTMLElement {
  * Public API types
  * ------------------------------------------------------------------------------------------------- */
 
-type MenubarState = {
+export type MenubarState = {
 	disabled: boolean;
 	orientation: "horizontal" | "vertical";
 	modal: boolean;
@@ -134,13 +134,13 @@ export type MenubarProps = Omit<DivProps, "className" | "style" | "children"> & 
 	children?: React.ReactNode;
 };
 
-type MenuState = {
+export type MenuState = {
 	open: boolean;
 	disabled: boolean;
 	active: boolean;
 };
 
-type MenuRootProps = Omit<DivProps, "className" | "style" | "children"> & {
+export type MenuRootProps = Omit<DivProps, "className" | "style" | "children"> & {
 	disabled?: boolean;
 	defaultOpen?: boolean;
 	open?: boolean;
@@ -180,7 +180,7 @@ export type MenuPopupProps = Omit<DivProps, "className" | "style"> & {
 	children?: React.ReactNode;
 };
 
-type MenuItemCommonState = {
+export type MenuItemCommonState = {
 	disabled: boolean;
 	highlighted: boolean;
 };

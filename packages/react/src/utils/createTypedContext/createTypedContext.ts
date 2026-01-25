@@ -1,10 +1,10 @@
 import * as React from "react";
 
-type ErrorMessage<TName extends string> =
+export type ErrorMessage<TName extends string> =
   | string
   | ((component: string, contextName: TName) => string);
 
-type CreateContextCreatorOptions<TName extends string> = {
+export type CreateContextCreatorOptions<TName extends string> = {
   /**
    * Used in error messages and React DevTools.
    * Example: "Avatar"

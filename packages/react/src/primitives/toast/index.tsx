@@ -512,7 +512,7 @@ const store = new ToastStore();
  * Public API (toast)
  * -----------------------------------------------------------------------------------------------*/
 
-type CreateFn = (message?: React.ReactNode | (() => React.ReactNode), opts?: ToastOptions) => ToastId;
+export type CreateFn = (message?: React.ReactNode | (() => React.ReactNode), opts?: ToastOptions) => ToastId;
 type CreateToast = (message?: React.ReactNode | (() => React.ReactNode), opts?: ToastOptions, typeOverride?: ToastType) => ToastT;
 
 const normalizeToast = (
@@ -574,7 +574,7 @@ const createToast: CreateToast = (message, opts, typeOverride = "normal") => {
 	return t;
 };
 
-type ToastApi = CreateFn & {
+export type ToastApi = CreateFn & {
 	success: CreateFn;
 	error: CreateFn;
 	info: CreateFn;

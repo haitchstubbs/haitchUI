@@ -98,7 +98,7 @@ function ensureAbsoluteThumb(thumb: HTMLElement, orientation: Orientation) {
  * Types
  * ------------------------------------------------------------------------------------------------- */
 
-type Orientation = "vertical" | "horizontal";
+export type Orientation = "vertical" | "horizontal";
 
 type LayoutState = {
 	canScrollX: boolean;

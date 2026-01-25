@@ -13,9 +13,9 @@ import {
 } from "@tanstack/react-table";
 import { useVirtualizer, Virtualizer, type VirtualItem } from "@tanstack/react-virtual";
 
-type VirtualizationMode = "on" | "off" | "auto";
+export type VirtualizationMode = "on" | "off" | "auto";
 
-type DataTableContextValue<TData> = {
+export type DataTableContextValue<TData> = {
 	table: Table<TData>;
 	rows: Row<TData>[];
 	enableRowSelection: boolean;

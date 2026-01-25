@@ -2,25 +2,25 @@ import { Children, Fragment, isValidElement } from "react";
 import { isWhitespaceText } from "../internal/isWhitespaceText";
 import { getSingleChildElement } from "../internal/getSingleChildElement";
 
-interface InputProps {
+export interface InputProps {
 	asChild?: boolean;
 	defaultElement: React.ElementType;
 	children: React.ReactNode;
 }
 
-interface SlotProps {
+export interface SlotProps {
 	type: "slot";
 	element: React.ReactElement;
 }
 
-interface ElementProps {
+export interface ElementProps {
 	type: "native";
 	elementType: React.ElementType;
 }
 
-type ResolveRenderTargetOptions = InputProps;
+export type ResolveRenderTargetOptions = InputProps;
 
-type ResolveRenderTargetResult = SlotProps | ElementProps;
+export type ResolveRenderTargetResult = SlotProps | ElementProps;
 
 
 export function resolveRenderTarget({ asChild, defaultElement, children }: ResolveRenderTargetOptions): ResolveRenderTargetResult {

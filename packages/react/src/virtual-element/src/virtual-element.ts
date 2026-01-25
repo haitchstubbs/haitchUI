@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { DOM } from "@haitch-ui/react/overlay";
 
-type Rect = {
+export type Rect = {
 	x: number;
 	y: number;
 	width: number;

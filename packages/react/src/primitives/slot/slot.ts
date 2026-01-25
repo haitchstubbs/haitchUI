@@ -1,7 +1,7 @@
 import * as React from "react";
 import { composeRefs } from "@/utils/compose-refs";
 
-type AnyProps = Record<string, unknown>;
+export type AnyProps = Record<string, unknown>;
 
 function isWhitespaceText(node: unknown): node is string {
 	return typeof node === "string" && node.trim() === "";

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { composeRefs } from "@/utils/compose-refs"
 import { composeEventHandlers } from "@/utils/compose-event-handlers"
-type Orientation = "horizontal" | "vertical"
+export type Orientation = "horizontal" | "vertical"
 
 type DataAttrs = {
   "data-slot"?: string
@@ -88,7 +88,7 @@ function nextEnabledIndex(items: ItemRecord[], from: number, dir: 1 | -1) {
 
 /** ---------- Root ---------- */
 
-type RootOwnProps = {
+export type RootOwnProps = {
   value?: string | null
   defaultValue?: string
   onValueChange?: (value: string) => void
@@ -289,7 +289,7 @@ function useItemContext(componentName: string) {
 
 /** ---------- Item ---------- */
 
-type ItemOwnProps = {
+export type ItemOwnProps = {
   value: string
   disabled?: boolean
 }

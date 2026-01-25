@@ -28,7 +28,7 @@ import { composeRefs } from "@/utils/compose-refs";
  * Types
  * -----------------------------------------------------------------------------------------------*/
 
-type Align = "start" | "end" | "middle";
+export type Align = "start" | "end" | "middle";
 type ResolvedAlign = "start" | "end" | "center";
 
 export type HoverCardProps = React.PropsWithChildren<{

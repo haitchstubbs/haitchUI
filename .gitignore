@@ -39,3 +39,6 @@ yarn-error.log*
 
 # Typedocs
 packages/react/docs
+
+# Vitest Coverage
+coverage/

@@ -1,7 +1,7 @@
 import type { OverlayDOM } from "@/primitives/overlay";
 
-type AlertContainer = Element | null;
-type AsChild = { asChild?: boolean };
+export type AlertContainer = Element | null;
+export type AsChild = { asChild?: boolean };
 export type AlertDialogContextValue = {
 	open: boolean;
 	setOpen: (next: boolean) => void;
