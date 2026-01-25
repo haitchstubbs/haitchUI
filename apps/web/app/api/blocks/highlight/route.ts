@@ -50,7 +50,7 @@ export async function GET(req: Request) {
 	const code = await fs.readFile(abs, "utf8");
 	const lang = filePath.endsWith(".tsx") ? "tsx" : "ts";
 
-	const highlightedHtml = await highlight(code, lang, numbered, { theme });
+	const highlightedHtml = await highlight(code, lang, numbered);
 
 	return NextResponse.json({ path: filePath, lang, code, highlightedHtml });
 }

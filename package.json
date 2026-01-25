@@ -24,7 +24,7 @@
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
 		"@testing-library/jest-dom": "^6.9.1",
-		"vitest": "^4.0.16",
+		"vitest": "^4.0.18",
 		"@haitch-ui/configs": "workspace:*",
 		"@haitch-ui/tests": "workspace:*",
 		"@haitch-ui/react": "workspace:*"
@@ -35,7 +35,9 @@
 		"react-dom": "^19.2.0",
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
-		"@floating-ui/react": "^0.26.0"
+		"@floating-ui/react": "^0.26.0",
+		"vitest": "4.0.18",
+		"@vitest/ui": "4.0.18"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"engines": {

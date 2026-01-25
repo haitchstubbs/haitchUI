@@ -41,6 +41,7 @@
 		"test:coverage": "vitest run --coverage"
 	},
 	"devDependencies": {
-		"@vitest/coverage-v8": "4.0.16"
+		"@vitest/coverage-v8": "^4.0.18",
+		"typedoc": "^0.28.16"
 	}
 }

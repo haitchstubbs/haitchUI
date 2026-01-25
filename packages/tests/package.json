@@ -20,7 +20,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@vitejs/plugin-react": "^5.1.2",
 		"axe-core": "^4.11.0",
-		"vitest": "^4.0.16",
+		"vitest": "^4.0.18",
 		"vitest-axe": "^0.1.0"
 	},
 	"devDependencies": {
